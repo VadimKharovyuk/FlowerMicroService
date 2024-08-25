@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Цветочный Магазин</title>
+
+    <style>
+        /* Подключение шрифтов */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header {
+            background-color: #3c32ce;
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header .logo img {
+            height: 50px;
+        }
+
+        .header .nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            margin: 0 5px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .header .nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .main {
+            padding: 40px;
+            flex: 1;
+            text-align: center;
+        }
+
+        .main h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .main p {
+            font-size: 18px;
+            margin-bottom: 40px;
+        }
+
+        .category-section, .product-section {
+            margin-bottom: 40px;
+        }
+
+        .category-list, .product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .category-card, .product-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: calc(33.33% - 20px);
+            padding: 20px;
+            transition: transform 0.3s;
+        }
+
+        .category-card:hover, .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .category-card img, .product-card img {
+            border-radius: 10px;
+            width: 100%;
+            height: auto;
+        }
+
+        .category-card h3, .product-card h2 {
+            font-size: 20px;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        .product-card p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .footer {
+            background-color: #0e0e0d;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+<header class="header">
+    <div class="logo">
+        <img src="/logo.png" alt="Цветочный Магазин">
+    </div>
+    <nav class="nav">
+        <a href="/">Главная</a>
+        <a href="/products">Продукты</a>
+        <a href="/categories">Categories</a>
+        <a href="/about">О нас</a>
+        <a href="/contact">Контакты</a>
+    </nav>
+</header>
+
+<main class="main">
+    <h1>Добро пожаловать в наш цветочный магазин!</h1>
+    <p>Мы предлагаем широкий ассортимент цветов и растений для любого случая.</p>
+
+    <section class="category-section">
+        <h2>Категории</h2>
+        <div class="category-list">
+            <div class="category-card">
+                <img src="/images/category1.jpg" alt="Категория 1">
+                <h3>Категория 1</h3>
+            </div>
+            <div class="category-card">
+                <img src="/images/category2.jpg" alt="Категория 2">
+                <h3>Категория 2</h3>
+            </div>
+            <div class="category-card">
+                <img src="/images/category3.jpg" alt="Категория 3">
+                <h3>Категория 3</h3>
+            </div>
+        </div>
+    </section>
+
+    <section class="product-section">
+        <h2>Наши Продукты</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="/images/flower1.jpg" alt="Цветок 1">
+                <h2>Цветок 1</h2>
+                <p>Описание цветка 1.</p>
+            </div>
+            <div class="product-card">
+                <img src="/images/flower2.jpg" alt="Цветок 2">
+                <h2>Цветок 2</h2>
+                <p>Описание цветка 2.</p>
+            </div>
+            <div class="product-card">
+                <img src="/images/flower3.jpg" alt="Цветок 3">
+                <h2>Цветок 3</h2>
+                <p>Описание цветка 3.</p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <p>&copy; 2024 Цветочный Магазин. Все права защищены.</p>
+</footer>
+</body>
+</html>

@@ -1,25 +1,22 @@
-package com.example.flovermodel.dto;
+package com.example.flowershop.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.math.BigDecimal;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductDTO {
     private Long id;
     private String name;
     private String description;
+    private String category;
     private Double weight;
     private String countryOfOrigin;
     private BigDecimal price;
-    private String imageURL;
+    private String imageUrl;
     private Integer stockQuantity;
-
-    private Long categoryId; // Идентификатор категории
 }

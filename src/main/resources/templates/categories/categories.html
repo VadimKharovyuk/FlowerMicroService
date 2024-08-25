@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Категории</title>
+    <link rel="stylesheet" href="/css/styles.css"> <!-- Подключение вашего CSS -->
+</head>
+<body>
+<header>
+    <h1>Категории</h1>
+</header>
+
+<main>
+    <section class="category-section">
+        <h2>Список категорий</h2>
+        <div class="category-list">
+            <div th:each="category : ${categories}" class="category-card">
+                <img th:src="@{'/images/' + ${category.name} + '.jpg'}" alt="Категория"/>
+                <h3 th:text="${category.name}"></h3>
+                <p th:text="${category.description}"></p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2024 Цветочный Магазин. Все права защищены.</p>
+</footer>
+</body>
+</html>
