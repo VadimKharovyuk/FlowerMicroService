@@ -17,9 +17,9 @@
         <h2>Список категорий</h2>
         <div class="category-list">
             <div th:each="category : ${categories}" class="category-card">
-                <img th:src="@{'/images/' + ${category.name} + '.jpg'}" alt="Категория"/>
                 <h3 th:text="${category.name}"></h3>
                 <p th:text="${category.description}"></p>
+                <img th:src="@{${category.image}}" alt=" Image">
             </div>
         </div>
     </section>

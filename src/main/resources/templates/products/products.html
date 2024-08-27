@@ -38,11 +38,13 @@
   <div class="product-grid">
     <th:block th:each="product : ${products}">
       <div class="product-card">
-        <img th:src="@{/images/[[${product.imageURL}]]}" alt="Продукт">
         <h2 th:text="${product.name}"></h2>
+        <h2 th:text="${product.countryOfOrigin}"></h2>
         <p th:text="${product.description}"></p>
+        <img th:src="@{${product.imageUrl}}" alt=" Image">
         <p th:text="'Цена: ' + ${product.price}"></p>
       </div>
+
     </th:block>
   </div>
 </main>

@@ -65,41 +65,77 @@
             margin-bottom: 40px;
         }
 
-        .category-list, .product-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
+        .category-list {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
         }
 
-        .category-card, .product-card {
+        .category-card {
             background-color: white;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: calc(33.33% - 20px);
+            height: 250px;  /* Установленная высота */
             padding: 20px;
             transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
-        .category-card:hover, .product-card:hover {
+        .category-card:hover {
             transform: translateY(-5px);
         }
 
-        .category-card img, .product-card img {
+        .category-card img {
             border-radius: 10px;
             width: 100%;
-            height: auto;
+            height: 150px;  /* Установленная высота изображения */
+            object-fit: cover;
         }
 
-        .category-card h3, .product-card h2 {
+        .category-card h3 {
             font-size: 20px;
             margin-top: 15px;
             margin-bottom: 10px;
         }
 
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            height: 350px;  /* Установленная высота для карточек продуктов */
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .product-card h2 {
+            font-size: 20px;
+            margin: 15px 0;
+        }
+
         .product-card p {
-            font-size: 16px;
+            font-size: 14px;
             color: #666;
+            margin: 0;
         }
 
         .footer {
@@ -113,13 +149,10 @@
 </head>
 <body>
 <header class="header">
-    <div class="logo">
-        <img src="/logo.png" alt="Цветочный Магазин">
-    </div>
     <nav class="nav">
         <a href="/">Главная</a>
         <a href="/products">Продукты</a>
-        <a href="/categories">Categories</a>
+        <a href="/categories">Категории</a>
         <a href="/about">О нас</a>
         <a href="/contact">Контакты</a>
     </nav>
@@ -132,41 +165,15 @@
     <section class="category-section">
         <h2>Категории</h2>
         <div class="category-list">
-            <div class="category-card">
-                <img src="/images/category1.jpg" alt="Категория 1">
-                <h3>Категория 1</h3>
-            </div>
-            <div class="category-card">
-                <img src="/images/category2.jpg" alt="Категория 2">
-                <h3>Категория 2</h3>
-            </div>
-            <div class="category-card">
-                <img src="/images/category3.jpg" alt="Категория 3">
-                <h3>Категория 3</h3>
+            <div th:each="category : ${categories}" class="category-card">
+                <a th:href="@{/products/category/{categoryId}(categoryId=${category.id})}">
+                    <img th:src="@{${category.image}}" alt="Категория">
+                    <h3 th:text="${category.name}">Название категории</h3>
+                </a>
             </div>
         </div>
     </section>
 
-    <section class="product-section">
-        <h2>Наши Продукты</h2>
-        <div class="product-grid">
-            <div class="product-card">
-                <img src="/images/flower1.jpg" alt="Цветок 1">
-                <h2>Цветок 1</h2>
-                <p>Описание цветка 1.</p>
-            </div>
-            <div class="product-card">
-                <img src="/images/flower2.jpg" alt="Цветок 2">
-                <h2>Цветок 2</h2>
-                <p>Описание цветка 2.</p>
-            </div>
-            <div class="product-card">
-                <img src="/images/flower3.jpg" alt="Цветок 3">
-                <h2>Цветок 3</h2>
-                <p>Описание цветка 3.</p>
-            </div>
-        </div>
-    </section>
 </main>
 
 <footer class="footer">

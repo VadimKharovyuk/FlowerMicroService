@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Продукты по категории</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        /* Основные стили для страницы */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #f8f8f8;
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav {
+            margin-top: 10px;
+        }
+
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        /* Стили для списка продуктов */
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px; /* Расстояние между карточками */
+            justify-content: center; /* Центрирование карточек */
+        }
+
+        .product-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            width: calc(20% - 20px); /* 5 карточек в ряд, минус расстояние между ними */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .product-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .product-card h3 {
+            margin: 10px 0;
+        }
+
+        .product-card p {
+            margin: 5px 0;
+        }
+
+        /* Эффект hover */
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Описание при hover */
+        .product-card::after {
+            content: attr(data-description);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 10px;
+            border-radius: 0 0 8px 8px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            font-size: 14px;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .product-card:hover::after {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Продукты по категории</h1>
+    <nav>
+        <a href="/">Главная</a>
+        <a href="/products">Продукты</a>
+        <a href="/categories">Категории</a>
+        <a href="/about">О нас</a>
+        <a href="/contact">Контакты</a>
+    </nav>
+</header>
+
+<main>
+    <h2>Продукты в категории</h2>
+    <div class="product-list">
+        <div th:each="product : ${productByCategory}" class="product-card">
+            <img th:src="@{${product.imageUrl}}" alt="Продукт">
+            <h3 th:text="${product.name}">Название продукта</h3>
+            <p th:text="${product.description}">Описание продукта</p>
+            <p>Вес: <span th:text="${product.weight}">Вес</span> кг</p>
+            <p>Страна происхождения: <span th:text="${product.countryOfOrigin}">Страна</span></p>
+            <p>Цена: <span th:text="${product.price}">Цена</span> руб.</p>
+            <p>Количество на складе: <span th:text="${product.stockQuantity}">Количество</span></p>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2024 Цветочный Магазин. Все права защищены.</p>
+</footer>
+</body>
+</html>

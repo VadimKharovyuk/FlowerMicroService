@@ -19,6 +19,7 @@ public class CategoryMapper {
         CategoryDTO categoryDTO = new CategoryDTO();
         categoryDTO.setId(category.getId());
         categoryDTO.setName(category.getName());
+        categoryDTO.setImage(category.getImage());
         categoryDTO.setDescription(category.getDescription());
         categoryDTO.setProducts(category.getProducts().stream()
                 .map(ProductMapper::toDTO) // Используем ProductMapper для маппинга продуктов
@@ -36,6 +37,7 @@ public class CategoryMapper {
         Category category = new Category();
         category.setId(categoryDTO.getId());
         category.setName(categoryDTO.getName());
+        category.setImage(categoryDTO.getImage());
         category.setDescription(categoryDTO.getDescription());
 
         // Обработка списка продуктов

@@ -61,4 +61,16 @@ public class ProductService {
     public void deleteProduct(Long id) {
         productRepository.deleteById(id);
     }
+    // Получение продуктов по категории
+    public List<ProductDTO> getProductsByCategory(Long categoryId) {
+        Optional<Category> categoryOptional = categoryRepository.findById(categoryId);
+        if (categoryOptional.isPresent()) {
+            Category category = categoryOptional.get();
+            List<Product> products = productRepository.findByCategory(category);
+            return products.stream()
+                    .map(ProductMapper::toDTO)
+                    .collect(Collectors.toList());
+        }
+        return List.of();
+    }
 }
