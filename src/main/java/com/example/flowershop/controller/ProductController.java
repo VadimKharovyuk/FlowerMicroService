@@ -17,20 +17,21 @@ import java.util.List;
 public class ProductController {
 
     private final ProductServiceClient productServiceClient;
-
-    // Получение продуктов по категории
-    @GetMapping("/category/{categoryId}")
-    public String getProductByCategory(@PathVariable Long categoryId, Model model) {
-        List<ProductDTO> productDTOListByCategory = productServiceClient.getProductsByCategory(categoryId);
-        model.addAttribute("productByCategory", productDTOListByCategory);
-        return "products/listProductsByCategory"; // Шаблон для отображения продуктов по категории
-    }
-
-    // Получение всех продуктов
     @GetMapping
     public String getAllProducts(Model model) {
         List<ProductDTO> products = productServiceClient.getAllProducts();
         model.addAttribute("products", products);
         return "products/products"; // Шаблон для отображения всех продуктов
     }
+
+    // Получение продуктов по категории
+    @GetMapping("/category/{categoryId}")
+    public String getProductByCategory(@PathVariable Long categoryId, Model model) {
+        List<ProductDTO> productDTOListByCategory = productServiceClient.getProductsByCategory(categoryId);
+        model.addAttribute("productByCategory", productDTOListByCategory);
+        return "products/listProductsByCategory";
+    }
+
+
+
 }

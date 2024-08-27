@@ -6,18 +6,95 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Список Продуктов</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-    .header { background: #2d394b; color: white; padding: 10px; display: flex; align-items: center; }
-    .header .logo { margin-right: auto; }
-    .header .logo img { height: 50px; }
-    .header .nav { display: flex; gap: 20px; }
-    .header .nav a { color: white; text-decoration: none; }
-    .main { padding: 20px; }
-    .product-grid { display: flex; gap: 20px; flex-wrap: wrap; }
-    .product-card { border: 1px solid #ddd; padding: 10px; border-radius: 5px; width: calc(33% - 20px); box-sizing: border-box; }
-    .product-card img { width: 100%; height: auto; }
-    .product-card h2 { font-size: 18px; }
-    .product-card p { font-size: 14px; }
+    /* General Reset and Font Setup */
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #f5f5f5;
+    }
+
+    /* Header Styles */
+    .header {
+      background-color: #3c32ce;
+      color: white;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header .logo img {
+      height: 50px;
+    }
+
+    .header .nav a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 15px;
+      margin: 0 5px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .header .nav a:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Main Content Styles */
+    .main {
+      padding: 40px;
+      text-align: center;
+    }
+
+    .main h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .product-card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .product-card img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 5px;
+    }
+
+    .product-card h2 {
+      font-size: 20px;
+      margin: 15px 0;
+    }
+
+    .product-card p {
+      font-size: 14px;
+      color: #666;
+      margin: 10px 0;
+    }
+
+    /* Footer Styles */
+    .footer {
+      background-color: #0e0e0d;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: auto;
+    }
   </style>
 </head>
 <body>
@@ -39,12 +116,11 @@
     <th:block th:each="product : ${products}">
       <div class="product-card">
         <h2 th:text="${product.name}"></h2>
-        <h2 th:text="${product.countryOfOrigin}"></h2>
+        <h3 th:text="${product.countryOfOrigin}"></h3>
         <p th:text="${product.description}"></p>
-        <img th:src="@{${product.imageUrl}}" alt=" Image">
+        <img th:src="@{/${product.imageUrl}}" alt="Продукт"> <!-- Correct URL path -->
         <p th:text="'Цена: ' + ${product.price}"></p>
       </div>
-
     </th:block>
   </div>
 </main>

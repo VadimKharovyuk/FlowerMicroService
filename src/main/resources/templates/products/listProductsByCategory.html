@@ -60,8 +60,9 @@
             padding: 15px;
             width: calc(20% - 20px); /* 5 карточек в ряд, минус расстояние между ними */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.5s ease, box-shadow 0.3s ease;
             position: relative;
+            overflow: hidden;
         }
 
         .product-card img {
@@ -74,37 +75,22 @@
             margin: 10px 0;
         }
 
-        .product-card p {
-            margin: 5px 0;
+        .product-info {
+            display: none; /* Скрываем информацию по умолчанию */
         }
 
-        /* Эффект hover */
         .product-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
-        /* Описание при hover */
-        .product-card::after {
-            content: attr(data-description);
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.7);
-            color: #fff;
-            padding: 10px;
-            border-radius: 0 0 8px 8px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-            font-size: 14px;
-            text-align: center;
-            line-height: 1.4;
+        .product-card:hover .product-info {
+            display: block; /* Показываем информацию при наведении */
         }
 
-        .product-card:hover::after {
-            opacity: 1;
+        /* Описание при hover */
+        .product-info p {
+            margin: 5px 0;
         }
     </style>
 </head>
@@ -124,13 +110,15 @@
     <h2>Продукты в категории</h2>
     <div class="product-list">
         <div th:each="product : ${productByCategory}" class="product-card">
-            <img th:src="@{${product.imageUrl}}" alt="Продукт">
+            <img th:src="@{/images/imageURL/${product.imageURL}}" alt="Продукт">
             <h3 th:text="${product.name}">Название продукта</h3>
-            <p th:text="${product.description}">Описание продукта</p>
-            <p>Вес: <span th:text="${product.weight}">Вес</span> кг</p>
             <p>Страна происхождения: <span th:text="${product.countryOfOrigin}">Страна</span></p>
-            <p>Цена: <span th:text="${product.price}">Цена</span> руб.</p>
-            <p>Количество на складе: <span th:text="${product.stockQuantity}">Количество</span></p>
+            <div class="product-info">
+                <p th:text="${product.description}">Описание продукта</p>
+                <p>Вес: <span th:text="${product.weight}">Вес</span> кг</p>
+                <p>Цена: <span th:text="${product.price}">Цена</span> руб.</p>
+                <p>Количество на складе: <span th:text="${product.stockQuantity}">Количество</span></p>
+            </div>
         </div>
     </div>
 </main>
