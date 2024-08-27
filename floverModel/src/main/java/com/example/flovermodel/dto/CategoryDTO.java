@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -17,6 +18,7 @@ public class CategoryDTO {
     private String name;
     private String description;
     private String image;
-    private List<ProductDTO> products;
+
+    private List<ProductDTO> products =new ArrayList<>();
 
 }
