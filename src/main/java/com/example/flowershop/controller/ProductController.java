@@ -23,9 +23,13 @@ public class ProductController {
     @GetMapping("/{id}")
     public String findById(@PathVariable Long id, Model model) {
         ProductDTO product = productServiceClient.getProductById(id);
-            model.addAttribute("product", product);
-            return "products/productInfo";
-        }
+        List<ProductDTO> relatedProducts = productServiceClient.getRelatedProducts(id);
+
+
+        model.addAttribute("product", product);
+        model.addAttribute("relatedProducts", relatedProducts);
+        return "products/productInfo";
+    }
 
     @GetMapping("/search")
     public String search(@RequestParam("name") String name, Model model) {

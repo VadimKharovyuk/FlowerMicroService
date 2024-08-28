@@ -70,6 +70,28 @@
             padding: 20px;
             margin-top: auto; /* Push footer to the bottom */
         }
+        .related-products {
+            margin-top: 40px;
+        }
+
+        .related-products h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -95,6 +117,18 @@
         <p>Stock Quantity: <span th:text="${product.stockQuantity}">0</span></p>
         <img th:src="@{${product.imageUrl}}" alt="Product Image" />
     </div>
+    <!-- Related products section -->
+    <section class="related-products" th:if="${relatedProducts != null and !relatedProducts.isEmpty()}">
+        <h2>Related Products</h2>
+        <div class="product-grid">
+            <div th:each="relatedProduct : ${relatedProducts}" class="product-card">
+                <img th:src="@{${relatedProduct.imageUrl}}" alt="Related Product Image" />
+                <h3 th:text="${relatedProduct.name}">Product Name</h3>
+                <p th:text="${relatedProduct.price}">Price</p>
+                <a th:href="@{/products/{id}(id=${relatedProduct.id})}">View Details</a>
+            </div>
+        </div>
+    </section>
 
     <!-- Сообщение, если продукт не найден -->
     <div th:if="${product == null}">

@@ -9,5 +9,9 @@ public class FlowerShopApplication {
     public static void main(String[] args) {
         SpringApplication.run(FlowerShopApplication.class, args);
     }
+    //добавление продукта
+    //update prodyct
+    //delete prodyct
+    //cписок продуктов  по поиске
 
 }

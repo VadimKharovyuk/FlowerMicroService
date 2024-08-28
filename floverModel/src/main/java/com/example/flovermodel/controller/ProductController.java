@@ -16,10 +16,17 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+
+
     @GetMapping("/{id}")
     public ResponseEntity<ProductDTO> getProductById(@PathVariable Long id) {
         ProductDTO productDTO = productService.getProductById(id);
         return productDTO != null ? new ResponseEntity<>(productDTO, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    @GetMapping("/{id}/related")
+    public ResponseEntity<List<ProductDTO>> getRelatedProducts(@PathVariable Long id) {
+        List<ProductDTO> relatedProducts = productService.findRelatedProducts(id);
+        return ResponseEntity.ok(relatedProducts);
     }
 
 

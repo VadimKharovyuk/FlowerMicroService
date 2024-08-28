@@ -12,6 +12,7 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -23,7 +24,6 @@ public class ProductServiceClient {
 
     private final RestTemplate restTemplate;
 
-
     public ProductDTO getProductById(Long id) {
         String url = productServiceUrl + "/" + id;
         try {
@@ -31,6 +31,21 @@ public class ProductServiceClient {
         } catch (HttpClientErrorException | HttpServerErrorException e) {
 
             return null;
+        }
+    }
+
+    public List<ProductDTO> getRelatedProducts(Long id) {
+        // URL для конечной точки связанных товаров
+        String url = productServiceUrl + "/" + id + "/related";
+
+        try {
+            // Отправляем GET-запрос и ожидаем список ProductDTO в качестве ответа
+            ProductDTO[] relatedProductsArray = restTemplate.getForObject(url, ProductDTO[].class);
+
+            // Преобразуем массив в список и возвращаем его
+            return Arrays.asList(relatedProductsArray);
+        } catch (HttpClientErrorException | HttpServerErrorException e) {
+            return Collections.emptyList(); // Возвращаем пустой список в случае ошибки
         }
     }
 

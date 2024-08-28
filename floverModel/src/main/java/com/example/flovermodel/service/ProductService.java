@@ -6,6 +6,7 @@ import com.example.flovermodel.model.Category;
 import com.example.flovermodel.model.Product;
 import com.example.flovermodel.repository.CategoryRepository;
 import com.example.flovermodel.repository.ProductRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -79,6 +80,22 @@ public class ProductService {
         // Используем маппер для преобразования продуктов в DTO
         return products.stream()
                 .map(ProductMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<ProductDTO> findRelatedProducts(Long id) {
+        // Находим продукт по ID
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Product not found"));
+
+        // Находим связанные продукты по категории этого продукта
+        List<Product> relatedProducts = productRepository.findByCategory(product.getCategory());
+
+        // Преобразуем список связанных продуктов в список DTO и ограничиваем его до 5 элементов
+        return relatedProducts.stream()
+                .filter(p -> !p.getId().equals(product.getId()))  // Исключаем исходный продукт из списка
+                .limit(5)  // Ограничиваем список до 5 элементов
+                .map(ProductMapper::toDTO)  // Преобразуем в ProductDTO
                 .collect(Collectors.toList());
     }
 }
