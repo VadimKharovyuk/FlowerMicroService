@@ -6,10 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Цветочный Магазин</title>
 
+    <!-- Подключение шрифтов и иконок -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
     <style>
         /* Подключение шрифтов */
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #f5f5f5;
@@ -32,6 +34,11 @@
             height: 50px;
         }
 
+        .header .nav {
+            display: flex;
+            align-items: center;
+        }
+
         .header .nav a {
             color: white;
             text-decoration: none;
@@ -43,6 +50,38 @@
 
         .header .nav a:hover {
             background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .header .search-form {
+            display: flex;
+            align-items: center;
+        }
+
+        .header .search-form input[type="text"] {
+            padding: 5px;
+            margin-right: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            flex: 1;
+        }
+
+        .header .search-form button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .header .search-form button i {
+            margin-right: 5px;
+        }
+
+        .header .search-form button:hover {
+            background-color: #0056b3;
         }
 
         .main {
@@ -145,34 +184,13 @@
             padding: 20px;
             margin-top: auto;
         }
-        .search-form {
-            display: flex;
-            align-items: center;
-        }
-
-        .search-form input[type="text"] {
-            padding: 5px;
-            margin-right: 5px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-        }
-
-        .search-form button {
-            padding: 5px 10px;
-            border: none;
-            border-radius: 3px;
-            background-color: #007bff;
-            color: #fff;
-            cursor: pointer;
-        }
-
-        .search-form button:hover {
-            background-color: #0056b3;
-        }
     </style>
 </head>
 <body>
 <header class="header">
+    <div class="logo">
+        <img src="logo.png" alt="Logo">
+    </div>
     <nav class="nav">
         <a href="/">Главная</a>
         <a href="/products">Продукты</a>
@@ -182,7 +200,7 @@
     </nav>
     <form action="/products/search" method="get" class="search-form">
         <input type="text" name="name" placeholder="Поиск по названию" />
-        <button type="submit">Поиск</button>
+        <button type="submit"><i class="fas fa-search"></i> Поиск</button>
     </form>
 </header>
 
@@ -201,7 +219,6 @@
             </div>
         </div>
     </section>
-
 </main>
 
 <footer class="footer">
