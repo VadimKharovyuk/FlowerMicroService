@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -16,7 +17,17 @@ import java.util.List;
 @RequestMapping("/products")
 public class ProductController {
 
+
     private final ProductServiceClient productServiceClient;
+
+    @GetMapping("/search")
+    public String search(@RequestParam("name") String name, Model model) {
+        List<ProductDTO> products = productServiceClient.findProductsByName(name);
+        model.addAttribute("products", products);
+        return "products/search";
+    }
+
+
     @GetMapping
     public String getAllProducts(Model model) {
         List<ProductDTO> products = productServiceClient.getAllProducts();

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Search Results</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+        }
+
+        /* Navigation Styles */
+        .nav {
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+            background-color: #444;
+        }
+
+        .nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-weight: bold;
+        }
+
+        .nav a:hover {
+            background-color: #555;
+        }
+
+        /* Form Styles */
+        form {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Product List Styles */
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        .main {
+            text-align: center;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="nav">
+        <a href="/">Главная</a>
+        <a href="/products">Продукты</a>
+        <a href="/categories">Категории</a>
+        <a href="/about">О нас</a>
+        <a href="/contact">Контакты</a>
+    </div>
+    <h1 style="text-align: center">Search Results</h1>
+</header>
+
+<main class="main">
+    <br>
+    <!-- Форма для поиска -->
+    <form action="/products/search" method="get">
+        <input type="text" name="name" placeholder="Search by name" />
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- Проверка наличия результатов поиска -->
+    <div th:if="${products.isEmpty()}">
+        <p>No products found.</p>
+    </div>
+
+    <!-- Отображение списка продуктов -->
+    <div th:if="${!products.isEmpty()}">
+        <ul>
+            <li th:each="product : ${products}">
+                <h2 th:text="${product.name}">Product Name</h2>
+                <p th:text="${product.description}">Description</p>
+                <p>Weight: <span th:text="${product.weight}">0.0</span> kg</p>
+                <p>Country of Origin: <span th:text="${product.countryOfOrigin}">Unknown</span></p>
+                <p>Price: $<span th:text="${product.price}">0.00</span></p>
+                <p>Stock Quantity: <span th:text="${product.stockQuantity}">0</span></p>
+                <!-- <img th:src="@{${product.imageURL}}" alt="Product Image" /> -->
+            </li>
+        </ul>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2023 Search Results. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

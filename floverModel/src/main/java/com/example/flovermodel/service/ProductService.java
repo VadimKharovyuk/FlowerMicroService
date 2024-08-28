@@ -73,4 +73,12 @@ public class ProductService {
         }
         return List.of();
     }
+    public List<ProductDTO> findProductsByName(String name) {
+        // Получаем список продуктов по имени
+        List<Product> products = productRepository.findByNameIgnoreCase(name);
+        // Используем маппер для преобразования продуктов в DTO
+        return products.stream()
+                .map(ProductMapper::toDTO)
+                .collect(Collectors.toList());
+    }
 }

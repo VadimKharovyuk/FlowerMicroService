@@ -1,7 +1,11 @@
 package com.example.flowershop.service;
 
 import com.example.flowershop.dto.ProductDTO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
@@ -11,7 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
-
+@RequiredArgsConstructor
 public class ProductServiceClient {
 
     @Value("${product.service.url}")
@@ -19,10 +23,22 @@ public class ProductServiceClient {
 
     private final RestTemplate restTemplate;
 
-    public ProductServiceClient(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
-    }
 
+    // Метод для поиска продуктов по имени через внешний API
+
+    public List<ProductDTO> findProductsByName(String name) {
+        String url = productServiceUrl + "/search?name=" + name;
+
+        // Выполняем запрос и обрабатываем результат
+        ResponseEntity<List<ProductDTO>> response = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<ProductDTO>>() {}
+        );
+
+        return response.getBody();
+    }
     public ProductDTO getProductById(Long id) {
         String url = productServiceUrl + "/" + id;
         try {

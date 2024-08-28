@@ -15,6 +15,16 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+   // поиска продуктов по имени
+    @GetMapping("/search")
+    public ResponseEntity<List<ProductDTO>> searchProduct(@RequestParam String name) {
+        // Вызываем сервис для поиска продуктов
+        List<ProductDTO> products = productService.findProductsByName(name);
+        if (!products.isEmpty()) {
+            return new ResponseEntity<>(products, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 
     // Получение продуктов по категории
     @GetMapping("/category/{categoryId}")
