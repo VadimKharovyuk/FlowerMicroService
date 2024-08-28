@@ -11,6 +11,9 @@
       margin: 0;
       font-family: 'Poppins', sans-serif;
       background-color: #f5f5f5;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
     /* Header Styles */
@@ -44,6 +47,7 @@
     .main {
       padding: 40px;
       text-align: center;
+      flex: 1; /* Make sure the main content takes up available space */
     }
 
     .main h1 {
@@ -55,6 +59,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
+      justify-content: center; /* Center items horizontally */
     }
 
     .product-card {
@@ -93,7 +98,7 @@
       color: white;
       text-align: center;
       padding: 20px;
-      margin-top: auto;
+      margin-top: auto; /* Push footer to the bottom */
     }
   </style>
 </head>
@@ -115,11 +120,13 @@
   <div class="product-grid">
     <th:block th:each="product : ${products}">
       <div class="product-card">
-        <h2 th:text="${product.name}"></h2>
-        <h3 th:text="${product.countryOfOrigin}"></h3>
-        <p th:text="${product.description}"></p>
-        <img th:src="@{/${product.imageUrl}}" alt="Продукт"> <!-- Correct URL path -->
-        <p th:text="'Цена: ' + ${product.price}"></p>
+        <a th:href="@{/products/{id}(id=${product.id})}">
+          <h2 th:text="${product.name}">Product Name</h2>
+          <h3 th:text="${product.countryOfOrigin}">Country</h3>
+          <p th:text="${product.description}">Description</p>
+          <img th:src="@{${product.imageUrl}}" alt="Product Image" />
+          <p th:text="'Цена: ' + ${product.price}">Price</p>
+        </a>
       </div>
     </th:block>
   </div>

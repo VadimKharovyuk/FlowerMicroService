@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Product Information</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #3c32ce;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            justify-content: center; /* Center navigation items */
+        }
+
+        .nav {
+            display: flex;
+            gap: 15px; /* Space between links */
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Product Info Styles */
+        .product-info {
+            padding: 40px;
+            text-align: center; /* Center align text and image */
+            flex: 1; /* Ensure the main section takes up available space */
+        }
+
+        .product-info img {
+            max-width: 200px;
+            height: auto;
+            margin-top: 20px;
+        }
+
+        .product-info h1 {
+            margin-top: 0;
+            font-size: 24px;
+        }
+
+        .product-info p {
+            font-size: 16px;
+            color: #333;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: auto; /* Push footer to the bottom */
+        }
+    </style>
+</head>
+<body>
+<header>
+    <nav class="nav">
+        <a href="/">Главная</a>
+        <a href="/products">Продукты</a>
+        <a href="/categories">Категории</a>
+        <a href="/about">О нас</a>
+        <a href="/contact">Контакты</a>
+    </nav>
+</header>
+
+<main class="product-info">
+    <!-- Проверка наличия данных о продукте -->
+    <div th:if="${product != null}">
+        <h1 th:text="${product.name}">Product Name</h1>
+        <p th:text="${product.description}">Description</p>
+        <p>Category: <span th:text="${product.category}">Unknown</span></p>
+        <p>Weight: <span th:text="${product.weight}">0.0</span> kg</p>
+        <p>Country of Origin: <span th:text="${product.countryOfOrigin}">Unknown</span></p>
+        <p>Price: $<span th:text="${product.price}">0.00</span></p>
+        <p>Stock Quantity: <span th:text="${product.stockQuantity}">0</span></p>
+        <img th:src="@{${product.imageUrl}}" alt="Product Image" />
+    </div>
+
+    <!-- Сообщение, если продукт не найден -->
+    <div th:if="${product == null}">
+        <p>Product not found.</p>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2024 Your Company. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

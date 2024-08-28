@@ -24,6 +24,19 @@ public class ProductServiceClient {
     private final RestTemplate restTemplate;
 
 
+    public ProductDTO getProductById(Long id) {
+        String url = productServiceUrl + "/" + id;
+        try {
+            return restTemplate.getForObject(url, ProductDTO.class);
+        } catch (HttpClientErrorException | HttpServerErrorException e) {
+
+            return null;
+        }
+    }
+
+
+
+
     // Метод для поиска продуктов по имени через внешний API
 
     public List<ProductDTO> findProductsByName(String name) {
@@ -38,15 +51,6 @@ public class ProductServiceClient {
         );
 
         return response.getBody();
-    }
-    public ProductDTO getProductById(Long id) {
-        String url = productServiceUrl + "/" + id;
-        try {
-            return restTemplate.getForObject(url, ProductDTO.class);
-        } catch (HttpClientErrorException | HttpServerErrorException e) {
-
-            return null;
-        }
     }
 
     public List<ProductDTO> getAllProducts() {
