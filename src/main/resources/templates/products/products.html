@@ -125,6 +125,7 @@
           <h3 th:text="${product.countryOfOrigin}">Country</h3>
           <p th:text="${product.description}">Description</p>
           <p th:text="'Цена: ' + ${product.price}">Price</p>
+          <img th:src="@{${product.imgPath}}" alt="product">
         </a>
       </div>
     </th:block>

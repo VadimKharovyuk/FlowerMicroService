@@ -18,6 +18,7 @@ public class ProductMapper {
         productDTO.setCountryOfOrigin(product.getCountryOfOrigin());
         productDTO.setPrice(product.getPrice());
         productDTO.setStockQuantity(product.getStockQuantity());
+        productDTO.setImgPath(product.getImgPath());
 
         if (product.getCategory() != null) {
             productDTO.setCategoryId(product.getCategory().getId());
@@ -39,6 +40,7 @@ public class ProductMapper {
         product.setCountryOfOrigin(productDTO.getCountryOfOrigin());
         product.setPrice(productDTO.getPrice());
         product.setStockQuantity(productDTO.getStockQuantity());
+        product.setImgPath(productDTO.getImgPath());
 
         // Маппинг категории
         if (category != null) {

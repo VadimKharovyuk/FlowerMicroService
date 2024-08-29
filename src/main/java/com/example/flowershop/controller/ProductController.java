@@ -32,7 +32,6 @@ public class ProductController {
 
     @GetMapping("/search")
     public String search(@RequestParam("name") String name, Model model) {
-
         List<ProductDTO> products = productServiceClient.findProductsByName(name);
         model.addAttribute("products", products);
         return "products/search";

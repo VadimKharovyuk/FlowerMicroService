@@ -36,6 +36,8 @@ public class Product {
 
     private BigDecimal price;
 
+    private String imgPath;
+
 
     @Column(name = "stock_quantity")
     private Integer stockQuantity;

@@ -19,6 +19,7 @@ public class ProductDTO {
     private String countryOfOrigin;
     private BigDecimal price;
     private Integer stockQuantity;
+    private String imgPath;
 
     private Long categoryId; // Идентификатор категории
 }

@@ -115,6 +115,8 @@
         <p>Country of Origin: <span th:text="${product.countryOfOrigin}">Unknown</span></p>
         <p>Price: $<span th:text="${product.price}">0.00</span></p>
         <p>Stock Quantity: <span th:text="${product.stockQuantity}">0</span></p>
+        <img th:src="@{${product.imgPath}}" alt="product">
+
 
 
 
@@ -125,6 +127,7 @@
         <div class="product-grid">
             <div th:each="relatedProduct : ${relatedProducts}" class="product-card">
                 <h3 th:text="${relatedProduct.name}">Product Name</h3>
+                <img th:src="@{${relatedProduct.imgPath}}" alt="Related Product Image">
                 <p th:text="${relatedProduct.description}">Описание</p>
                 <p th:text="'Цена: ' + ${relatedProduct.price}">Price</p>
                 <a th:href="@{/products/{id}(id=${relatedProduct.id})}">View Details</a>

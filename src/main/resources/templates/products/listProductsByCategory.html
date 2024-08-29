@@ -109,6 +109,7 @@
                 <a th:href="@{/products/{id}(id=${product.id})}" class="product-card p-3 shadow-sm d-block">
 
                     <h3 th:text="${product.name}" class="h5 mb-2">Название продукта</h3>
+                    <img th:src="@{${product.imgPath}}" alt="product">
                     <p th:text="${product.description}" class="small text-muted mb-2">Описание продукта</p>
                     <div class="product-info">
                         <p class="text-muted mb-1">Страна: <span th:text="${product.countryOfOrigin}">Страна</span></p>
