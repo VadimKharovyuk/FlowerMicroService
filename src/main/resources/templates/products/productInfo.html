@@ -115,16 +115,18 @@
         <p>Country of Origin: <span th:text="${product.countryOfOrigin}">Unknown</span></p>
         <p>Price: $<span th:text="${product.price}">0.00</span></p>
         <p>Stock Quantity: <span th:text="${product.stockQuantity}">0</span></p>
-        <img th:src="@{${product.imageUrl}}" alt="Product Image" />
+
+
+
     </div>
     <!-- Related products section -->
     <section class="related-products" th:if="${relatedProducts != null and !relatedProducts.isEmpty()}">
         <h2>Related Products</h2>
         <div class="product-grid">
             <div th:each="relatedProduct : ${relatedProducts}" class="product-card">
-                <img th:src="@{${relatedProduct.imageUrl}}" alt="Related Product Image" />
                 <h3 th:text="${relatedProduct.name}">Product Name</h3>
-                <p th:text="${relatedProduct.price}">Price</p>
+                <p th:text="${relatedProduct.description}">Описание</p>
+                <p th:text="'Цена: ' + ${relatedProduct.price}">Price</p>
                 <a th:href="@{/products/{id}(id=${relatedProduct.id})}">View Details</a>
             </div>
         </div>

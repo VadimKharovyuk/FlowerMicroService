@@ -25,14 +25,14 @@ public class ProductController {
         ProductDTO product = productServiceClient.getProductById(id);
         List<ProductDTO> relatedProducts = productServiceClient.getRelatedProducts(id);
 
-
-        model.addAttribute("product", product);
         model.addAttribute("relatedProducts", relatedProducts);
+        model.addAttribute("product", product);
         return "products/productInfo";
     }
 
     @GetMapping("/search")
     public String search(@RequestParam("name") String name, Model model) {
+
         List<ProductDTO> products = productServiceClient.findProductsByName(name);
         model.addAttribute("products", products);
         return "products/search";

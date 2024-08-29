@@ -12,6 +12,7 @@ public class FlowerShopApplication {
     //добавление продукта
     //update prodyct
     //delete prodyct
-    //cписок продуктов  по поиске
+   //отзыввы для товара
+
 
 }

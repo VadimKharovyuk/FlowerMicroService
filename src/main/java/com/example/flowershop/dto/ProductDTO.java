@@ -17,6 +17,5 @@ public class ProductDTO {
     private Double weight;
     private String countryOfOrigin;
     private BigDecimal price;
-    private String imageUrl;
     private Integer stockQuantity;
 }

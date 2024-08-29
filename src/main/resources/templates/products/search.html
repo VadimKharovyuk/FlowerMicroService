@@ -61,7 +61,6 @@
         <div th:each="product : ${products}" class="col-md-4 col-lg-3 mb-4">
             <div class="product-card p-3 shadow-sm">
                 <a th:href="@{/products/{id}(id=${product.id})}">
-                    <img th:src="@{/images/${product.imageURL}}" alt="Продукт" class="img-fluid mb-3">
                     <h3 th:text="${product.name}" class="h5">Название продукта</h3>
                     <p th:text="${product.description}" class="small text-muted">Описание продукта</p>
                     <div class="product-info">
@@ -74,6 +73,7 @@
             </div>
         </div>
     </div>
+
 </main>
 
 <footer class="bg-light text-center py-4 border-top">

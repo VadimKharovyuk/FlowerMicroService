@@ -35,7 +35,7 @@ public class Product {
     private String countryOfOrigin;
 
     private BigDecimal price;
-    private String imageURL;
+
 
     @Column(name = "stock_quantity")
     private Integer stockQuantity;

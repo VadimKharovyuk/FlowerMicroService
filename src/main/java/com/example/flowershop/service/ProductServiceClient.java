@@ -37,22 +37,16 @@ public class ProductServiceClient {
     public List<ProductDTO> getRelatedProducts(Long id) {
         // URL для конечной точки связанных товаров
         String url = productServiceUrl + "/" + id + "/related";
-
         try {
-            // Отправляем GET-запрос и ожидаем список ProductDTO в качестве ответа
             ProductDTO[] relatedProductsArray = restTemplate.getForObject(url, ProductDTO[].class);
-
             // Преобразуем массив в список и возвращаем его
             return Arrays.asList(relatedProductsArray);
         } catch (HttpClientErrorException | HttpServerErrorException e) {
-            return Collections.emptyList(); // Возвращаем пустой список в случае ошибки
+            return Collections.emptyList();
         }
     }
 
 
-
-
-    // Метод для поиска продуктов по имени через внешний API
 
     public List<ProductDTO> findProductsByName(String name) {
         String url = productServiceUrl + "/search?name=" + name;
