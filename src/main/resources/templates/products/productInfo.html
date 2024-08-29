@@ -110,7 +110,7 @@
     <div th:if="${product != null}">
         <h1 th:text="${product.name}">Product Name</h1>
         <p th:text="${product.description}">Description</p>
-        <p>Category: <span th:text="${product.category}">Unknown</span></p>
+        <p>Category: <span th:text="${product.categoryName}">Unknown</span></p>
         <p>Weight: <span th:text="${product.weight}">0.0</span> kg</p>
         <p>Country of Origin: <span th:text="${product.countryOfOrigin}">Unknown</span></p>
         <p>Price: $<span th:text="${product.price}">0.00</span></p>

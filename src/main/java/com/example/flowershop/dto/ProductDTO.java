@@ -11,11 +11,14 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class ProductDTO {
     private Long id;
+
     private String name;
     private String description;
-    private String category;
     private Double weight;
     private String countryOfOrigin;
     private BigDecimal price;
     private Integer stockQuantity;
+
+
+    private  CategoryDTO categoryName;
 }

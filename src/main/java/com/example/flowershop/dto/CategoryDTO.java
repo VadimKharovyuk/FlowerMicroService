@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -15,6 +16,8 @@ public class CategoryDTO {
     private String name;
     private String description;
     private String image;
+
+    private List<ProductDTO> products =new ArrayList<>();
 
 
 }
