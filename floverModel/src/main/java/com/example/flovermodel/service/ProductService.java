@@ -62,6 +62,7 @@ public class ProductService {
     public void deleteProduct(Long id) {
         productRepository.deleteById(id);
     }
+
     // Получение продуктов по категории
     public List<ProductDTO> getProductsByCategory(Long categoryId) {
         Optional<Category> categoryOptional = categoryRepository.findById(categoryId);
@@ -74,6 +75,7 @@ public class ProductService {
         }
         return List.of();
     }
+
     public List<ProductDTO> findProductsByName(String name) {
         // Получаем список продуктов по имени
         List<Product> products = productRepository.findByNameIgnoreCase(name);
@@ -97,5 +99,20 @@ public class ProductService {
                 .limit(5)  // Ограничиваем список до 5 элементов
                 .map(ProductMapper::toDTO)  // Преобразуем в ProductDTO
                 .collect(Collectors.toList());
+    }
+
+    public ProductDTO addProduct(ProductDTO productDTO) {
+        // Находим категорию по ID, если она указана
+        Category category = categoryRepository.findById(productDTO.getCategoryId())
+                .orElseThrow(() -> new EntityNotFoundException("Category not found"));
+
+        // Преобразуем DTO в сущность Product
+        Product product = ProductMapper.toEntity(productDTO, category);
+
+        // Сохраняем продукт в базе данных
+        Product savedProduct = productRepository.save(product);
+
+        // Возвращаем сохранённый продукт в виде DTO
+        return ProductMapper.toDTO(savedProduct);
     }
 }

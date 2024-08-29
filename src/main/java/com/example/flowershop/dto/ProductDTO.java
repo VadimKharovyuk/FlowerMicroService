@@ -22,5 +22,5 @@ public class ProductDTO {
     private String imgPath;
 
 
-    private  CategoryDTO categoryName;
+    private Long categoryId;
 }

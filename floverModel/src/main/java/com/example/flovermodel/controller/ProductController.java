@@ -16,8 +16,11 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-
-
+    @PostMapping("/add")
+    public ResponseEntity<ProductDTO> addProduct(@RequestBody ProductDTO productDTO) {
+        ProductDTO createdProduct = productService.addProduct(productDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
+    }
     @GetMapping("/{id}")
     public ResponseEntity<ProductDTO> getProductById(@PathVariable Long id) {
         ProductDTO productDTO = productService.getProductById(id);

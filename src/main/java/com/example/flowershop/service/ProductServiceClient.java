@@ -24,6 +24,10 @@ public class ProductServiceClient {
 
     private final RestTemplate restTemplate;
 
+    public ProductDTO createProduct(ProductDTO productDTO) {
+        String url = productServiceUrl + "/add";
+        return restTemplate.postForObject(url, productDTO, ProductDTO.class);
+    }
     public ProductDTO getProductById(Long id) {
         String url = productServiceUrl + "/" + id;
         try {

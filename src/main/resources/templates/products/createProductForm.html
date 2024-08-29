@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить новый продукт</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center">Добавить новый продукт</h1>
+    <form th:action="@{/products/add}" method="post" th:object="${createProduct}" class="mt-4">
+        <div class="mb-3">
+            <label for="name" class="form-label">Название</label>
+            <input type="text" id="name" th:field="*{name}" class="form-control" placeholder="Введите название" required>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Описание</label>
+            <textarea id="description" th:field="*{description}" class="form-control" placeholder="Введите описание" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="weight" class="form-label">Вес (в кг)</label>
+            <input type="number" id="weight" th:field="*{weight}" class="form-control" placeholder="Введите вес" step="0.01" required>
+        </div>
+        <div class="mb-3">
+            <label for="countryOfOrigin" class="form-label">Страна происхождения</label>
+            <input type="text" id="countryOfOrigin" th:field="*{countryOfOrigin}" class="form-control" placeholder="Введите страну" required>
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Цена (в руб.)</label>
+            <input type="number" id="price" th:field="*{price}" class="form-control" placeholder="Введите цену" step="0.01" required>
+        </div>
+        <div class="mb-3">
+            <label for="stockQuantity" class="form-label">Количество на складе</label>
+            <input type="number" id="stockQuantity" th:field="*{stockQuantity}" class="form-control" placeholder="Введите количество" required>
+        </div>
+        <div class="mb-3">
+            <label for="imgPath" class="form-label">URL изображения</label>
+            <input type="text" id="imgPath" th:field="*{imgPath}" class="form-control" placeholder="Введите URL изображения">
+        </div>
+        <div class="mb-3">
+            <label for="category" class="form-label">Категория</label>
+            <select th:field="*{categoryId}" class="form-control" id="category">
+                <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Добавить продукт</button>
+    </form>
+</div>
+</body>
+</html>
