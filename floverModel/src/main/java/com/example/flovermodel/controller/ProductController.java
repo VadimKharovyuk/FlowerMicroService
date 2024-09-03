@@ -32,10 +32,14 @@ public class ProductController {
     @Cacheable("productsInStock")
     public ResponseEntity<List<ProductDTO>> getProductsInStock() {
         List<ProductDTO> allProducts = productService.getAllProducts();
-        List<ProductDTO> productsInStock = allProducts.stream()
-                .filter(product -> product.getStockQuantity() != null && product.getStockQuantity() > 0)
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(productsInStock);
+
+        // Проходим по всем продуктам, и в случае отсутствия на складе, устанавливаем количество как 0.
+        for (ProductDTO product : allProducts) {
+            if (product.getStockQuantity() == null || product.getStockQuantity() <= 0) {
+                product.setStockQuantity(0); // Или добавьте флаг для "нет на складе"
+            }
+        }
+        return ResponseEntity.ok(allProducts);
     }
     // Обновление продукта
     @PutMapping("/{id}")

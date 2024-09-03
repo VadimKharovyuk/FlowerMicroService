@@ -123,10 +123,10 @@
         <p>Нет доступных продуктов</p>
     </div>
 
-    <!-- Отображение продуктов -->
+    <!-- Отображение продуктов, если есть в наличии -->
     <div th:if="${!#lists.isEmpty(products)}" class="product-grid">
         <th:block th:each="product : ${products}">
-            <div class="product-card">
+            <div th:if="${product.stockQuantity != null && product.stockQuantity > 0}" class="product-card">
                 <a th:href="@{/products/{id}(id=${product.id})}">
                     <h2 th:text="${product.name}">Product Name</h2>
                     <h3 th:text="${product.countryOfOrigin}">Country</h3>
