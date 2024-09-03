@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Update Product</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    /* Общие стили для страницы */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    /* Основной контейнер */
+    main.product-info {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 90%;
+      max-width: 800px;
+    }
+
+    /* Заголовки */
+    h1, h2 {
+      color: #333;
+    }
+
+    /* Стили для формы */
+    form {
+      display: grid;
+      gap: 15px;
+    }
+
+    /* Метки формы */
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    /* Поля ввода */
+    input[type="text"],
+    input[type="number"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    /* Текстовое поле */
+    textarea {
+      height: 100px;
+      resize: vertical;
+    }
+
+    /* Кнопка отправки */
+    button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Изображение товара */
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+<main class="product-info">
+  <!-- Проверка наличия данных о продукте -->
+  <div th:if="${product != null}">
+    <h1 th:text="${product.name}">Product Name</h1>
+    <p th:text="${product.description}">Description</p>
+    <p>Weight: <span th:text="${product.weight}">0.0</span> kg</p>
+    <p>Country of Origin: <span th:text="${product.countryOfOrigin}">Unknown</span></p>
+    <p>Price: $<span th:text="${product.price}">0.00</span></p>
+    <p>Stock Quantity: <span th:text="${product.stockQuantity}">0</span></p>
+    <img th:src="@{${product.imgPath}}" alt="Product Image">
+  </div>
+
+  <!-- Форма для обновления продукта -->
+  <div>
+    <h2>Update Product</h2>
+    <form th:action="@{/products/{id}(id=${product.id})}" th:object="${product}" method="post">
+      <input type="hidden" th:field="*{id}" />
+
+      <label for="name">Name:</label>
+      <input type="text" id="name" th:field="*{name}" required/>
+
+      <label for="description">Description:</label>
+      <textarea id="description" th:field="*{description}" required></textarea>
+
+      <label for="weight">Weight (kg):</label>
+      <input type="number" id="weight" th:field="*{weight}" step="0.01" required/>
+
+      <label for="countryOfOrigin">Country of Origin:</label>
+      <input type="text" id="countryOfOrigin" th:field="*{countryOfOrigin}" required/>
+
+      <label for="price">Price ($):</label>
+      <input type="number" id="price" th:field="*{price}" step="0.01" required/>
+
+      <label for="stockQuantity">Stock Quantity:</label>
+      <input type="number" id="stockQuantity" th:field="*{stockQuantity}" required/>
+
+      <label for="imgPath">Image URL:</label>
+      <input type="text" id="imgPath" th:field="*{imgPath}" required/>
+
+      <button type="submit">Update Product</button>
+    </form>
+  </div>
+</main>
+</body>
+</html>

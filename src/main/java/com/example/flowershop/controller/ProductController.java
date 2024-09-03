@@ -19,7 +19,25 @@ public class ProductController {
 
     private final ProductServiceClient productServiceClient;
     private final CategoryServiceClient categoryServiceClient;
-
+    @PostMapping("/{id}")
+    public String updateProduct(@PathVariable Long id, @ModelAttribute ProductDTO productDTO) {
+        ProductDTO updatedProduct = productServiceClient.updateProduct(id, productDTO);
+        if (updatedProduct != null) {
+            // Редирект на страницу с деталями обновленного товара
+            return "redirect:/products/" + id;
+        } else {
+            // Обработка случая, когда товар не был обновлен
+            return "redirect:/error"; // или другой путь для отображения ошибки
+        }
+    }
+    @GetMapping("/update/{id}")
+    public String showUpdateProductForm(@PathVariable Long id, Model model) {
+        // Получаем данные о товаре по идентификатору
+        ProductDTO productDTO = productServiceClient.getProductById(id);
+        // Добавляем объект ProductDTO в модель
+        model.addAttribute("product", productDTO);
+        return "products/productDetails";
+    }
     @GetMapping("/new")
     public String addFormCreateProduct(Model model) {
         List<CategoryDTO> categories = categoryServiceClient.getAllCategories();

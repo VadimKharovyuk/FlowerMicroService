@@ -7,6 +7,7 @@ import com.example.flovermodel.model.Product;
 import com.example.flovermodel.repository.CategoryRepository;
 import com.example.flovermodel.repository.ProductRepository;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,13 +16,41 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class ProductService {
 
-    @Autowired
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
 
-    @Autowired
-    private CategoryRepository categoryRepository;
+    // Обновление продукта
+    public ProductDTO updateProduct(Long id, ProductDTO productDTO) {
+        Optional<Product> existingProductOpt = productRepository.findById(id);
+        if (existingProductOpt.isPresent()) {
+            Product existingProduct = existingProductOpt.get();
+
+            // Обновляем поля продукта только при необходимости
+            existingProduct.setName(productDTO.getName());
+            existingProduct.setDescription(productDTO.getDescription());
+            existingProduct.setWeight(productDTO.getWeight());
+            existingProduct.setCountryOfOrigin(productDTO.getCountryOfOrigin());
+            existingProduct.setPrice(productDTO.getPrice());
+            existingProduct.setStockQuantity(productDTO.getStockQuantity());
+            existingProduct.setImgPath(productDTO.getImgPath());
+
+            // Проверяем, существует ли новая категория
+            if (productDTO.getCategoryId() != null) {
+                Category category = categoryRepository.findById(productDTO.getCategoryId())
+                        .orElseThrow(() -> new RuntimeException("Category not found"));
+                existingProduct.setCategory(category);
+            }
+
+            // Сохраняем обновленный продукт
+            Product updatedProduct = productRepository.save(existingProduct);
+            return ProductMapper.toDTO(updatedProduct);
+        } else {
+            throw new RuntimeException("Product not found");
+        }
+    }
 
     // Создание нового продукта
     public ProductDTO createProduct(ProductDTO productDTO) {
@@ -44,19 +73,6 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
-    // Обновление продукта
-    public ProductDTO updateProduct(Long id, ProductDTO productDTO) {
-        Optional<Product> existingProduct = productRepository.findById(id);
-        if (existingProduct.isPresent()) {
-            Product product = existingProduct.get();
-            Category category = categoryRepository.findById(productDTO.getCategoryId()).orElse(null);
-            product = ProductMapper.toEntity(productDTO, category);
-            product.setId(id); // Устанавливаем ID существующего продукта
-            Product updatedProduct = productRepository.save(product);
-            return ProductMapper.toDTO(updatedProduct);
-        }
-        return null;
-    }
 
     // Удаление продукта
     public void deleteProduct(Long id) {

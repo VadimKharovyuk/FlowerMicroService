@@ -7,6 +7,8 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -21,8 +23,21 @@ public class ProductServiceClient {
 
     @Value("${product.service.url}")
     private String productServiceUrl;
-
     private final RestTemplate restTemplate;
+
+    // Добавляем метод обновления продукта
+    public ProductDTO updateProduct(Long id, ProductDTO productDTO) {
+        String url = productServiceUrl + "/" + id;
+        try {
+            // Выполняем PUT-запрос для обновления продукта
+            restTemplate.put(url, productDTO);
+            // После обновления возвращаем обновленный продукт с сервера
+            return getProductById(id); // Возвращаем обновленный продукт после вызова
+        } catch (HttpClientErrorException | HttpServerErrorException e) {
+            // Обрабатываем ошибки, например, если продукт не найден
+            return null;
+        }
+    }
 
     public ProductDTO createProduct(ProductDTO productDTO) {
         String url = productServiceUrl + "/add";
@@ -77,5 +92,7 @@ public class ProductServiceClient {
         ProductDTO[] productsByCategory = restTemplate.getForObject(url, ProductDTO[].class);
         return productsByCategory != null ? Arrays.asList(productsByCategory) : List.of();
     }
+
+
 
 }
