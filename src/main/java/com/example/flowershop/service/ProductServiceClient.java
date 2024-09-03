@@ -24,6 +24,18 @@ public class ProductServiceClient {
     @Value("${product.service.url}")
     private String productServiceUrl;
     private final RestTemplate restTemplate;
+
+    public ProductDTO addProductQuantity(Long productId, int quantityToAdd) {
+        // Формируем корректный URL без дублирования /products
+        String url = productServiceUrl + "/" + productId + "/add-stock?quantityToAdd=" + quantityToAdd;
+        try {
+            restTemplate.put(url, null); // Выполняем PUT запрос для увеличения количества
+            return restTemplate.getForObject(productServiceUrl + "/" + productId, ProductDTO.class); // Получаем обновленный продукт
+        } catch (HttpClientErrorException | HttpServerErrorException e) {
+            return null; // Обрабатываем ошибку
+        }
+    }
+
     public List<ProductDTO> getProductsInStock() {
         String url = productServiceUrl + "/stock";
         try {

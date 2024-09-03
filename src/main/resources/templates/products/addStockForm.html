@@ -1,0 +1,129 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Добавить Количество</title>-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="container">-->
+<!--    <h1 class="text-center mt-5">Добавить количество для продукта</h1>-->
+<!--    <div class="row justify-content-center mt-4">-->
+<!--        <div class="col-md-6">-->
+<!--            <form th:action="@{/products/{id}/add-stock(id=${product.id})}" method="post">-->
+<!--                <div class="mb-3">-->
+<!--                    <label for="productName" class="form-label">Продукт:</label>-->
+<!--                    <input type="text" id="productName" class="form-control" th:value="${product.name}" readonly>-->
+<!--                </div>-->
+<!--                <div class="mb-3">-->
+<!--                    <label for="currentStock" class="form-label">Текущее количество:</label>-->
+<!--                    <input type="text" id="currentStock" class="form-control" th:value="${product.stockQuantity}" readonly>-->
+<!--                </div>-->
+<!--                <div class="mb-3">-->
+<!--                    <label for="quantityToAdd" class="form-label">Добавить количество:</label>-->
+<!--                    <input type="number" id="quantityToAdd" name="quantityToAdd" class="form-control" min="1" required>-->
+<!--                </div>-->
+<!--                <div class="text-center">-->
+<!--                    <button type="submit" class="btn btn-primary">Добавить</button>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; Bootstrap JS &ndash;&gt;-->
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>-->
+<!--</body>-->
+<!--</html>-->
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Добавить Количество</title>-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="container">-->
+<!--    <h1 class="text-center mt-5">Добавить количество для продукта</h1>-->
+<!--    <div class="row justify-content-center mt-4">-->
+<!--        <div class="col-md-6">-->
+<!--            <form th:action="@{/products/{id}/add-stock(id=${product.id})}" method="post">-->
+<!--                &lt;!&ndash; Выбор продукта из списка &ndash;&gt;-->
+<!--                <div class="mb-3">-->
+<!--                    <label for="productSelect" class="form-label">Выберите продукт:</label>-->
+<!--                    <select id="productSelect" name="productId" class="form-select" required>-->
+<!--                        <option th:each="product : ${listProduct}" th:value="${product.id}" th:text="${product.name}"></option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--                &lt;!&ndash; Текущее количество &ndash;&gt;-->
+<!--                <div class="mb-3">-->
+<!--                    <label for="currentStock" class="form-label">Текущее количество:</label>-->
+<!--                    <input type="text" id="currentStock" class="form-control" th:value="${product.stockQuantity}" readonly>-->
+<!--                </div>-->
+<!--                &lt;!&ndash; Поле для добавления количества &ndash;&gt;-->
+<!--                <div class="mb-3">-->
+<!--                    <label for="quantityToAdd" class="form-label">Добавить количество:</label>-->
+<!--                    <input type="number" id="quantityToAdd" name="quantityToAdd" class="form-control" min="1" required>-->
+<!--                </div>-->
+<!--                <div class="text-center">-->
+<!--                    <button type="submit" class="btn btn-primary">Добавить</button>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; Bootstrap JS &ndash;&gt;-->
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>-->
+<!--</body>-->
+<!--</html>-->
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить Количество</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h1 class="text-center mt-5">Добавить количество для продукта</h1>
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-6">
+            <form th:action="@{/products/{id}/add-stock(id=${product.id})}" method="post">
+                <!-- Выбор продукта из списка -->
+                <div class="mb-3">
+                    <label for="productSelect" class="form-label">Выберите продукт:</label>
+                    <select id="productSelect" name="productId" class="form-select" required>
+                        <option th:each="product : ${listProduct}"
+                                th:value="${product.id}"
+                                th:text="${product.name}"></option>
+                    </select>
+                </div>
+                <!-- Текущее количество -->
+                <div class="mb-3">
+                    <label for="currentStock" class="form-label">Текущее количество:</label>
+                    <input type="text" id="currentStock" class="form-control"
+                           th:value="${product.stockQuantity != null && product.stockQuantity > 0 ? product.stockQuantity : 'Нет в наличии'}"
+                           readonly>
+                </div>
+                <!-- Поле для добавления количества -->
+                <div class="mb-3">
+                    <label for="quantityToAdd" class="form-label">Добавить количество:</label>
+                    <input type="number" id="quantityToAdd" name="quantityToAdd"
+                           class="form-control" min="1" required>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

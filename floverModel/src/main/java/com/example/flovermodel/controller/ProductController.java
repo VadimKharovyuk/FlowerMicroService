@@ -19,6 +19,15 @@ public class ProductController {
 
     private final ProductService productService;
     private final ProductFacade productFacade;
+
+    @PutMapping("/{id}/add-stock")
+    public ResponseEntity<ProductDTO> addProductQuantity(
+            @PathVariable Long id,
+            @RequestParam int quantityToAdd) {
+
+        ProductDTO updatedProduct = productFacade.addProductQuantity(id, quantityToAdd);
+        return ResponseEntity.ok(updatedProduct);
+    }
     @GetMapping("/stock")
     @Cacheable("productsInStock")
     public ResponseEntity<List<ProductDTO>> getProductsInStock() {

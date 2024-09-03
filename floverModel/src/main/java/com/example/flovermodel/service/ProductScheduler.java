@@ -25,6 +25,7 @@ public class ProductScheduler {
 //            }
 //        }
 //    }
+//}
 @Scheduled(cron = "0 0 * * * ?") // Запускается каждый час
 public void checkStockQuantities() {
     List<ProductDTO> allProducts = productService.getAllProducts();

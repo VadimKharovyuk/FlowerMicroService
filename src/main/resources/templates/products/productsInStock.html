@@ -1,8 +1,85 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--  <title>Products In Stock</title>-->
+<!--  <link rel="stylesheet" href="/css/styles.css">-->
+<!--  <style>-->
+<!--    /* styles.css */-->
+<!--    body {-->
+<!--      font-family: Arial, sans-serif;-->
+<!--      margin: 20px;-->
+<!--    }-->
+
+<!--    .products-in-stock {-->
+<!--      max-width: 800px;-->
+<!--      margin: auto;-->
+<!--    }-->
+
+<!--    h1 {-->
+<!--      text-align: center;-->
+<!--      margin-bottom: 20px;-->
+<!--    }-->
+
+<!--    table {-->
+<!--      width: 100%;-->
+<!--      border-collapse: collapse;-->
+<!--    }-->
+
+<!--    table, th, td {-->
+<!--      border: 1px solid #ddd;-->
+<!--    }-->
+
+<!--    th, td {-->
+<!--      padding: 8px;-->
+<!--      text-align: left;-->
+<!--    }-->
+
+<!--    th {-->
+<!--      background-color: #f4f4f4;-->
+<!--    }-->
+
+<!--    .update-link {-->
+<!--      color: #007bff;-->
+<!--      text-decoration: none;-->
+<!--    }-->
+
+<!--    .update-link:hover {-->
+<!--      text-decoration: underline;-->
+<!--    }-->
+<!--  </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<main class="products-in-stock">-->
+<!--  <h1>Products In Stock</h1>-->
+<!--  <table>-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--      <th>Name</th>-->
+<!--      <th>Stock Quantity</th>-->
+<!--      <th>Action</th> &lt;!&ndash; Добавляем колонку для действия &ndash;&gt;-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <tr th:each="product : ${productsInStock}">-->
+<!--      <td th:text="${product.name}">Product Name</td>-->
+<!--      <td th:text="${product.stockQuantity}">0</td>-->
+<!--      <td>-->
+<!--        &lt;!&ndash; Добавляем ссылку для обновления &ndash;&gt;-->
+<!--        <a th:href="@{/products/update/{id}(id=${product.id})}" class="update-link">Update</a>-->
+<!--      </td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--  </table>-->
+<!--</main>-->
+<!--</body>-->
+<!--</html>-->
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+  <meta charset="UTF-8">
   <title>Products In Stock</title>
-  <link rel="stylesheet" href="/css/styles.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     /* styles.css */
     body {
@@ -38,12 +115,12 @@
       background-color: #f4f4f4;
     }
 
-    .update-link {
+    .update-link, .add-stock-link {
       color: #007bff;
       text-decoration: none;
     }
 
-    .update-link:hover {
+    .update-link:hover, .add-stock-link:hover {
       text-decoration: underline;
     }
   </style>
@@ -56,7 +133,8 @@
     <tr>
       <th>Name</th>
       <th>Stock Quantity</th>
-      <th>Action</th> <!-- Добавляем колонку для действия -->
+      <th>Update</th> <!-- Колонка для обновления товара -->
+      <th>Add Stock</th> <!-- Новая колонка для добавления количества -->
     </tr>
     </thead>
     <tbody>
@@ -64,8 +142,12 @@
       <td th:text="${product.name}">Product Name</td>
       <td th:text="${product.stockQuantity}">0</td>
       <td>
-        <!-- Добавляем ссылку для обновления -->
+        <!-- Ссылка для обновления товара -->
         <a th:href="@{/products/update/{id}(id=${product.id})}" class="update-link">Update</a>
+      </td>
+      <td>
+        <!-- Ссылка для добавления количества товара -->
+        <a th:href="@{/products/{id}/add-stock(id=${product.id})}" class="add-stock-link">Add Stock</a>
       </td>
     </tr>
     </tbody>

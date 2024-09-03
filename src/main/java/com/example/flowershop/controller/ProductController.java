@@ -20,7 +20,26 @@ public class ProductController {
     private final ProductServiceClient productServiceClient;
     private final CategoryServiceClient categoryServiceClient;
 
+    // Новый метод для отображения формы добавления количества товара
+    @GetMapping("/{id}/add-stock")
+    public String showAddStockForm(@PathVariable Long id, Model model) {
+        ProductDTO product = productServiceClient.getProductById(id);
+        model.addAttribute("product", product);
+        model.addAttribute("listProduct",productServiceClient.getAllProducts());
+        return "products/addStockForm"; // Возвращаем шаблон формы
+    }
 
+
+    // Новый метод для обработки POST-запроса и добавления количества товара
+    @PostMapping("/{id}/add-stock")
+    public String addProductStock(@PathVariable Long id, @RequestParam int quantityToAdd) {
+        ProductDTO updatedProduct = productServiceClient.addProductQuantity(id, quantityToAdd);
+        if (updatedProduct != null) {
+            return "redirect:/products/" + id; // Редирект на страницу товара после обновления
+        } else {
+            return "redirect:/error"; // Редирект на страницу ошибки, если возникла ошибка
+        }
+    }
     @GetMapping("/stock")
     public String getStockInfo(Model model) {
         List<ProductDTO> productsInStock = productServiceClient.getProductsInStock();

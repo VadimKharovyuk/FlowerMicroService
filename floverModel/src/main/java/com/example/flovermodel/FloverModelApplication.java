@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableScheduling
-@EnableCaching
+//@EnableCaching
 public class FloverModelApplication {
 
     public static void main(String[] args) {

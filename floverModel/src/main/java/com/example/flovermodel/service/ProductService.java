@@ -23,8 +23,25 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
 
+
+    public ProductDTO addProductQuantity(Long productId, int quantityToAdd) {
+        // Retrieve the existing product by ID
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+
+        // Add the specified quantity to the current stock quantity
+        int newStockQuantity = product.getStockQuantity() + quantityToAdd;
+        product.setStockQuantity(newStockQuantity);
+
+        // Save the updated product back to the database
+        Product updatedProduct = productRepository.save(product);
+
+        // Return the updated product as a DTO
+        return ProductMapper.toDTO(updatedProduct);
+    }
+
     // Обновление продукта
-    @CacheEvict(value = "products", allEntries = true)
+//    @CacheEvict(value = "products", allEntries = true)
     public ProductDTO updateProduct(Long id, ProductDTO productDTO) {
         Optional<Product> existingProductOpt = productRepository.findById(id);
         if (existingProductOpt.isPresent()) {
@@ -69,7 +86,7 @@ public class ProductService {
     }
 
     // Получение всех продуктов
-    @Cacheable("products")
+//    @Cacheable("products")
     public List<ProductDTO> getAllProducts() {
         return productRepository.findAll().stream()
                 .map(ProductMapper::toDTO)
@@ -134,4 +151,5 @@ public class ProductService {
         // Возвращаем сохранённый продукт в виде DTO
         return ProductMapper.toDTO(savedProduct);
     }
+
 }

@@ -16,6 +16,9 @@ public class ProductFacade {
     public ProductDTO updateProduct(Long id, ProductDTO productDTO) {
         return productService.updateProduct(id, productDTO);
     }
+    public ProductDTO addProductQuantity(Long productId,int stockQuantity){
+       return productService.addProductQuantity(productId,stockQuantity);
+    }
 
 
 }
