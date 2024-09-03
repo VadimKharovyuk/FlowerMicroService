@@ -24,6 +24,16 @@ public class ProductServiceClient {
     @Value("${product.service.url}")
     private String productServiceUrl;
     private final RestTemplate restTemplate;
+    public List<ProductDTO> getProductsInStock() {
+        String url = productServiceUrl + "/stock";
+        try {
+            ResponseEntity<ProductDTO[]> response = restTemplate.getForEntity(url, ProductDTO[].class);
+            return Arrays.asList(response.getBody());
+        } catch (HttpClientErrorException | HttpServerErrorException e) {
+            // Логирование ошибки или обработка
+            return Collections.emptyList();
+        }
+    }
 
     // Добавляем метод обновления продукта
     public ProductDTO updateProduct(Long id, ProductDTO productDTO) {

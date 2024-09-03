@@ -19,6 +19,14 @@ public class ProductController {
 
     private final ProductServiceClient productServiceClient;
     private final CategoryServiceClient categoryServiceClient;
+
+
+    @GetMapping("/stock")
+    public String getStockInfo(Model model) {
+        List<ProductDTO> productsInStock = productServiceClient.getProductsInStock();
+        model.addAttribute("productsInStock", productsInStock);
+        return "products/productsInStock";
+    }
     @PostMapping("/{id}")
     public String updateProduct(@PathVariable Long id, @ModelAttribute ProductDTO productDTO) {
         ProductDTO updatedProduct = productServiceClient.updateProduct(id, productDTO);

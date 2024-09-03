@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Products In Stock</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    /* styles.css */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    .products-in-stock {
+      max-width: 800px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f4f4f4;
+    }
+
+    .update-link {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .update-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+<main class="products-in-stock">
+  <h1>Products In Stock</h1>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Stock Quantity</th>
+      <th>Action</th> <!-- Добавляем колонку для действия -->
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${productsInStock}">
+      <td th:text="${product.name}">Product Name</td>
+      <td th:text="${product.stockQuantity}">0</td>
+      <td>
+        <!-- Добавляем ссылку для обновления -->
+        <a th:href="@{/products/update/{id}(id=${product.id})}" class="update-link">Update</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</main>
+</body>
+</html>

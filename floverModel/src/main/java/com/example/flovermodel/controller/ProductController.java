@@ -4,12 +4,13 @@ import com.example.flovermodel.Fasade.ProductFacade;
 import com.example.flovermodel.dto.ProductDTO;
 import com.example.flovermodel.service.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/products")
@@ -18,7 +19,15 @@ public class ProductController {
 
     private final ProductService productService;
     private final ProductFacade productFacade;
-
+    @GetMapping("/stock")
+    @Cacheable("productsInStock")
+    public ResponseEntity<List<ProductDTO>> getProductsInStock() {
+        List<ProductDTO> allProducts = productService.getAllProducts();
+        List<ProductDTO> productsInStock = allProducts.stream()
+                .filter(product -> product.getStockQuantity() != null && product.getStockQuantity() > 0)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(productsInStock);
+    }
     // Обновление продукта
     @PutMapping("/{id}")
     public ResponseEntity<ProductDTO> updateProduct(@PathVariable Long id, @RequestBody ProductDTO productDTO) {
