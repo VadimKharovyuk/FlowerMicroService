@@ -1,141 +1,146 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Список Продуктов</title>
-  <style>
-    /* General Reset and Font Setup */
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background-color: #f5f5f5;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Список Продуктов</title>
+    <style>
+        /* General Reset and Font Setup */
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
 
-    /* Header Styles */
-    .header {
-      background-color: #3c32ce;
-      color: white;
-      padding: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+        /* Header Styles */
+        .header {
+            background-color: #3c32ce;
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
 
-    .header .logo img {
-      height: 50px;
-    }
+        .header .logo img {
+            height: 50px;
+        }
 
-    .header .nav a {
-      color: white;
-      text-decoration: none;
-      padding: 10px 15px;
-      margin: 0 5px;
-      border-radius: 5px;
-      transition: background-color 0.3s;
-    }
+        .header .nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            margin: 0 5px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
 
-    .header .nav a:hover {
-      background-color: rgba(255, 255, 255, 0.2);
-    }
+        .header .nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
 
-    /* Main Content Styles */
-    .main {
-      padding: 40px;
-      text-align: center;
-      flex: 1; /* Make sure the main content takes up available space */
-    }
+        /* Main Content Styles */
+        .main {
+            padding: 40px;
+            text-align: center;
+            flex: 1; /* Make sure the main content takes up available space */
+        }
 
-    .main h1 {
-      font-size: 36px;
-      margin-bottom: 20px;
-    }
+        .main h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
 
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      justify-content: center; /* Center items horizontally */
-    }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            justify-content: center; /* Center items horizontally */
+        }
 
-    .product-card {
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      text-align: center;
-      transition: transform 0.3s;
-    }
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
 
-    .product-card:hover {
-      transform: translateY(-5px);
-    }
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
 
-    .product-card img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 5px;
-    }
+        .product-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
 
-    .product-card h2 {
-      font-size: 20px;
-      margin: 15px 0;
-    }
+        .product-card h2 {
+            font-size: 20px;
+            margin: 15px 0;
+        }
 
-    .product-card p {
-      font-size: 14px;
-      color: #666;
-      margin: 10px 0;
-    }
+        .product-card p {
+            font-size: 14px;
+            color: #666;
+            margin: 10px 0;
+        }
 
-    /* Footer Styles */
-    .footer {
-      background-color: #0e0e0d;
-      color: white;
-      text-align: center;
-      padding: 20px;
-      margin-top: auto; /* Push footer to the bottom */
-    }
-  </style>
+        /* Footer Styles */
+        .footer {
+            background-color: #0e0e0d;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: auto; /* Push footer to the bottom */
+        }
+    </style>
 </head>
 <body>
 <header class="header">
-  <div class="logo">
-    <img src="/logo.png" alt="Цветочный Магазин">
-  </div>
-  <nav class="nav">
-    <a href="/">Главная</a>
-    <a href="/products">Продукты</a>
-    <a href="/products/new"> Добавить Продукты</a>
-    <a href="/products/stock"> stock Продукты</a>
-    <a href="/about">О нас</a>
-    <a href="/contact">Контакты</a>
-  </nav>
+    <div class="logo">
+        <img src="/logo.png" alt="Цветочный Магазин">
+    </div>
+    <nav class="nav">
+        <a href="/">Главная</a>
+        <a href="/products">Продукты</a>
+        <a href="/products/new">Добавить Продукты</a>
+        <a href="/products/stock">Stock Продукты</a>
+        <a href="/about">О нас</a>
+        <a href="/contact">Контакты</a>
+    </nav>
 </header>
 
 <main class="main">
-  <h1>Список Продуктов</h1>
-  <div class="product-grid">
-    <th:block th:each="product : ${products}">
-      <div class="product-card">
-        <a th:href="@{/products/{id}(id=${product.id})}">
-          <h2 th:text="${product.name}">Product Name</h2>
-          <h3 th:text="${product.countryOfOrigin}">Country</h3>
-          <p th:text="${product.description}">Description</p>
-          <p th:text="'Цена: ' + ${product.price}">Price</p>
-          <img th:src="@{${product.imgPath}}" alt="product">
-        </a>
-      </div>
-    </th:block>
-  </div>
+    <!-- Проверка наличия продуктов -->
+    <div th:if="${#lists.isEmpty(products)}">
+        <p>Нет доступных продуктов</p>
+    </div>
+
+    <!-- Отображение продуктов -->
+    <div th:if="${!#lists.isEmpty(products)}" class="product-grid">
+        <th:block th:each="product : ${products}">
+            <div class="product-card">
+                <a th:href="@{/products/{id}(id=${product.id})}">
+                    <h2 th:text="${product.name}">Product Name</h2>
+                    <h3 th:text="${product.countryOfOrigin}">Country</h3>
+                    <p th:text="${product.description}">Description</p>
+                    <p th:text="'Цена: ' + ${product.price}">Price</p>
+                    <img th:src="@{${product.imgPath}}" alt="product">
+                </a>
+            </div>
+        </th:block>
+    </div>
 </main>
 
 <footer class="footer">
-  <p>&copy; 2024 Цветочный Магазин. Все права защищены.</p>
+    <p>&copy; 2024 Цветочный Магазин. Все права защищены.</p>
 </footer>
 </body>
 </html>
