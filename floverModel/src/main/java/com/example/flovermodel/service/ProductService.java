@@ -8,8 +8,7 @@ import com.example.flovermodel.repository.CategoryRepository;
 import com.example.flovermodel.repository.ProductRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;

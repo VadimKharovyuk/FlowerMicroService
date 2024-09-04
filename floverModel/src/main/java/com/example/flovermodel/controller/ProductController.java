@@ -20,6 +20,12 @@ public class ProductController {
     private final ProductService productService;
     private final ProductFacade productFacade;
 
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductDTO> getProductById(@PathVariable Long id) {
+        ProductDTO productDTO = productService.getProductById(id);
+        return productDTO != null ? new ResponseEntity<>(productDTO, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
     @PutMapping("/{id}/add-stock")
     public ResponseEntity<ProductDTO> addProductQuantity(
             @PathVariable Long id,
@@ -53,11 +59,7 @@ public class ProductController {
         ProductDTO createdProduct = productService.addProduct(productDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
     }
-    @GetMapping("/{id}")
-    public ResponseEntity<ProductDTO> getProductById(@PathVariable Long id) {
-        ProductDTO productDTO = productService.getProductById(id);
-        return productDTO != null ? new ResponseEntity<>(productDTO, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
+
     @GetMapping("/{id}/related")
     public ResponseEntity<List<ProductDTO>> getRelatedProducts(@PathVariable Long id) {
         List<ProductDTO> relatedProducts = productService.findRelatedProducts(id);
