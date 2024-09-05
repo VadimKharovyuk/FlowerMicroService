@@ -4,59 +4,47 @@ import com.example.cart.dto.CartDTO;
 import com.example.cart.dto.CartItemDTO;
 import com.example.cart.model.Cart;
 import com.example.cart.model.CartItem;
-import java.util.stream.Collectors;
+import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+@Component
 public class CartMapper {
 
-    // Преобразование Cart -> CartDTO
-    public static CartDTO toCartDTO(Cart cart) {
+    public static CartDTO toDTO(Cart cart) {
         CartDTO cartDTO = new CartDTO();
         cartDTO.setId(cart.getId());
         cartDTO.setPaid(cart.isPaid());
-        cartDTO.setTotalAmount(cart.getTotalAmount());
-
-        if (cart.getItems() != null) {
-            cartDTO.setItems(cart.getItems().stream()
-                    .map(CartMapper::toCartItemDTO)
-                    .collect(Collectors.toList()));
-        }
-
+        cartDTO.setItems(cart.getItems().stream().map(CartMapper::toDTO).collect(Collectors.toList()));
+        // Здесь можно добавить расчет totalAmount
         return cartDTO;
     }
 
-    // Преобразование CartDTO -> Cart
-    public static Cart toCart(CartDTO cartDTO) {
+    public static CartItemDTO toDTO(CartItem cartItem) {
+        CartItemDTO dto = new CartItemDTO();
+        dto.setId(cartItem.getId());
+        dto.setProductId(cartItem.getProductId());
+        dto.setProductName(cartItem.getProductName());
+        dto.setProductPrice(cartItem.getProductPrice());
+        dto.setQuantity(cartItem.getQuantity());
+        return dto;
+    }
+
+    public static Cart toEntity(CartDTO cartDTO) {
         Cart cart = new Cart();
         cart.setId(cartDTO.getId());
         cart.setPaid(cartDTO.isPaid());
-        cart.setTotalAmount(cartDTO.getTotalAmount());
-
-        if (cartDTO.getItems() != null) {
-            cart.setItems(cartDTO.getItems().stream()
-                    .map(CartMapper::toCartItem)
-                    .collect(Collectors.toList()));
-        }
-
+        cart.setItems((List<CartItem>) cartDTO.getItems().stream().map(CartMapper::toEntity).collect(Collectors.toSet()));
         return cart;
     }
 
-    // Преобразование CartItem -> CartItemDTO
-    public static CartItemDTO toCartItemDTO(CartItem cartItem) {
-        CartItemDTO cartItemDTO = new CartItemDTO();
-        cartItemDTO.setId(cartItem.getId());
-        cartItemDTO.setQuantity(cartItem.getQuantity());
-        cartItemDTO.setProduct(cartItem.getProduct());  // ProductDTO already present
-
-        return cartItemDTO;
-    }
-
-    // Преобразование CartItemDTO -> CartItem
-    public static CartItem toCartItem(CartItemDTO cartItemDTO) {
+    public static CartItem toEntity(CartItemDTO cartItemDTO) {
         CartItem cartItem = new CartItem();
         cartItem.setId(cartItemDTO.getId());
+        cartItem.setProductId(cartItemDTO.getProductId());
+        cartItem.setProductName(cartItemDTO.getProductName());
+        cartItem.setProductPrice(cartItemDTO.getProductPrice());
         cartItem.setQuantity(cartItemDTO.getQuantity());
-        cartItem.setProduct(cartItemDTO.getProduct());  // Transient ProductDTO
-
         return cartItem;
     }
 }

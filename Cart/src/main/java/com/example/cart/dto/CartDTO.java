@@ -13,8 +13,12 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CartDTO {
+
     private Long id;
+
     private List<CartItemDTO> items;
+
     private boolean paid;
-    private BigDecimal totalAmount;
+
+    private BigDecimal totalAmount;  // Можем добавить это поле, чтобы возвращать общую сумму корзины
 }

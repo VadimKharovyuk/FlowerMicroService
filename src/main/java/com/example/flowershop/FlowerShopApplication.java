@@ -10,8 +10,7 @@ public class FlowerShopApplication {
         SpringApplication.run(FlowerShopApplication.class, args);
     }
 
-  // -Метод Добавить количество товара ,если товара 0 не отображать
-    //-update product
+
     //-delete product +корзина -корзина продуктов по сессии
     // - доставка (флаг оплаченная )
     //-статус для расписание (progress/)
