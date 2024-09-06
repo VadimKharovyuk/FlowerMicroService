@@ -1,4 +1,4 @@
-package com.example.flowershop.dto;
+package com.example.cart.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,17 +11,12 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class ProductDTO {
     private Long id;
-
-
     private String name;
     private String description;
     private Double weight;
     private String countryOfOrigin;
     private BigDecimal price;
     private Integer stockQuantity;
-
     private String imgPath;
-
-
     private Long categoryId;
 }

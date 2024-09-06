@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Your Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: center;
+            background-color: #3131d9;
+            padding: 10px 0;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            margin: 0 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .nav a:hover {
+            background-color: #6f40cb;
+        }
+
+        .cart-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 15px;
+            align-items: center;
+        }
+
+        .cart-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-right: 15px;
+            border-radius: 5px;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-info h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #555;
+        }
+
+        .cart-item-info p {
+            margin: 5px 0;
+            color: #777;
+        }
+
+        .checkout-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        .checkout-button:hover {
+            background-color: #218838;
+        }
+
+        .empty-cart-message {
+            text-align: center;
+            color: #888;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Навигационное меню -->
+<nav class="nav">
+    <a href="/">Главная</a>
+    <a href="/products">Продукты</a>
+    <a href="/products/new">Добавить Продукты</a>
+    <a href="/products/stock">Stock Продукты</a>
+    <a href="/flowershop/cart/all">Корзина</a>
+    <a href="/about">О нас</a>
+    <a href="/contact">Контакты</a>
+</nav>
+
+<div class="cart-container">
+    <h1>Your Cart</h1>
+
+    <form th:action="@{/flowershop/cart/checkout}" method="post">
+        <div th:if="${all != null}" th:each="item : ${all}">
+            <div class="cart-item">
+                <!-- Изображение товара -->
+                <img th:src="@{${item.imgPath}}" alt="Product Image">
+
+                <!-- Информация о товаре -->
+                <div class="cart-item-info">
+                    <h3 th:text="${item.productName}">Product Name</h3>
+                    <p th:text="${item.productDescription}">Product Description</p>
+                    <p>Quantity: <span th:text="${item.quantity}">1</span></p>
+                    <p>Total Price: <span th:text="${item.totalPrice}">100.00</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div th:if="${all == null}">
+            <p class="empty-cart-message">Your cart is empty.</p>
+        </div>
+
+        <!-- Кнопка для оформления заказа -->
+        <button type="submit" class="checkout-button">Офррмить заказ</button>
+    </form>
+</div>
+
+</body>
+</html>

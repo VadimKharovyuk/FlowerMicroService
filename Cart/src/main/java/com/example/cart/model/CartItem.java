@@ -2,37 +2,37 @@ package com.example.cart.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+
 
 import java.math.BigDecimal;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "cart_items")
 public class CartItem {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cart_id", nullable = false)
-    private Cart cart;
+    private Long productId; // ID продукта из микросервиса FloverModelApplication
 
-    @Column(name = "product_id", nullable = false)
-    private Long productId;
+    private Integer quantity; // Количество данного продукта в корзине
 
-    @Column(name = "product_name")
+    private BigDecimal totalPrice; // Общая цена для данного количества продукта
+
+    // Дополнительные поля для хранения информации о продукте
     private String productName;
+    private String productDescription;
+    private String imgPath;
 
-    @Column(name = "product_price")
-    private BigDecimal productPrice;
 
-    @Column(name = "quantity", nullable = false)
-    private int quantity;
+
+    // Метод для обновления общей цены
+    public void updateTotalPrice(Double productPrice) {
+        this.totalPrice = BigDecimal.valueOf(productPrice).multiply(BigDecimal.valueOf(quantity));
+    }
 }

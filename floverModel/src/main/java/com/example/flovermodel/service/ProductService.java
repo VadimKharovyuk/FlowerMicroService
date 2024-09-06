@@ -151,4 +151,16 @@ public class ProductService {
         return ProductMapper.toDTO(savedProduct);
     }
 
+    public void decreaseProductStock(Long productId, int quantity) {
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new EntityNotFoundException("Product not found"));
+
+        if (product.getStockQuantity() < quantity) {
+            throw new RuntimeException("Insufficient stock available");
+        }
+
+        product.setStockQuantity(product.getStockQuantity() - quantity);
+        productRepository.save(product);
+    }
+
 }

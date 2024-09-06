@@ -112,6 +112,7 @@
         <a href="/products">Продукты</a>
         <a href="/products/new">Добавить Продукты</a>
         <a href="/products/stock">Stock Продукты</a>
+        <a href="/flowershop/cart/all">Корзина</a>
         <a href="/about">О нас</a>
         <a href="/contact">Контакты</a>
     </nav>
@@ -123,7 +124,6 @@
         <p>Нет доступных продуктов</p>
     </div>
 
-    <!-- Отображение продуктов, если есть в наличии -->
     <div th:if="${!#lists.isEmpty(products)}" class="product-grid">
         <th:block th:each="product : ${products}">
             <div th:if="${product.stockQuantity != null && product.stockQuantity > 0}" class="product-card">
@@ -134,6 +134,14 @@
                     <p th:text="'Цена: ' + ${product.price}">Price</p>
                     <img th:src="@{${product.imgPath}}" alt="product">
                 </a>
+
+                <!-- Форма для добавления товара в корзину -->
+                <form th:action="@{/flowershop/cart/add}" method="post">
+                    <input type="hidden" name="productId" th:value="${product.id}"/>
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" name="quantity" value="1" min="1"/>
+                    <button type="submit">Add to Cart</button>
+                </form>
             </div>
         </th:block>
     </div>

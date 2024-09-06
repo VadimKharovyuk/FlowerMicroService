@@ -19,7 +19,11 @@ public class ProductController {
 
     private final ProductService productService;
     private final ProductFacade productFacade;
-
+    @PutMapping("/{productId}/decreaseStock")
+    public ResponseEntity<Void> decreaseStock(@PathVariable Long productId, @RequestParam int quantity) {
+        productService.decreaseProductStock(productId, quantity);
+        return ResponseEntity.ok().build();
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductDTO> getProductById(@PathVariable Long id) {

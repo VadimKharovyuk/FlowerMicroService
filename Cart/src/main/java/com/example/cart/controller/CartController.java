@@ -1,33 +1,37 @@
 package com.example.cart.controller;
 
-import com.example.cart.dto.CartDTO;
-import com.example.cart.dto.CartItemDTO;
+import com.example.cart.model.CartItem;
 import com.example.cart.service.CartService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequestMapping("/api/carts")
+import java.util.List;
 
+@RestController
+@RequestMapping("/api/cart")
+@RequiredArgsConstructor
 public class CartController {
 
     private final CartService cartService;
 
-    public CartController(CartService cartService) {
-        this.cartService = cartService;
+    // Метод для добавления продукта в корзину
+    @PostMapping("/add")
+    public ResponseEntity<CartItem> addProductToCart(@RequestParam Long productId, @RequestParam Integer quantity) {
+        CartItem cartItem = cartService.addProductToCart(productId, quantity);
+        return cartItem != null ? new ResponseEntity<>(cartItem, HttpStatus.CREATED) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    // Добавление товара в корзину
-    @PostMapping("/{cartId}/items")
-    public ResponseEntity<CartDTO> addItemToCart(@PathVariable Long cartId, @RequestBody CartItemDTO cartItemDTO) {
-        CartDTO updatedCart = cartService.addItemToCart(cartId, cartItemDTO);
-        return ResponseEntity.ok(updatedCart);
+    // Метод для получения элемента корзины по ID
+    @GetMapping("/{id}")
+    public ResponseEntity<CartItem> getCartItemById(@PathVariable Long id) {
+        CartItem cartItem = cartService.getCartItemById(id);
+        return cartItem != null ? new ResponseEntity<>(cartItem, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    // Удаление товара из корзины
-    @DeleteMapping("/{cartId}/items/{itemId}")
-    public ResponseEntity<CartDTO> removeItemFromCart(@PathVariable Long cartId, @PathVariable Long itemId) {
-        CartDTO updatedCart = cartService.removeItemFromCart(cartId, itemId);
-        return ResponseEntity.ok(updatedCart);
+    @GetMapping("/all")
+    public List<CartItem> getAll() {
+        return cartService.getAll();
     }
 }

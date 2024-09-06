@@ -1,92 +1,56 @@
 package com.example.cart.service;
 
-import com.example.cart.dto.CartDTO;
-import com.example.cart.dto.CartItemDTO;
-import com.example.cart.mapper.CartMapper;
-import com.example.cart.model.Cart;
+import com.example.cart.dto.ProductDTO;
 import com.example.cart.model.CartItem;
 import com.example.cart.repository.CartItemRepository;
-import com.example.cart.repository.CartRepository;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
-@AllArgsConstructor
 public class CartService {
 
-    private final CartRepository cartRepository;
-    private final CartItemRepository cartItemRepository;
+    @Autowired
+    private CartItemRepository cartItemRepository;
 
-    // Метод для поиска корзины по ID
-    @Transactional(readOnly = true)
-    public CartDTO findCartById(Long cartId) {
-        Optional<Cart> optionalCart = cartRepository.findById(cartId);
+    @Autowired
+    private RestTemplate restTemplate;
 
-        if (optionalCart.isEmpty()) {
-            throw new RuntimeException("Cart not found!");
+    private final String productServiceUrl = "http://localhost:9002/api/products/";
+
+    public CartItem addProductToCart(Long productId, Integer quantity) {
+        try {
+            // Получение информации о продукте
+            ProductDTO product = restTemplate.getForObject(productServiceUrl + productId, ProductDTO.class);
+
+            if (product != null) {
+                CartItem cartItem = new CartItem();
+                cartItem.setProductId(product.getId());
+                cartItem.setProductName(product.getName());
+                cartItem.setProductDescription(product.getDescription());
+                cartItem.setImgPath(product.getImgPath());
+                cartItem.setQuantity(quantity);
+                cartItem.updateTotalPrice(product.getPrice().doubleValue()); // Обновление общей цены
+
+                return cartItemRepository.save(cartItem);
+            }
+        } catch (HttpClientErrorException e) {
+            // Логирование ошибки
+            System.err.println("Error fetching product: " + e.getMessage());
         }
-
-        return CartMapper.toDTO(optionalCart.get());
+        return null; // или выбросить исключение, если продукт не найден
     }
 
-    // Метод для добавления товара в корзину
-    @Transactional
-    public CartDTO addItemToCart(Long cartId, CartItemDTO cartItemDTO) {
-        // Ищем корзину по ID или создаем новую, если она не найдена
-        Cart cart = cartRepository.findById(cartId).orElseGet(() -> {
-            Cart newCart = new Cart();
-            // newCart.setId(cartId); // Обычно ID генерируется автоматически базой данных
-            newCart.setItems(new ArrayList<>());
-            newCart.setPaid(false); // Корзина по умолчанию не оплачена
-            return cartRepository.save(newCart);  // Сохраняем новую корзину
-        });
-
-        // Маппинг CartItemDTO на CartItem и добавление в корзину
-        CartItem cartItem = CartMapper.toEntity(cartItemDTO);
-        cartItem.setCart(cart);  // Устанавливаем связь с корзиной
-
-        // Добавляем новый товар в список товаров корзины
-        cart.getItems().add(cartItem);
-
-        // Сохраняем изменения в корзине
-        cartRepository.save(cart);
-
-        // Возвращаем обновленную корзину как DTO
-        return CartMapper.toDTO(cart);
+    public CartItem getCartItemById(Long id) {
+        Optional<CartItem> cartItem = cartItemRepository.findById(id);
+        return cartItem.orElse(null); // Вернуть null, если элемент не найден
     }
 
-    // Метод для удаления товара из корзины
-    @Transactional
-    public CartDTO removeItemFromCart(Long cartId, Long cartItemId) {
-        Optional<Cart> optionalCart = cartRepository.findById(cartId);
-
-        if (optionalCart.isEmpty()) {
-            throw new RuntimeException("Cart not found!");
-        }
-
-        Cart cart = optionalCart.get();
-
-        Optional<CartItem> optionalCartItem = cartItemRepository.findById(cartItemId);
-
-        if (optionalCartItem.isEmpty() || !cart.getItems().contains(optionalCartItem.get())) {
-            throw new RuntimeException("CartItem not found in the cart!");
-        }
-
-        CartItem cartItem = optionalCartItem.get();
-
-        // Удаляем элемент из корзины
-        cart.getItems().remove(cartItem);
-
-        // Удаляем элемент корзины из репозитория
-        cartItemRepository.delete(cartItem);
-
-        // Сохраняем изменения в корзине
-        cartRepository.save(cart);
-
-        return CartMapper.toDTO(cart);
+    public List<CartItem> getAll(){
+       return cartItemRepository.findAll();
     }
 }
