@@ -3,73 +3,114 @@
 <head>
     <title>Product Information</title>
     <style>
-        /* Global Styles */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            background-color: #f4f4f4;
         }
 
-        /* Header Styles */
         header {
-            background-color: #3c32ce;
-            color: #fff;
-            padding: 20px;
-            display: flex;
-            justify-content: center; /* Center navigation items */
-        }
-
-        .nav {
-            display: flex;
-            gap: 15px; /* Space between links */
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
         }
 
         .nav a {
             color: white;
             text-decoration: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
+            margin: 0 15px;
+            font-size: 16px;
         }
 
         .nav a:hover {
-            background-color: rgba(255, 255, 255, 0.2);
+            text-decoration: underline;
         }
 
-        /* Product Info Styles */
-        .product-info {
-            padding: 40px;
-            text-align: center; /* Center align text and image */
-            flex: 1; /* Ensure the main section takes up available space */
+        main.product-info {
+            display: flex;
+            margin: 20px;
         }
 
-        .product-info img {
-            max-width: 300px;
-            height: auto;
-            margin-top: 20px;
+        .category-list-section {
+            width: 20%;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-right: 1px solid #ddd;
+        }
+
+        .category-list-section h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .category-list-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .category-list-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .category-list-section ul li a {
+            text-decoration: none;
+            color: #3c32ce;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .category-list-section ul li a:hover {
+            color: #1a1aff;
+        }
+
+        .product-info div {
+            width: 80%;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-left: 20px;
         }
 
         .product-info h1 {
-            margin-top: 0;
-            font-size: 24px;
+            font-size: 28px;
+            margin-bottom: 10px;
         }
 
         .product-info p {
             font-size: 16px;
-            color: #333;
+            margin-bottom: 10px;
         }
 
-        /* Footer Styles */
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: auto; /* Push footer to the bottom */
+        .product-info img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
         }
+
+        .add-to-cart-form {
+            margin-top: 20px;
+        }
+
+        .add-to-cart-form input[type="number"] {
+            width: 60px;
+            padding: 5px;
+            margin-right: 10px;
+        }
+
+        .add-to-cart-form button {
+            background-color: #3c32ce;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .add-to-cart-form button:hover {
+            background-color: #1a1aff;
+        }
+
         .related-products {
             margin-top: 40px;
         }
@@ -81,62 +122,51 @@
 
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
         }
 
         .product-card {
             background-color: white;
+            padding: 15px;
             border-radius: 10px;
+            text-align: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            text-align: center;
-        }
-        /* Стили формы добавления в корзину */
-        .add-to-cart-form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 20px;
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            margin: 20px auto;
         }
 
-        .add-to-cart-form label {
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #333;
-        }
-
-        .add-to-cart-form input[type="number"] {
-            width: 80px;
-            padding: 10px;
-            font-size: 16px;
-            text-align: center;
-            border: 1px solid #ddd;
-            border-radius: 10px;
+        .product-card img {
+            max-width: 100%;
+            height: auto;
             margin-bottom: 15px;
         }
 
-        .add-to-cart-form .btn {
-            background-color: #3c32ce;
+        .product-card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .product-card p {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .product-card a {
+            text-decoration: none;
+            color: #3c32ce;
+            font-weight: bold;
+        }
+
+        .product-card a:hover {
+            color: #1a1aff;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #333;
             color: white;
-            padding: 12px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+            margin-top: 40px;
         }
-
-        .add-to-cart-form .btn:hover {
-            background-color: #2923a6;
-        }
-
     </style>
 </head>
 <body>
@@ -151,6 +181,16 @@
 </header>
 
 <main class="product-info">
+
+    <aside class="category-list-section">
+        <h2>Категории</h2>
+        <ul>
+            <li th:each="category : ${categories}">
+                <a th:href="@{/products/category/{categoryId}(categoryId=${category.id})}" th:text="${category.name}">Category Name</a>
+            </li>
+        </ul>
+    </aside>
+
     <!-- Проверка наличия данных о продукте -->
     <div th:if="${product != null}">
         <h1 th:text="${product.name}">Product Name</h1>
@@ -167,9 +207,8 @@
             <input type="number" name="quantity" value="1" min="1"/>
             <button type="submit">Добавить в корзину</button>
         </form>
-
-
     </div>
+
     <!-- Related products section -->
     <section class="related-products" th:if="${relatedProducts != null and !relatedProducts.isEmpty()}">
         <h2>Related Products</h2>

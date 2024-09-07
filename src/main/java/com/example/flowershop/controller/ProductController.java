@@ -82,7 +82,9 @@ public class ProductController {
     public String findById(@PathVariable Long id, Model model) {
         ProductDTO product = productServiceClient.getProductById(id);
         List<ProductDTO> relatedProducts = productServiceClient.getRelatedProducts(id);
+        List<CategoryDTO> categories = categoryServiceClient.getAllCategories();
 
+        model.addAttribute("categories", categories);
         model.addAttribute("relatedProducts", relatedProducts);
         model.addAttribute("product", product);
         return "products/productInfo";
