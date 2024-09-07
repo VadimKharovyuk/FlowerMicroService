@@ -92,6 +92,51 @@
             padding: 20px;
             text-align: center;
         }
+        /* Стили формы добавления в корзину */
+        .add-to-cart-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 20px auto;
+        }
+
+        .add-to-cart-form label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .add-to-cart-form input[type="number"] {
+            width: 80px;
+            padding: 10px;
+            font-size: 16px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .add-to-cart-form .btn {
+            background-color: #3c32ce;
+            color: white;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-to-cart-form .btn:hover {
+            background-color: #2923a6;
+        }
+
     </style>
 </head>
 <body>
@@ -115,8 +160,14 @@
         <p>Price: $<span th:text="${product.price}">0.00</span></p>
         <p>Stock Quantity: <span th:text="${product.stockQuantity}">0</span></p>
         <img th:src="@{${product.imgPath}}" alt="product">
-        <!-- Ссылка на страницу обновления товара -->
-<!--        <a th:href="@{/products/update/{id}(id=${product.id})}" class="btn btn-primary">Update Product</a>-->
+
+        <form th:action="@{/flowershop/cart/add}" method="post" class="add-to-cart-form">
+            <input type="hidden" name="productId" th:value="${product.id}"/>
+            <label for="quantity">Количество:</label>
+            <input type="number" name="quantity" value="1" min="1"/>
+            <button type="submit">Добавить в корзину</button>
+        </form>
+
 
     </div>
     <!-- Related products section -->
