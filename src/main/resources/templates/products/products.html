@@ -92,6 +92,42 @@
             margin: 10px 0;
         }
 
+        /* Form Styles */
+        .add-to-cart-form {
+            display: flex;
+            flex-direction: column; /* Stack elements vertically */
+            align-items: flex-start; /* Align items to the start */
+            margin-top: 10px;
+        }
+
+        .add-to-cart-form label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .add-to-cart-form input[type="number"] {
+            width: 60px;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px; /* Space between input and button */
+        }
+
+        .add-to-cart-form button {
+            padding: 10px;
+            background-color: #3030e5;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%; /* Make button full width */
+        }
+
+        .add-to-cart-form button:hover {
+            background-color: #8246e3;
+        }
+
         /* Footer Styles */
         .footer {
             background-color: #0e0e0d;
@@ -136,11 +172,11 @@
                 </a>
 
                 <!-- Форма для добавления товара в корзину -->
-                <form th:action="@{/flowershop/cart/add}" method="post">
+                <form th:action="@{/flowershop/cart/add}" method="post" class="add-to-cart-form">
                     <input type="hidden" name="productId" th:value="${product.id}"/>
-                    <label for="quantity">Quantity:</label>
+                    <label for="quantity">Количество:</label>
                     <input type="number" name="quantity" value="1" min="1"/>
-                    <button type="submit">Add to Cart</button>
+                    <button type="submit">Добавить в корзину</button>
                 </form>
             </div>
         </th:block>
