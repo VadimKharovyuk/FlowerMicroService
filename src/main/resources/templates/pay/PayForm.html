@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Form</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Основные стили для body и заднего фона */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Контейнер для карты оплаты */
+        .card-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Карточка формы оплаты */
+        .card {
+            background-color: #fff;
+            width: 400px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+
+        /* Заголовок карты */
+        .card-header {
+            background-color: #5267df;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card-header h2 {
+            color: #fff;
+            margin: 0;
+            font-size: 24px;
+        }
+
+        /* Основная часть карты (форма) */
+        .card-body {
+            padding: 20px;
+        }
+
+        /* Общие стили для input групп */
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-sizing: border-box;
+        }
+
+        /* Две маленькие колонки для даты и CVV */
+        .input-row {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .small-input {
+            width: 48%;
+        }
+
+        /* Кнопка оплаты */
+        .btn {
+            background-color: #5267df;
+            color: white;
+            padding: 15px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #3e4db7;
+        }
+
+        /* Дополнительные стили для улучшения интерфейса */
+        input::placeholder {
+            color: #aaa;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<div class="card-container">
+    <div class="card">
+        <div class="card-header">
+            <h2>Payment Information</h2>
+        </div>
+        <div class="card-body">
+            <form action="/processPayment" method="POST">
+                <div class="input-group">
+                    <label for="cardName">Cardholder Name</label>
+                    <input type="text" id="cardName" name="cardName" placeholder="John Doe" required>
+                </div>
+                <div class="input-group">
+                    <label for="cardNumber">Card Number</label>
+                    <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9123 4567" maxlength="19" required>
+                </div>
+                <div class="input-row">
+                    <div class="input-group small-input">
+                        <label for="expiryDate">Expiry Date</label>
+                        <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" maxlength="5" required>
+                    </div>
+                    <div class="input-group small-input">
+                        <label for="cvv">CVV</label>
+                        <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="3" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn">Pay Now</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
