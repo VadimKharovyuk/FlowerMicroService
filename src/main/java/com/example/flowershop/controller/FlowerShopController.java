@@ -2,7 +2,9 @@ package com.example.flowershop.controller;
 
 import com.example.flowershop.dto.CartDTO;
 import com.example.flowershop.dto.CartItemDTO;
+import com.example.flowershop.dto.CategoryDTO;
 import com.example.flowershop.service.CartClientService;
+import com.example.flowershop.service.CategoryServiceClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import java.util.List;
 public class FlowerShopController {
 
     private final CartClientService cartClientService;
+    private final CategoryServiceClient categoryServiceClient;
 
     @GetMapping
     public String viewCart( @PathVariable Long id, Model model) {
@@ -34,9 +37,13 @@ public class FlowerShopController {
         return "errorPage";  // Можно заменить на страницу с ошибкой, если требуется
     }
 
+
     @GetMapping("/all")
     public String getAll(Model model){
         List<CartItemDTO> cartItemDTOList = cartClientService.getAll();
+        List<CategoryDTO> categories = categoryServiceClient.getAllCategories();
+
+        model.addAttribute("categories", categories);
         model.addAttribute("all",cartItemDTOList );
         return "cart/cartItemAdded";
     }

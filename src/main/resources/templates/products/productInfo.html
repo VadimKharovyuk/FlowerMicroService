@@ -11,7 +11,7 @@
         }
 
         header {
-            background-color: #333;
+            background-color: #1844b2;
             color: white;
             padding: 10px 0;
             text-align: center;
@@ -211,7 +211,7 @@
 
     <!-- Related products section -->
     <section class="related-products" th:if="${relatedProducts != null and !relatedProducts.isEmpty()}">
-        <h2>Related Products</h2>
+        <h2>Рекомендация</h2>
         <div class="product-grid">
             <div th:each="relatedProduct : ${relatedProducts}" class="product-card">
                 <h3 th:text="${relatedProduct.name}">Product Name</h3>

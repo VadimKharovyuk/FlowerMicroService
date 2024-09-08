@@ -1,26 +1,56 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ru">
 <head>
-    <title>Your Cart</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Товары</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
         }
 
-        h1 {
-            text-align: center;
-            color: #333;
+        .main-content-wrapper {
+            display: flex;
+        }
+
+        aside {
+            width: 200px;
+            background-color: #f0f0f0;
+            padding: 20px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        aside h2 {
+            margin-top: 0;
+        }
+
+        aside ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        aside li {
+            margin-bottom: 10px;
+        }
+
+        .main-content {
+            margin-left: 200px;
+            padding: 20px;
+            flex-grow: 1;
         }
 
         .nav {
             display: flex;
-            justify-content: center;
-            background-color: #3131d9;
-            padding: 10px 0;
-            border-radius: 5px;
+            justify-content: space-between;
+            background-color: #333;
+            padding: 10px;
             margin-bottom: 20px;
         }
 
@@ -28,121 +58,110 @@
             color: white;
             text-decoration: none;
             padding: 10px 15px;
-            margin: 0 10px;
             border-radius: 5px;
             transition: background-color 0.3s;
         }
 
         .nav a:hover {
-            background-color: #6f40cb;
+            background-color: #444;
         }
 
         .cart-container {
             max-width: 800px;
             margin: 0 auto;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
         }
 
         .cart-item {
             display: flex;
-            margin-bottom: 15px;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 15px;
-            align-items: center;
+            border-bottom: 1px solid #ccc;
+            padding: 20px 0;
         }
 
         .cart-item img {
             width: 100px;
             height: 100px;
             object-fit: cover;
-            margin-right: 15px;
-            border-radius: 5px;
+            margin-right: 20px;
         }
 
         .cart-item-info {
-            flex: 1;
+            flex-grow: 1;
         }
 
-        .cart-item-info h3 {
-            margin: 0;
-            font-size: 18px;
-            color: #555;
-        }
-
-        .cart-item-info p {
-            margin: 5px 0;
-            color: #777;
+        .empty-cart-message {
+            text-align: center;
+            font-style: italic;
         }
 
         .checkout-button {
             display: block;
             width: 100%;
             padding: 10px;
-            background-color: #28a745;
+            background-color: #4CAF50;
             color: white;
             border: none;
-            border-radius: 5px;
-            font-size: 16px;
             cursor: pointer;
-            text-align: center;
-            text-decoration: none;
+            font-size: 16px;
             margin-top: 20px;
         }
 
         .checkout-button:hover {
-            background-color: #218838;
-        }
-
-        .empty-cart-message {
-            text-align: center;
-            color: #888;
-            font-size: 18px;
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
+<div class="main-content-wrapper">
+    <!-- Секция категорий в виде aside -->
+    <aside>
+        <h2>Категории</h2>
+        <ul>
+            <li th:each="category : ${categories}">
+                <a th:href="@{/products/category/{categoryId}(categoryId=${category.id})}" th:text="${category.name}">Category Name</a>
+            </li>
+        </ul>
+    </aside>
 
-<!-- Навигационное меню -->
-<nav class="nav">
-    <a href="/">Главная</a>
-    <a href="/products">Продукты</a>
-    <a href="/products/new">Добавить Продукты</a>
-    <a href="/products/stock">Stock Продукты</a>
-    <a href="/flowershop/cart/all">Корзина</a>
-    <a href="/about">О нас</a>
-    <a href="/contact">Контакты</a>
-</nav>
+    <div class="main-content">
+        <!-- Навигационное меню -->
+        <nav class="nav">
+            <a href="/">Главная</a>
+            <a href="/products">Продукты</a>
+            <a href="/products/new">Добавить Продукты</a>
+            <a href="/products/stock">Stock Продукты</a>
+            <a href="/flowershop/cart/all">Корзина</a>
+            <a href="/about">О нас</a>
+            <a href="/contact">Контакты</a>
+        </nav>
 
-<div class="cart-container">
-    <h1>Your Cart</h1>
+        <div class="cart-container">
+            <h1>Your Cart</h1>
 
-    <form th:action="@{/flowershop/cart/checkout}" method="post">
-        <div th:if="${all != null}" th:each="item : ${all}">
-            <div class="cart-item">
-                <!-- Изображение товара -->
-                <img th:src="@{${item.imgPath}}" alt="Product Image">
+            <form th:action="@{/flowershop/cart/checkout}" method="post">
+                <div th:if="${all != null}" th:each="item : ${all}">
+                    <div class="cart-item">
+                        <!-- Изображение товара -->
+                        <img th:src="@{${item.imgPath}}" alt="Product Image">
 
-                <!-- Информация о товаре -->
-                <div class="cart-item-info">
-                    <h3 th:text="${item.productName}">Product Name</h3>
-                    <p th:text="${item.productDescription}">Product Description</p>
-                    <p>Quantity: <span th:text="${item.quantity}">1</span></p>
-                    <p>Total Price: <span th:text="${item.totalPrice}">100.00</span></p>
+                        <!-- Информация о товаре -->
+                        <div class="cart-item-info">
+                            <h3 th:text="${item.productName}">Product Name</h3>
+                            <p th:text="${item.productDescription}">Product Description</p>
+                            <p>Quantity: <span th:text="${item.quantity}">1</span></p>
+                            <p>Total Price: <span th:text="${item.totalPrice}">100.00</span></p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
 
-        <div th:if="${all == null}">
-            <p class="empty-cart-message">Your cart is empty.</p>
-        </div>
+                <div th:if="${all == null}">
+                    <p class="empty-cart-message">Your cart is empty.</p>
+                </div>
 
-        <!-- Кнопка для оформления заказа -->
-        <button type="submit" class="checkout-button">Офррмить заказ</button>
-    </form>
+                <!-- Кнопка для оформления заказа -->
+                <button type="submit" class="checkout-button">Оформить заказ</button>
+            </form>
+        </div>
+    </div>
 </div>
-
 </body>
 </html>
