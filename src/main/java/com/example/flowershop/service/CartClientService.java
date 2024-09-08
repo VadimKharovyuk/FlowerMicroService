@@ -8,6 +8,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -20,6 +21,19 @@ public class CartClientService {
     private String cartServiceUrl;
 
     private final RestTemplate restTemplate;
+
+    // Метод для удаления товара из корзины
+    public boolean deleteCartItem(Long id) {
+        String url = cartServiceUrl + "/delete/" + id;
+        try {
+            restTemplate.postForEntity(url, null, Void.class);
+            return true; // Удаление успешно
+        } catch (HttpClientErrorException e) {
+            // Логирование ошибки
+            System.err.println("Error deleting cart item: " + e.getMessage());
+            return false; // Удаление не удалось
+        }
+    }
 
     // Метод для добавления продукта в корзину
     public CartItemDTO addProductToCart(Long productId, Integer quantity) {

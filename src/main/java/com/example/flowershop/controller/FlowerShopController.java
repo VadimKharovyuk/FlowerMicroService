@@ -6,6 +6,7 @@ import com.example.flowershop.dto.CategoryDTO;
 import com.example.flowershop.service.CartClientService;
 import com.example.flowershop.service.CategoryServiceClient;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,12 @@ public class FlowerShopController {
 
     private final CartClientService cartClientService;
     private final CategoryServiceClient categoryServiceClient;
+
+    @PostMapping("/removeFromCart/{cartItemId}")
+    public String removeFromCart(@PathVariable Long cartItemId) {
+        cartClientService.deleteCartItem(cartItemId);
+        return "redirect:/flowershop/cart/all";
+    }
 
     @GetMapping
     public String viewCart( @PathVariable Long id, Model model) {

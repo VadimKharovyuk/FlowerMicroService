@@ -128,4 +128,35 @@ public class CartService {
             System.err.println("Error decreasing stock for product: " + e.getMessage());
         }
     }
+
+
+    private void increaseProductStock(Long productId, Integer quantity) {
+        String url = productServiceUrl + productId + "/increaseStock?quantity=" + quantity;
+        try {
+            restTemplate.put(url, null); // Отправляем PUT запрос на увеличение количества товара
+        } catch (HttpClientErrorException e) {
+            // Логирование ошибки при увеличении количества товара
+            System.err.println("Error increasing stock for product: " + e.getMessage());
+        }
+    }
+
+    public boolean deleteCartItem(Long id) {
+        Optional<CartItem> cartItem = cartItemRepository.findById(id);
+
+        if (cartItem.isPresent()) {
+            CartItem item = cartItem.get();
+            Long productId = item.getProductId(); // Предполагаем, что у CartItem есть метод getProductId()
+            Integer quantity = item.getQuantity(); // Предполагаем, что у CartItem есть метод getQuantity()
+
+            // Удаляем элемент из корзины
+            cartItemRepository.deleteById(id);
+
+            // Возвращаем количество товара на склад
+             increaseProductStock(productId, quantity);
+
+            return true; // Удаление успешно
+        } else {
+            return false; // Элемент не найден
+        }
+    }
 }

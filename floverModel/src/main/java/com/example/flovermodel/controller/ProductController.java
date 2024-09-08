@@ -19,6 +19,19 @@ public class ProductController {
 
     private final ProductService productService;
     private final ProductFacade productFacade;
+
+
+    // В контроллере продуктового микросервиса
+    @PutMapping("/{productId}/increaseStock")
+    public ResponseEntity<Void> increaseStock(@PathVariable Long productId, @RequestParam Integer quantity) {
+        boolean isUpdated = productService.increaseStock(productId, quantity);
+
+        if (isUpdated) {
+            return ResponseEntity.noContent().build(); // Возвращаем статус 204 No Content при успешном увеличении
+        } else {
+            return ResponseEntity.notFound().build(); // Возвращаем статус 404 если товар не найден
+        }
+    }
     @PutMapping("/{productId}/decreaseStock")
     public ResponseEntity<Void> decreaseStock(@PathVariable Long productId, @RequestParam int quantity) {
         productService.decreaseProductStock(productId, quantity);

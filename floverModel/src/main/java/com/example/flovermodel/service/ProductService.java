@@ -163,4 +163,16 @@ public class ProductService {
         productRepository.save(product);
     }
 
+    public boolean increaseStock(Long productId, Integer quantity) {
+        Optional<Product> product = productRepository.findById(productId);
+
+        if (product.isPresent()) {
+            Product existingProduct = product.get();
+            existingProduct.setStockQuantity(existingProduct.getStockQuantity() + quantity);
+            productRepository.save(existingProduct);
+            return true; // Увеличение успешно
+        } else {
+            return false; // Товар не найден
+        }
+    }
 }

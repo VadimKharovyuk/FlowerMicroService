@@ -15,6 +15,16 @@ import java.util.List;
 public class CartController {
 
     private final CartService cartService;
+    // Удаление товара из корзины по id
+    @PostMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteCartItem(@PathVariable Long id) {
+        boolean isDeleted = cartService.deleteCartItem(id);
+        if (isDeleted) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     // Метод для добавления продукта в корзину
     @PostMapping("/add")
