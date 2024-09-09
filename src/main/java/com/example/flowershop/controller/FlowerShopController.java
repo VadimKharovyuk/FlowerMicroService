@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Controller
@@ -30,6 +31,7 @@ public class FlowerShopController {
     @GetMapping
     public String viewCart( @PathVariable Long id, Model model) {
         CartItemDTO cartItemDTO = cartClientService.getCartItemById(id);
+
         model.addAttribute("cartItems", cartItemDTO);
         return "cart/viewCart"; // Название HTML-шаблона для отображения корзины
     }
@@ -46,13 +48,22 @@ public class FlowerShopController {
 
 
     @GetMapping("/all")
-    public String getAll(Model model){
+    public String getAll(Model model) {
+        // Получаем список всех элементов корзины
         List<CartItemDTO> cartItemDTOList = cartClientService.getAll();
+
+        // Рассчитываем общую сумму корзины
+        BigDecimal totalAmount = cartClientService.calculateTotalAmount(cartItemDTOList);
+
+        // Получаем список всех категорий
         List<CategoryDTO> categories = categoryServiceClient.getAllCategories();
 
+        // Добавляем данные в модель
         model.addAttribute("categories", categories);
-        model.addAttribute("all",cartItemDTOList );
-        return "cart/cartItemAdded";
+        model.addAttribute("all", cartItemDTOList);
+        model.addAttribute("totalAmount", totalAmount);
+
+        return "cart/cartItemAdded"; // Название HTML-шаблона для отображения корзины
     }
 
 }

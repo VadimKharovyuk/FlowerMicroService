@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -56,6 +58,31 @@ public class CartClientService {
                 null,
                 new ParameterizedTypeReference<List<CartItemDTO>>() {}
         );
+        return response.getBody();
+    }
+
+    public BigDecimal calculateTotalAmount(List<CartItemDTO> cartItems) {
+        BigDecimal totalAmount = BigDecimal.ZERO;
+
+        for (CartItemDTO item : cartItems) {
+            // Рассчитываем общую стоимость для каждой позиции в корзине
+            BigDecimal itemTotalPrice = item.getTotalPrice();
+            totalAmount = totalAmount.add(itemTotalPrice);
+        }
+
+        return totalAmount;
+    }
+
+
+    public List<CartItemDTO> getCartItems(Long cartId) {
+        // Отправляем запрос к внешнему сервису для получения элементов корзины
+        ResponseEntity<List<CartItemDTO>> response = restTemplate.exchange(
+                cartServiceUrl + "/api/carts/" + cartId + "/items",
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<CartItemDTO>>() {}
+        );
+
         return response.getBody();
     }
 }

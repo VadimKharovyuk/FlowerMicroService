@@ -108,6 +108,32 @@
         .checkout-button:hover {
             background-color: #45a049;
         }
+        /* Стили для контейнера div */
+        div.pay-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        /* Стили для кнопки оплаты */
+        button.pay-button {
+            background-color: #4CAF50; /* Зелёный фон */
+            color: white; /* Белый текст */
+            border: none; /* Без границы */
+            padding: 15px 30px; /* Внутренний отступ */
+            text-align: center; /* Текст по центру */
+            text-decoration: none; /* Убираем подчеркивание */
+            display: inline-block;
+            font-size: 16px; /* Размер текста */
+            margin: 10px 0; /* Отступы */
+            cursor: pointer; /* Указатель на кнопке */
+            border-radius: 8px; /* Скругленные углы */
+            transition: background-color 0.3s ease; /* Плавный переход фона */
+        }
+
+        /* Стили при наведении на кнопку */
+        button.pay-button:hover {
+            background-color: #45a049; /* Более тёмный зелёный при наведении */
+        }
     </style>
 </head>
 <body>
@@ -163,6 +189,14 @@
                 <!-- Кнопка для оформления заказа -->
                 <button type="submit" class="checkout-button">Оформить заказ</button>
             </form>
+
+            <h2>Total Amount: <span th:text="${totalAmount}">0</span></h2>
+            <!-- Кнопка для оплаты через банк -->
+            <div class="pay-container">
+                <form action="/payments/payBank" method="get">
+                    <button type="submit" class="pay-button">Оплатить через  Lucky Bank </button>
+                </form>
+            </div>
         </div>
     </div>
 

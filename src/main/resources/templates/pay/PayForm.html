@@ -1,3 +1,160 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Payment Form</title>-->
+<!--    <link rel="stylesheet" href="styles.css">-->
+<!--    <style>-->
+<!--        /* Основные стили для body и заднего фона */-->
+<!--        body {-->
+<!--            font-family: 'Arial', sans-serif;-->
+<!--            background-image: url('https://monobank.ua/resources/1.0.29.2-1723812793905/img/og/platinum-uk.png');-->
+<!--            background-size: cover;-->
+<!--            background-position: center;-->
+<!--            background-attachment: fixed;-->
+<!--            display: flex;-->
+<!--            justify-content: center;-->
+<!--            align-items: center;-->
+<!--            height: 100vh;-->
+<!--            margin: 0;-->
+<!--        }-->
+
+<!--        /* Контейнер для карты оплаты */-->
+<!--        .card-container {-->
+<!--            display: flex;-->
+<!--            justify-content: center;-->
+<!--            align-items: center;-->
+<!--            padding-left: 320px;-->
+<!--        }-->
+
+<!--        /* Карточка формы оплаты */-->
+<!--        .card {-->
+<!--            background-color: rgba(255, 255, 255, 0.9);-->
+<!--            width: 500px;-->
+<!--            border-radius: 25px;-->
+<!--            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);-->
+<!--            overflow: hidden;-->
+<!--        }-->
+
+<!--        /* Заголовок карты */-->
+<!--        .card-header {-->
+<!--            background-color: #1a1c2d;-->
+<!--            padding: 20px;-->
+<!--            text-align: center;-->
+<!--        }-->
+
+<!--        .card-header h2 {-->
+<!--            color: #fff;-->
+<!--            margin: 0;-->
+<!--            font-size: 24px;-->
+<!--        }-->
+
+<!--        /* Основная часть карты (форма) */-->
+<!--        .card-body {-->
+<!--            padding: 20px;-->
+<!--        }-->
+
+<!--        /* Общие стили для input групп */-->
+<!--        .input-group {-->
+<!--            margin-bottom: 20px;-->
+<!--        }-->
+
+<!--        .input-group label {-->
+<!--            display: block;-->
+<!--            margin-bottom: 8px;-->
+<!--            color: #333;-->
+<!--            font-weight: bold;-->
+<!--        }-->
+
+<!--        .input-group input {-->
+<!--            width: 100%;-->
+<!--            padding: 10px;-->
+<!--            font-size: 16px;-->
+<!--            border: 1px solid #ddd;-->
+<!--            border-radius: 10px;-->
+<!--            box-sizing: border-box;-->
+<!--        }-->
+
+<!--        /* Две маленькие колонки для даты и CVV */-->
+<!--        .input-row {-->
+<!--            display: flex;-->
+<!--            justify-content: space-between;-->
+<!--        }-->
+
+<!--        .small-input {-->
+<!--            width: 48%;-->
+<!--        }-->
+
+<!--        /* Кнопка оплаты */-->
+<!--        .btn {-->
+<!--            background-color: #5267df;-->
+<!--            color: white;-->
+<!--            padding: 15px;-->
+<!--            font-size: 18px;-->
+<!--            border: none;-->
+<!--            border-radius: 10px;-->
+<!--            cursor: pointer;-->
+<!--            width: 100%;-->
+<!--            margin-top: 10px;-->
+<!--            transition: background-color 0.3s ease;-->
+<!--        }-->
+
+<!--        .btn:hover {-->
+<!--            background-color: #3e4db7;-->
+<!--        }-->
+
+<!--        /* Дополнительные стили для улучшения интерфейса */-->
+<!--        input::placeholder {-->
+<!--            color: #aaa;-->
+<!--            font-size: 14px;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="card-container">-->
+<!--    <div class="card">-->
+<!--        <div class="card-header">-->
+<!--            <h2>Payment Information</h2>-->
+<!--        </div>-->
+<!--        <div class="card-body">-->
+<!--            <form action="/payments/process" method="POST">-->
+<!--                <div class="input-group">-->
+<!--                    <label for="cardName">Cardholder Name</label>-->
+<!--                    <input type="text" id="cardName" name="cardName" placeholder="Vadim Kharovyuk" required>-->
+<!--                </div>-->
+<!--                <div class="input-group">-->
+<!--                    <label for="cardNumber">Card Number</label>-->
+<!--                    <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9123 4567" maxlength="19" required>-->
+<!--                </div>-->
+<!--                <div class="input-row">-->
+<!--                    <div class="input-group small-input">-->
+<!--                        <label for="expiryDate">Expiry Date</label>-->
+<!--                        <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" maxlength="5" required>-->
+<!--                    </div>-->
+<!--                    <div class="input-group small-input">-->
+<!--                        <label for="cvv">CVV</label>-->
+<!--                        <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="3" required>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                &lt;!&ndash; Отображение общей суммы &ndash;&gt;-->
+<!--                <div class="input-group">-->
+<!--                    <label>Total Amount</label>-->
+<!--                    <p th:text="${totalAmount}">100.00</p>-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash; Передача общей суммы в обработчик оплаты &ndash;&gt;-->
+<!--                <input type="hidden" name="totalAmount" th:value="${totalAmount}">-->
+
+<!--                <button type="submit" class="btn">Pay Now</button>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -118,11 +275,7 @@
             <h2>Payment Information</h2>
         </div>
         <div class="card-body">
-            <form action="/processPayment" method="POST">
-                <div class="input-group">
-                    <label for="cardName">Cardholder Name</label>
-                    <input type="text" id="cardName" name="cardName" placeholder="Vadim Kharovyuk" required>
-                </div>
+            <form action="/payments/process" method="POST" onsubmit="return validateAmount()">
                 <div class="input-group">
                     <label for="cardNumber">Card Number</label>
                     <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9123 4567" maxlength="19" required>
@@ -137,8 +290,19 @@
                         <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="3" required>
                     </div>
                 </div>
+                <!-- Отображение общей суммы -->
+                <h2>Total Amount: <span th:text="${totalAmount}">0</span></h2>
+                <input type="hidden" id="amount" name="amount" th:value="${totalAmount}">
                 <button type="submit" class="btn">Pay Now</button>
             </form>
+            <script>
+                function validateAmount() {
+                    var amountField = document.getElementById('amount');
+                    // Очистка значений от нечисловых символов, если необходимо
+                    amountField.value = amountField.value.replace(/[^0-9.]/g, '');
+                    return true; // Разрешает отправку формы
+                }
+            </script>
         </div>
     </div>
 </div>
