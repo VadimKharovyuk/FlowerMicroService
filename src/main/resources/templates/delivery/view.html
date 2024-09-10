@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Delivery Details</title>
+    <style>
+        .delivery-details {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .delivery-details h2 {
+            margin-bottom: 20px;
+        }
+        .delivery-details p {
+            margin: 10px 0;
+        }
+        .product-info {
+            margin-top: 20px;
+        }
+        .product-info img {
+            max-width: 200px;
+            height: auto;
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="delivery-details">
+    <h2>Delivery Details</h2>
+
+    <p><strong>Name:</strong> <span th:text="${delivery.name}">John Doe</span></p>
+    <p><strong>Phone:</strong> <span th:text="${delivery.phone}">123-456-7890</span></p>
+    <p><strong>Email:</strong> <span th:text="${delivery.email}">john.doe@example.com</span></p>
+    <p><strong>Address:</strong> <span th:text="${delivery.address}">123 Elm Street, Springfield</span></p>
+    <p><strong>Status:</strong> <span th:text="${delivery.paid ? 'Paid' : 'Not Paid'}">Not Paid</span></p>
+
+    <div class="product-info" th:if="${cartItemDTOS != null}">
+        <h3>Product Information</h3>
+        <ul>
+            <li th:each="item : ${cartItemDTOS}">
+                <div>
+                    <img th:src="@{${item.imgPath}}" alt="Product Image" />
+                    <p><strong>Product Name:</strong> <span th:text="${item.productName}"></span></p>
+                    <p><strong>Description:</strong> <span th:text="${item.productDescription}"></span></p>
+                    <p><strong>Quantity:</strong> <span th:text="${item.quantity}"></span></p>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div th:if="${delivery.cartItem == null}">
+        <p>No product information available.</p>
+    </div>
+</div>
+</body>
+</html>

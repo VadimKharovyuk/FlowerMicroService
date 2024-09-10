@@ -1,0 +1,101 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <title>Deliveries</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>Deliveries</h1>-->
+
+<!--&lt;!&ndash; Ссылка для создания новой доставки &ndash;&gt;-->
+<!--<a href="/deliveries/create">Create New Delivery</a>-->
+
+<!--<table>-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <th>ID</th>-->
+<!--        <th>Name</th>-->
+<!--        <th>Address</th>-->
+<!--        <th>Paid</th>-->
+<!--        <th>Actions</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <tr th:each="delivery : ${deliveries}">-->
+<!--        <td th:text="${delivery.id}"></td>-->
+<!--        <td th:text="${delivery.name}"></td>-->
+<!--        <td th:text="${delivery.address}"></td>-->
+<!--        <td th:text="${delivery.paid ? 'Yes' : 'No'}"></td>-->
+<!--        <td>-->
+<!--            &lt;!&ndash; Ссылка для просмотра подробностей о доставке &ndash;&gt;-->
+<!--            <a th:href="@{/deliveries/{id}(id=${delivery.id})}" th:text="'View Details'"></a>-->
+
+<!--            &lt;!&ndash; Форма для пометки доставки как оплаченной &ndash;&gt;-->
+<!--            <form th:action="@{/deliveries/pay/{id}(id=${delivery.id})}" method="post" style="display:inline;">-->
+<!--                <button type="submit">Mark as Paid</button>-->
+<!--            </form>-->
+
+<!--            &lt;!&ndash; Форма для удаления доставки &ndash;&gt;-->
+<!--            <form th:action="@{/deliveries/delete/{id}(id=${delivery.id})}" method="post" style="display:inline;">-->
+<!--                <button type="submit">Delete</button>-->
+<!--            </form>-->
+<!--        </td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--</table>-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Deliveries</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+</head>
+<body>
+<div class="container my-5">
+    <h1>Deliveries</h1>
+
+    <!-- Ссылка для создания новой доставки -->
+    <a href="/deliveries/create" class="btn btn-primary mb-3">Create New Delivery</a>
+
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Paid</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="delivery : ${deliveries}">
+            <td th:text="${delivery.id}"></td>
+            <td th:text="${delivery.name}"></td>
+            <td th:text="${delivery.address}"></td>
+            <td th:text="${delivery.paid ? 'Yes' : 'No'}"></td>
+            <td>
+                <!-- Ссылка для просмотра подробностей о доставке -->
+                <a th:href="@{/deliveries/{id}(id=${delivery.id})}" class="btn btn-primary btn-sm">View Details</a>
+
+                <!-- Форма для пометки доставки как оплаченной -->
+                <form th:action="@{/deliveries/pay/{id}(id=${delivery.id})}" method="post" class="d-inline">
+                    <button type="submit" class="btn btn-success btn-sm">Mark as Paid</button>
+                </form>
+
+                <!-- Форма для удаления доставки -->
+                <form th:action="@{/deliveries/delete/{id}(id=${delivery.id})}" method="post" class="d-inline">
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Bootstrap JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+</body>
+</html>

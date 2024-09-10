@@ -26,6 +26,12 @@ public class PaymentController {
     @Value("${bank.api.url}") // URL вашего банковского API
     private String bankApiUrl;
 
+    @GetMapping("/checkout")
+    public String checkout (){
+        return "pay/checkout";
+
+    }
+
     @GetMapping("/payBank")
     public String formPay(Model model) {
         // Рассчитываем общую сумму корзины
@@ -103,9 +109,4 @@ public class PaymentController {
         return new Date(year - 1900, month - 1, 1); // java.sql.Date is year - 1900, month - 1
     }
 
-    @GetMapping("/checkout")
-    public String checkout (){
-        return "pay/checkout";
-
-    }
 }

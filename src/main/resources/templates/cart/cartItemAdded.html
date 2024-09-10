@@ -186,8 +186,6 @@
                     <p class="empty-cart-message">Your cart is empty.</p>
                 </div>
 
-                <!-- Кнопка для оформления заказа -->
-                <button type="submit" class="checkout-button">Оформить заказ</button>
             </form>
 
             <h2>Total Amount: <span th:text="${totalAmount}">0</span></h2>
@@ -197,6 +195,8 @@
                     <button type="submit" class="pay-button">Оплатить через  Lucky Bank </button>
                 </form>
             </div>
+            <a href="/deliveries/create">Создать доствку</a>
+            <a href="/deliveries">Мои доствки </a>
         </div>
     </div>
 

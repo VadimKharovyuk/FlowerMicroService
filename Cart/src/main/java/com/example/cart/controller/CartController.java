@@ -15,6 +15,13 @@ import java.util.List;
 public class CartController {
 
     private final CartService cartService;
+
+    // Метод для получения элемента корзины по ID
+    @GetMapping("/{id}")
+    public ResponseEntity<CartItem> getCartItemById(@PathVariable Long id) {
+        CartItem cartItem = cartService.getCartItemById(id);
+        return cartItem != null ? new ResponseEntity<>(cartItem, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
     // Удаление товара из корзины по id
     @PostMapping("/delete/{id}")
     public ResponseEntity<Void> deleteCartItem(@PathVariable Long id) {
@@ -31,13 +38,6 @@ public class CartController {
     public ResponseEntity<CartItem> addProductToCart(@RequestParam Long productId, @RequestParam Integer quantity) {
         CartItem cartItem = cartService.addProductToCart(productId, quantity);
         return cartItem != null ? new ResponseEntity<>(cartItem, HttpStatus.CREATED) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
-    // Метод для получения элемента корзины по ID
-    @GetMapping("/{id}")
-    public ResponseEntity<CartItem> getCartItemById(@PathVariable Long id) {
-        CartItem cartItem = cartService.getCartItemById(id);
-        return cartItem != null ? new ResponseEntity<>(cartItem, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/all")
