@@ -55,15 +55,42 @@
         <label for="address">Address:</label>
         <input type="text" id="address" th:field="*{address}" placeholder="Enter your delivery address" />
 
+        <!-- Выбор товара из корзины -->
         <label for="cartItem">Select Item:</label>
-        <select id="cartItem" th:field="*{cartItem.productId}">
+        <select id="cartItem" th:field="*{cartItem.productId}" onchange="updateHiddenFields()">
             <option th:each="item : ${cartItems}"
                     th:value="${item.productId}"
+                    th:data-name="${item.productName}"
+                    th:data-description="${item.productDescription}"
+                    th:data-imgpath="${item.imgPath}"
+                    th:data-quantity="${item.quantity}"
+                    th:data-price="${item.totalPrice}"
                     th:text="${item.productName} + ' - ' + ${item.totalPrice}"></option>
         </select>
 
+        <!-- Скрытые поля для передачи данных о товаре -->
+        <input type="hidden" id="productName" th:field="*{cartItem.productName}" />
+        <input type="hidden" id="productDescription" th:field="*{cartItem.productDescription}" />
+        <input type="hidden" id="imgPath" th:field="*{cartItem.imgPath}" />
+        <input type="hidden" id="quantity" th:field="*{cartItem.quantity}" />
+        <input type="hidden" id="totalPrice" th:field="*{cartItem.totalPrice}" />
+
         <button type="submit">Create Delivery</button>
     </form>
+</div>
+
+<script type="text/javascript">
+    function updateHiddenFields() {
+        var select = document.getElementById("cartItem");
+        var selectedOption = select.options[select.selectedIndex];
+
+        document.getElementById("productName").value = selectedOption.getAttribute("data-name");
+        document.getElementById("productDescription").value = selectedOption.getAttribute("data-description");
+        document.getElementById("imgPath").value = selectedOption.getAttribute("data-imgpath");
+        document.getElementById("quantity").value = selectedOption.getAttribute("data-quantity");
+        document.getElementById("totalPrice").value = selectedOption.getAttribute("data-price");
+    }
+</script>
 </div>
 </body>
 </html>

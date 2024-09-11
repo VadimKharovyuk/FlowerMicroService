@@ -1,5 +1,4 @@
 package com.example.delivery.dto;
-
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -12,5 +11,4 @@ public class CartItemDTO {
     private String imgPath;
     private Integer quantity;
     private BigDecimal totalPrice;
-
 }

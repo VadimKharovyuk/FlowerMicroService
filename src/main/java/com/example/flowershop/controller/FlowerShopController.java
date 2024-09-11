@@ -1,6 +1,4 @@
 package com.example.flowershop.controller;
-
-import com.example.flowershop.dto.CartDTO;
 import com.example.flowershop.dto.CartItemDTO;
 import com.example.flowershop.dto.CategoryDTO;
 import com.example.flowershop.service.CartClientService;

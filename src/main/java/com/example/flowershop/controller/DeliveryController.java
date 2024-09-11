@@ -20,13 +20,14 @@ public class DeliveryController {
     private final CartClientService cartClientService;
 
 
+
     @GetMapping("/{id}")
     public String viewDelivery(@PathVariable Long id, Model model) {
         DeliveryDTO deliveryDTO = deliveryClientService.getDeliveryById(id);
-        var cartItemDTOS = cartClientService.getAll();
+
 
         model.addAttribute("delivery", deliveryDTO);
-        model.addAttribute("cartItemDTOS", cartItemDTOS);
+
         return "delivery/view";
     }
 

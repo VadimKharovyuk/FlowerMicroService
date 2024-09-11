@@ -156,8 +156,8 @@
             <a href="/products/new">Добавить Продукты</a>
             <a href="/products/stock">Stock Продукты</a>
             <a href="/flowershop/cart/all">Корзина</a>
-            <a href="/about">О нас</a>
-            <a href="/contact">Контакты</a>
+            <a href="/deliveries/create">Оформить доставку</a>
+            <a href="/deliveries">Мои заказы</a>
         </nav>
 
         <div class="cart-container">
@@ -175,9 +175,9 @@
                             <p th:text="${item.productDescription}">Product Description</p>
                             <p>Quantity: <span th:text="${item.quantity}">1</span></p>
                             <p>Total Price: <span th:text="${item.totalPrice}">100.00</span></p>
-                            <form th:action="@{/flowershop/cart/removeFromCart/{cartItemId}(cartItemId=${item.id})}" method="post" style="display:inline;">
-                                <button type="submit" class="checkout-button" style="background-color: #f44336;">Удалить</button>
-                            </form>
+<!--                            <form th:action="@{/flowershop/cart/removeFromCart/{cartItemId}(cartItemId=${item.id})}" method="post" style="display:inline;">-->
+<!--                                <button type="submit" class="checkout-button" style="background-color: #f44336;">Удалить</button>-->
+<!--                            </form>-->
                         </div>
                     </div>
                 </div>
@@ -195,9 +195,7 @@
                     <button type="submit" class="pay-button">Оплатить через  Lucky Bank </button>
                 </form>
             </div>
-            <a href="/deliveries/create">Создать доствку</a>
-            <a href="/deliveries">Мои доствки </a>
-        </div>
+
     </div>
 
 </div>

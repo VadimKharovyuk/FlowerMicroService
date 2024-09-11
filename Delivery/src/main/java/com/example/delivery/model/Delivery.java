@@ -21,6 +21,7 @@ public class Delivery {
     private Long id;
 
 
+
     private String name;
     private String phone;
     private String email;
@@ -28,11 +29,10 @@ public class Delivery {
 
     private boolean paid; // Оплачена ли доставка
 
-    // Данные из CartItemDTO можно сохранить в этих полях
     private Long productId;
-    private String productName;
+    private String productName;  // Убедись, что это поле имеет правильный тип
     private String productDescription;
     private String imgPath;
-    private Integer quantity;
+    private Integer quantity;  // Проверь аннотации и тип данных
     private BigDecimal totalPrice;
 }

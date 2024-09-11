@@ -1,49 +1,3 @@
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <title>Deliveries</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<h1>Deliveries</h1>-->
-
-<!--&lt;!&ndash; Ссылка для создания новой доставки &ndash;&gt;-->
-<!--<a href="/deliveries/create">Create New Delivery</a>-->
-
-<!--<table>-->
-<!--    <thead>-->
-<!--    <tr>-->
-<!--        <th>ID</th>-->
-<!--        <th>Name</th>-->
-<!--        <th>Address</th>-->
-<!--        <th>Paid</th>-->
-<!--        <th>Actions</th>-->
-<!--    </tr>-->
-<!--    </thead>-->
-<!--    <tbody>-->
-<!--    <tr th:each="delivery : ${deliveries}">-->
-<!--        <td th:text="${delivery.id}"></td>-->
-<!--        <td th:text="${delivery.name}"></td>-->
-<!--        <td th:text="${delivery.address}"></td>-->
-<!--        <td th:text="${delivery.paid ? 'Yes' : 'No'}"></td>-->
-<!--        <td>-->
-<!--            &lt;!&ndash; Ссылка для просмотра подробностей о доставке &ndash;&gt;-->
-<!--            <a th:href="@{/deliveries/{id}(id=${delivery.id})}" th:text="'View Details'"></a>-->
-
-<!--            &lt;!&ndash; Форма для пометки доставки как оплаченной &ndash;&gt;-->
-<!--            <form th:action="@{/deliveries/pay/{id}(id=${delivery.id})}" method="post" style="display:inline;">-->
-<!--                <button type="submit">Mark as Paid</button>-->
-<!--            </form>-->
-
-<!--            &lt;!&ndash; Форма для удаления доставки &ndash;&gt;-->
-<!--            <form th:action="@{/deliveries/delete/{id}(id=${delivery.id})}" method="post" style="display:inline;">-->
-<!--                <button type="submit">Delete</button>-->
-<!--            </form>-->
-<!--        </td>-->
-<!--    </tr>-->
-<!--    </tbody>-->
-<!--</table>-->
-<!--</body>-->
-<!--</html>-->
 
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
@@ -63,7 +17,6 @@
     <table class="table table-striped table-hover">
         <thead>
         <tr>
-            <th>ID</th>
             <th>Name</th>
             <th>Address</th>
             <th>Paid</th>
@@ -72,7 +25,6 @@
         </thead>
         <tbody>
         <tr th:each="delivery : ${deliveries}">
-            <td th:text="${delivery.id}"></td>
             <td th:text="${delivery.name}"></td>
             <td th:text="${delivery.address}"></td>
             <td th:text="${delivery.paid ? 'Yes' : 'No'}"></td>

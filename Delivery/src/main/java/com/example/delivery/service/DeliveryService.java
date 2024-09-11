@@ -18,20 +18,12 @@ public class DeliveryService {
     private final DeliveryRepository deliveryRepository;
     private final DeliveryMapper deliveryMapper;
 
-    public void createDelivery(DeliveryDTO deliveryDTO) {
-        try {
-            // Маппинг DTO в сущность Delivery с помощью маппера
-            Delivery delivery = deliveryMapper.toEntity(deliveryDTO);
-
-            // Сохраняем сущность в базе данных
-            deliveryRepository.save(delivery);
-
-        } catch (DataAccessException e) {
-            throw new RuntimeException("Failed to save delivery to the database", e);
-        } catch (Exception e) {
-            throw new RuntimeException("An error occurred while processing the delivery", e);
-        }
+    public DeliveryDTO createDelivery(DeliveryDTO deliveryDTO) {
+        Delivery delivery = deliveryMapper.toEntity(deliveryDTO);
+        Delivery savedDelivery = deliveryRepository.save(delivery);
+        return deliveryMapper.toDTO(savedDelivery); // Обязательно возвращай DTO
     }
+
     public List<DeliveryDTO> getAllDeliveries() {
         return deliveryRepository.findAll().stream()
                 .map(deliveryMapper::toDTO)

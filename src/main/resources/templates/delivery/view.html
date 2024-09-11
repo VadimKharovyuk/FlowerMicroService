@@ -1,55 +1,114 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
-    <title>Delivery Details</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Информация о доставке</title>
     <style>
-        .delivery-details {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #333;
+            --background-color: #f5f5f5;
+            --success-color: #4CAF50;
+            --error-color: #f44336;
         }
-        .delivery-details h2 {
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: var(--secondary-color);
+            background-color: var(--background-color);
+            padding: 20px;
+        }
+
+        .delivery-info {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: var(--primary-color);
             margin-bottom: 20px;
+            text-align: center;
         }
-        .delivery-details p {
-            margin: 10px 0;
+
+        h2 {
+            margin-top: 20px; /* Отступ сверху для подзаголовка */
+            color: var(--primary-color);
         }
-        .product-info {
+
+        p {
+            margin: 10px 0; /* Отступы между параграфами */
+        }
+
+        .payment-status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .payment-status.paid {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+        .payment-status.unpaid {
+            background-color: var(--error-color);
+            color: white;
+        }
+
+        .cart-item {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 4px;
             margin-top: 20px;
         }
-        .product-info img {
+
+        .cart-item img {
             max-width: 200px;
             height: auto;
-            display: block;
             margin-bottom: 10px;
+        }
+
+        @media (max-width: 480px) {
+            .delivery-info {
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
-<div class="delivery-details">
-    <h2>Delivery Details</h2>
+<div class="delivery-info">
+    <h1>Информация о доставке</h1>
 
-    <p><strong>Name:</strong> <span th:text="${delivery.name}">John Doe</span></p>
-    <p><strong>Phone:</strong> <span th:text="${delivery.phone}">123-456-7890</span></p>
-    <p><strong>Email:</strong> <span th:text="${delivery.email}">john.doe@example.com</span></p>
-    <p><strong>Address:</strong> <span th:text="${delivery.address}">123 Elm Street, Springfield</span></p>
-    <p><strong>Status:</strong> <span th:text="${delivery.paid ? 'Paid' : 'Not Paid'}">Not Paid</span></p>
+    <p><strong>Имя:</strong> <span th:text="${delivery.name}"></span></p>
+    <p><strong>Телефон:</strong> <span th:text="${delivery.phone}"></span></p>
+    <p><strong>Электронная почта:</strong> <span th:text="${delivery.email}"></span></p>
+    <p><strong>Адрес:</strong> <span th:text="${delivery.address}"></span></p>
+    <p><strong>Оплачено:</strong> <span class="payment-status" th:class="${delivery.paid ? 'paid' : 'unpaid'}" th:text="${delivery.paid ? 'Да' : 'Нет'}"></span></p>
 
-    <div class="product-info" th:if="${cartItemDTOS != null}">
-        <h3>Product Information</h3>
-        <ul>
-            <li th:each="item : ${cartItemDTOS}">
-                <div>
-                    <img th:src="@{${item.imgPath}}" alt="Product Image" />
-                    <p><strong>Product Name:</strong> <span th:text="${item.productName}"></span></p>
-                    <p><strong>Description:</strong> <span th:text="${item.productDescription}"></span></p>
-                    <p><strong>Quantity:</strong> <span th:text="${item.quantity}"></span></p>
-                </div>
-            </li>
-        </ul>
+    <h2>Элементы корзины</h2>
+    <div class="cart-item" th:if="${delivery.getCartItem() != null}">
+        <img th:src="@{${delivery.getCartItem().imgPath}}" alt="Изображение продукта" />
+        <p><strong>Название продукта:</strong> <span th:text="${delivery.getCartItem().productName}"></span></p>
+        <p><strong>Описание:</strong> <span th:text="${delivery.getCartItem().productDescription}"></span></p>
+        <p><strong>Количество:</strong> <span th:text="${delivery.getCartItem().quantity}"></span></p>
+        <p><strong>Цена:</strong> <span th:text="${delivery.getCartItem().getTotalPrice()}"></span></p>
     </div>
 
-    <div th:if="${delivery.cartItem == null}">
-        <p>No product information available.</p>
+    <div th:if="${delivery.getCartItem() == null}">
+        <p>Нет информации о товаре в корзине.</p>
     </div>
 </div>
 </body>

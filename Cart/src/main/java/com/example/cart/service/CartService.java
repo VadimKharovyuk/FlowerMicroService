@@ -84,6 +84,7 @@ public class CartService {
             // Получение информации о продукте через REST-запрос
             ProductDTO product = restTemplate.getForObject(productServiceUrl + productId, ProductDTO.class);
 
+
             if (product != null) {
                 // Создаем элемент корзины и устанавливаем необходимые параметры
                 CartItem cartItem = new CartItem();
