@@ -203,6 +203,23 @@
         <input type="text" name="name" placeholder="Поиск по названию" />
         <button type="submit"><i class="fas fa-search"></i> Поиск</button>
     </form>
+
+    <form action="/products/filterByCountry" method="get" class="search-form">
+        <label for="country">Поиск по стране :</label>
+        <select id="country" name="country" class="form-control">
+            <option value="">Выберите страну</option>
+            <!-- Замените этот список на динамически полученные страны или добавьте нужные -->
+            <option value="Germany" th:selected="${selectedCountry == 'Germany'}">Germany</option>
+            <option value="Japan" th:selected="${selectedCountry == 'Japan'}">Japan</option>
+            <option value="USA" th:selected="${selectedCountry == 'USA'}">USA</option>
+            <option value="Turkey" th:selected="${selectedCountry == 'Turkey'}">Turkey</option>
+            <option value="Франция" th:selected="${selectedCountry == 'Франция'}">Франция</option>
+            <option value="Netherlands" th:selected="${selectedCountry == 'Netherlands'}">Netherlands</option>
+            <option value="Голландия" th:selected="${selectedCountry == 'Голландия'}">Голландия</option>
+            <option value="Таиланд" th:selected="${selectedCountry == 'Таиланд'}">Таиланд</option>
+        </select>
+        <button type="submit">Поиск</button>
+    </form>
 </header>
 
 <main class="main">
@@ -220,21 +237,6 @@
             </div>
         </div>
     </section>
-
-
-    <form action="/products/filterByCountry" method="get">
-        <label for="country">Select country of origin:</label>
-        <select id="country" name="country">
-            <option value="">All countries</option>
-            <option value="Germany" th:selected="${selectedCountry == 'Germany'}">Germany</option>
-            <option value="Japan" th:selected="${selectedCountry == 'Japan'}">Japan</option>
-            <option value="USA" th:selected="${selectedCountry == 'USA'}">USA</option>
-            <option value="Turkey" th:selected="${selectedCountry == 'Turkey'}">Turkey</option>
-            <option value="Франция" th:selected="${selectedCountry == 'Франция'}">Франция</option>
-            <!-- Добавьте другие страны -->
-        </select>
-        <button type="submit">Filter</button>
-    </form>
 
 </main>
 

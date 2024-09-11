@@ -43,6 +43,10 @@
                     <option value="USA" th:selected="${selectedCountry == 'USA'}">USA</option>
                     <option value="Turkey" th:selected="${selectedCountry == 'Turkey'}">Turkey</option>
                     <option value="Франция" th:selected="${selectedCountry == 'Франция'}">Франция</option>
+                    <option value="Netherlands" th:selected="${selectedCountry == 'Netherlands'}">Netherlands</option>
+
+                    <option value="Голландия" th:selected="${selectedCountry == 'Голландия'}">Голландия</option>
+                    <option value="Таиланд" th:selected="${selectedCountry == 'Таиланд'}">Таиланд</option>
                 </select>
             </div>
             <button type="submit" class="btn btn-primary">Filter</button>
@@ -73,7 +77,8 @@
         <h2>Categories</h2>
         <ul class="list-group">
             <li class="list-group-item" th:each="category : ${categories}">
-                <a th:href="@{/categories/{id}(id=${category.id})}" th:text="${category.name}">Category Name</a>
+                <a th:href="@{/products/category/{categoryId}(categoryId=${category.id})}"
+                   th:text="${category.name}">Category Name</a>
             </li>
         </ul>
     </section>
