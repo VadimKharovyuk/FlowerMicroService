@@ -22,6 +22,13 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
 
+    public List<ProductDTO> findByCountryOfOrigin(String CountryOfOrigin){
+       return  productRepository.findByCountryOfOrigin(CountryOfOrigin).stream()
+               .map(ProductMapper::toDTO)
+               .collect(Collectors.toList());
+
+    }
+
 
     public ProductDTO addProductQuantity(Long productId, int quantityToAdd) {
         // Retrieve the existing product by ID

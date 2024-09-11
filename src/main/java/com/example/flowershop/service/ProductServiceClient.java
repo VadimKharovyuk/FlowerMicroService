@@ -25,6 +25,20 @@ public class ProductServiceClient {
     private String productServiceUrl;
     private final RestTemplate restTemplate;
 
+
+
+    // Метод для поиска товаров по стране
+    public List<ProductDTO> findByCountryOfOrigin(String countryOfOrigin) {
+        String url = productServiceUrl + "/country?country=" + countryOfOrigin;
+        ResponseEntity<List<ProductDTO>> response = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<ProductDTO>>() {}
+        );
+        return response.getBody();
+    }
+
     public ProductDTO addProductQuantity(Long productId, int quantityToAdd) {
         // Формируем корректный URL без дублирования /products
         String url = productServiceUrl + "/" + productId + "/add-stock?quantityToAdd=" + quantityToAdd;

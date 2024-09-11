@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -19,6 +20,25 @@ public class ProductController {
 
     private final ProductServiceClient productServiceClient;
     private final CategoryServiceClient categoryServiceClient;
+
+    @GetMapping("/filterByCountry")
+    public String filterByCountry(@RequestParam(value = "country", required = false) String country, Model model) {
+        List<ProductDTO> products;
+
+        if (country != null && !country.isEmpty()) {
+            // Поиск товаров по стране
+            products = productServiceClient.findByCountryOfOrigin(country);
+        } else {
+            // Если страна не указана, можно вернуть все товары или пустой список
+            products = new ArrayList<>();
+        }
+
+        model.addAttribute("products", products);
+        model.addAttribute("selectedCountry", country);
+        model.addAttribute("categories", categoryServiceClient.getAllCategories());
+
+        return "products/filterByCountry"; // возвращает имя шаблона для отображения
+    }
 
     // Новый метод для отображения формы добавления количества товара
     @GetMapping("/{id}/add-stock")

@@ -1,7 +1,9 @@
 package com.example.flovermodel.service;
 
 import com.example.flovermodel.dto.CategoryDTO;
+import com.example.flovermodel.dto.ProductDTO;
 import com.example.flovermodel.mapper.CategoryMapper;
+import com.example.flovermodel.mapper.ProductMapper;
 import com.example.flovermodel.model.Category;
 import com.example.flovermodel.repository.CategoryRepository;
 import com.example.flovermodel.repository.ProductRepository;
@@ -21,6 +23,22 @@ public class CategoryService {
     @Autowired
     private ProductRepository productRepository;
 
+
+    // Метод для получения всех категорий
+    public List<CategoryDTO> getAllCategories() {
+        return categoryRepository.findAll().stream()
+                .map(CategoryMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    // Метод для получения товаров по категории
+    public List<ProductDTO> getProductsByCategoryId(Long categoryId) {
+        Category category = categoryRepository.findById(categoryId).orElseThrow(() -> new RuntimeException("Category not found"));
+        return category.getProducts().stream()
+                .map(ProductMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
     // Создание новой категории
     public CategoryDTO createCategory(CategoryDTO categoryDTO) {
         Category category = CategoryMapper.toEntity(categoryDTO);
@@ -34,12 +52,6 @@ public class CategoryService {
         return category.map(CategoryMapper::toDTO).orElse(null);
     }
 
-    // Получение всех категорий
-    public List<CategoryDTO> getAllCategories() {
-        return categoryRepository.findAll().stream()
-                .map(CategoryMapper::toDTO)
-                .collect(Collectors.toList());
-    }
 
     // Обновление категории
     public CategoryDTO updateCategory(Long id, CategoryDTO categoryDTO) {
@@ -57,6 +69,7 @@ public class CategoryService {
     public void deleteCategory(Long id) {
         categoryRepository.deleteById(id);
     }
+
 
 
 }

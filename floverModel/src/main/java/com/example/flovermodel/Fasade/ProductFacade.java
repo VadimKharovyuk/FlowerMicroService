@@ -6,11 +6,16 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class ProductFacade {
 
     private final ProductService productService;
+    public List<ProductDTO> findByCountryOfOrigin(String countryOfOrigin) {
+        return productService.findByCountryOfOrigin(countryOfOrigin);
+    }
 
 
     public ProductDTO updateProduct(Long id, ProductDTO productDTO) {
@@ -19,6 +24,7 @@ public class ProductFacade {
     public ProductDTO addProductQuantity(Long productId,int stockQuantity){
        return productService.addProductQuantity(productId,stockQuantity);
     }
+
 
 
 }

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Search by Country</title>
+    <!-- Подключение Bootstrap CSS через CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css"> <!-- Путь к вашему CSS -->
+    <style>
+        .product-card img {
+            width: 250px; /* Фиксированная ширина */
+            height: 250px; /* Фиксированная высота */
+            object-fit: cover; /* Обрезка изображения, чтобы сохранить пропорции */
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+<header class="bg-primary text-white p-3">
+    <div class="container">
+        <h1>Product Search</h1>
+        <nav>
+            <ul class="nav">
+                <li class="nav-item"><a class="nav-link text-white" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="/products/filterByCountry">Search Products by Country</a></li>
+                <!-- Добавьте другие ссылки навигации -->
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main class="container my-4">
+    <section>
+        <h2>Search Products by Country</h2>
+        <form action="/products/filterByCountry" method="get" class="form-inline">
+            <div class="form-group mx-2">
+                <label for="country" class="mr-2">Select country of origin:</label>
+                <select id="country" name="country" class="form-control">
+                    <option value="">All countries</option>
+                    <!-- Замените этот список на динамически полученные страны или добавьте нужные -->
+                    <option value="Germany" th:selected="${selectedCountry == 'Germany'}">Germany</option>
+                    <option value="Japan" th:selected="${selectedCountry == 'Japan'}">Japan</option>
+                    <option value="USA" th:selected="${selectedCountry == 'USA'}">USA</option>
+                    <option value="Turkey" th:selected="${selectedCountry == 'Turkey'}">Turkey</option>
+                    <option value="Франция" th:selected="${selectedCountry == 'Франция'}">Франция</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </form>
+    </section>
+
+    <section class="mt-4">
+        <h2>Products</h2>
+        <p th:if="${products.size() == 0}">No products found for the selected country.</p>
+        <div th:if="${products.size() > 0}">
+            <div class="row">
+                <div class="col-md-4" th:each="product : ${products}">
+                    <div class="card mb-4 product-card">
+                        <img th:src="@{${product.imgPath}}" alt="product">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${product.name}">Product Name</h5>
+                            <p class="card-text" th:text="'Description: ' + ${product.description}">Product Description</p>
+                            <p class="card-text" th:text="'Country of Origin: ' + ${product.countryOfOrigin}">Country of Origin</p>
+                            <p class="card-text" th:text="'Price: $' + ${product.price}">Product Price</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mt-4">
+        <h2>Categories</h2>
+        <ul class="list-group">
+            <li class="list-group-item" th:each="category : ${categories}">
+                <a th:href="@{/categories/{id}(id=${category.id})}" th:text="${category.name}">Category Name</a>
+            </li>
+        </ul>
+    </section>
+</main>
+
+<footer class="bg-dark text-white text-center p-3">
+    <p>&copy; 2024 Your Company Name</p>
+</footer>
+
+<!-- Подключение Bootstrap JS и зависимостей через CDN -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

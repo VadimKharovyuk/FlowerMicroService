@@ -21,6 +21,12 @@ public class ProductController {
     private final ProductFacade productFacade;
 
 
+    @GetMapping("/country")
+    public ResponseEntity<List<ProductDTO>> getProductsByCountry(@RequestParam("country") String countryOfOrigin) {
+        List<ProductDTO> products = productFacade.findByCountryOfOrigin(countryOfOrigin);
+        return ResponseEntity.ok(products);
+    }
+
     // В контроллере продуктового микросервиса
     @PutMapping("/{productId}/increaseStock")
     public ResponseEntity<Void> increaseStock(@PathVariable Long productId, @RequestParam Integer quantity) {
