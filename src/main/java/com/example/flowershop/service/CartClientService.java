@@ -26,6 +26,18 @@ public class CartClientService {
     private String cartServiceUrl;
 
     private final RestTemplate restTemplate;
+    // Метод для удаления товара из корзины
+    public boolean deleteCartItem(Long id) {
+        String url = cartServiceUrl + "/delete/" + id;
+        try {
+            restTemplate.postForEntity(url, null, Void.class);
+            return true; // Удаление успешно
+        } catch (HttpClientErrorException e) {
+            // Логирование ошибки
+            System.err.println("Error deleting cart item: " + e.getMessage());
+            return false; // Удаление не удалось
+        }
+    }
 
     // Метод для получения элемента корзины по ID
 //    public CartItemDTO getCartItemById(Long id) {
@@ -33,6 +45,7 @@ public class CartClientService {
 //        ResponseEntity<CartItemDTO> response = restTemplate.exchange(url, HttpMethod.GET, null, CartItemDTO.class);
 //        return response.getBody();
 //    }
+
     public CartItemDTO getCartItemById(Long id) {
         log.info("Fetching cart item with ID: {}", id);
 
@@ -62,18 +75,7 @@ public class CartClientService {
         return response.getBody();
     }
 
-    // Метод для удаления товара из корзины
-    public boolean deleteCartItem(Long id) {
-        String url = cartServiceUrl + "/delete/" + id;
-        try {
-            restTemplate.postForEntity(url, null, Void.class);
-            return true; // Удаление успешно
-        } catch (HttpClientErrorException e) {
-            // Логирование ошибки
-            System.err.println("Error deleting cart item: " + e.getMessage());
-            return false; // Удаление не удалось
-        }
-    }
+
 
     // Метод для добавления продукта в корзину
     public CartItemDTO addProductToCart(Long productId, Integer quantity) {

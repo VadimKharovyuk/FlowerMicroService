@@ -108,6 +108,7 @@
         .checkout-button:hover {
             background-color: #45a049;
         }
+
         /* Стили для контейнера div */
         div.pay-container {
             margin: 20px 0;
@@ -133,6 +134,24 @@
         /* Стили при наведении на кнопку */
         button.pay-button:hover {
             background-color: #45a049; /* Более тёмный зелёный при наведении */
+        }
+
+        .remove-button {
+            background-color: #f44336; /* Красный цвет */
+            color: white; /* Белый текст */
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .remove-button:hover {
+            background-color: #c62828; /* Темнее при наведении */
         }
     </style>
 </head>
@@ -175,9 +194,9 @@
                             <p th:text="${item.productDescription}">Product Description</p>
                             <p>Quantity: <span th:text="${item.quantity}">1</span></p>
                             <p>Total Price: <span th:text="${item.totalPrice}">100.00</span></p>
-<!--                            <form th:action="@{/flowershop/cart/removeFromCart/{cartItemId}(cartItemId=${item.id})}" method="post" style="display:inline;">-->
-<!--                                <button type="submit" class="checkout-button" style="background-color: #f44336;">Удалить</button>-->
-<!--                            </form>-->
+                            <form th:action="@{/flowershop/cart/removeFromCart/{cartItemId}(cartItemId=${item.id})}" method="post">
+                                <button type="submit" class="remove-button">Удалить</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -192,12 +211,11 @@
             <!-- Кнопка для оплаты через банк -->
             <div class="pay-container">
                 <form action="/payments/payBank" method="get">
-                    <button type="submit" class="pay-button">Оплатить через  Lucky Bank </button>
+                    <button type="submit" class="pay-button">Оплатить через Lucky Bank</button>
                 </form>
             </div>
-
+        </div>
     </div>
-
 </div>
 </body>
 </html>
