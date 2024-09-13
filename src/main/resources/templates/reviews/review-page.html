@@ -1,31 +1,52 @@
+
 <!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
 <!--<head>-->
 <!--    <meta charset="UTF-8">-->
-<!--    <title>Title</title>-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Оставить отзыв</title>-->
+<!--    &lt;!&ndash; Подключение стилей Bootstrap &ndash;&gt;-->
+<!--    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">-->
+<!--    <style>-->
+<!--        .container {-->
+<!--            margin-top: 30px;-->
+<!--        }-->
+<!--        .form-group {-->
+<!--            margin-bottom: 15px;-->
+<!--        }-->
+<!--    </style>-->
 <!--</head>-->
 <!--<body>-->
-<!--&lt;!&ndash; review-page.html &ndash;&gt;-->
-<!--<h2>Оставить отзыв для продукта: <span th:text="${product.name}"></span></h2>-->
+<!--<div class="container">-->
+<!--    <h2 class="mb-4">Оставить отзыв для продукта: <span th:text="${product.name}"></span></h2>-->
+<!--    <div th:if="${product.imgPath != null}">-->
+<!--        <img th:src="@{${product.imgPath}}" alt="Product Image" class="img-fluid mb-4"/>-->
+<!--    </div>-->
 
-<!--<form action="/reviews/create" method="post">-->
-<!--    &lt;!&ndash; Скрытое поле для productId &ndash;&gt;-->
-<!--    <input type="hidden" name="productId" th:value="${product.id}"/>-->
+<!--    <form action="/reviews/create" method="post">-->
+<!--        &lt;!&ndash; Скрытое поле для productId &ndash;&gt;-->
+<!--        <input type="hidden" name="productId" th:value="${product.id}"/>-->
 
-<!--    <label for="review">Review:</label>-->
-<!--    <textarea id="review" name="review" rows="4" cols="50" required></textarea>-->
-<!--    <br><br>-->
+<!--        <div class="form-group">-->
+<!--            <label for="review">Отзыв:</label>-->
+<!--            <textarea id="review" name="review" class="form-control" rows="4" required></textarea>-->
+<!--        </div>-->
 
-<!--    <label for="rating">Rating (1-5):</label>-->
-<!--    <input type="number" id="rating" name="rating" min="1" max="5" required/>-->
-<!--    <br><br>-->
+<!--        <div class="form-group">-->
+<!--            <label for="rating">Рейтинг (1-5):</label>-->
+<!--            <input type="number" id="rating" name="rating" class="form-control" min="1" max="5" required/>-->
+<!--        </div>-->
 
-<!--    <button type="submit">Submit Review</button>-->
-<!--</form>-->
+<!--        <button type="submit" class="btn btn-primary">Отправить отзыв</button>-->
+<!--    </form>-->
+<!--</div>-->
 
+<!--&lt;!&ndash; Подключение JavaScript Bootstrap (опционально, для работы интерактивных компонентов) &ndash;&gt;-->
+<!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>-->
+<!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>-->
 <!--</body>-->
 <!--</html>-->
-
 
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
@@ -42,28 +63,49 @@
         .form-group {
             margin-bottom: 15px;
         }
+        .aside-img {
+            max-width: 100%;
+            height: auto;
+        }
+        .img-container {
+            position: sticky;
+            top: 0;
+            max-width: 100%;
+        }
     </style>
 </head>
 <body>
 <div class="container">
-    <h2 class="mb-4">Оставить отзыв для продукта: <span th:text="${product.name}"></span></h2>
+    <div class="row">
+        <!-- Секция для изображения продукта -->
+        <aside class="col-md-4 mb-4">
+            <div th:if="${product.imgPath != null}" class="img-container">
+                <img th:src="@{${product.imgPath}}" alt="Product Image" class="img-fluid aside-img"/>
+            </div>
+        </aside>
 
-    <form action="/reviews/create" method="post">
-        <!-- Скрытое поле для productId -->
-        <input type="hidden" name="productId" th:value="${product.id}"/>
+        <!-- Основное содержимое (форма для отзыва) -->
+        <main class="col-md-8">
+            <h2 class="mb-4">Оставить отзыв для продукта: <span th:text="${product.name}"></span></h2>
 
-        <div class="form-group">
-            <label for="review">Отзыв:</label>
-            <textarea id="review" name="review" class="form-control" rows="4" required></textarea>
-        </div>
+            <form action="/reviews/create" method="post">
+                <!-- Скрытое поле для productId -->
+                <input type="hidden" name="productId" th:value="${product.id}"/>
 
-        <div class="form-group">
-            <label for="rating">Рейтинг (1-5):</label>
-            <input type="number" id="rating" name="rating" class="form-control" min="1" max="5" required/>
-        </div>
+                <div class="form-group">
+                    <label for="review">Отзыв:</label>
+                    <textarea id="review" name="review" class="form-control" rows="4" required></textarea>
+                </div>
 
-        <button type="submit" class="btn btn-primary">Отправить отзыв</button>
-    </form>
+                <div class="form-group">
+                    <label for="rating">Рейтинг (1-5):</label>
+                    <input type="number" id="rating" name="rating" class="form-control" min="1" max="5" required/>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Отправить отзыв</button>
+            </form>
+        </main>
+    </div>
 </div>
 
 <!-- Подключение JavaScript Bootstrap (опционально, для работы интерактивных компонентов) -->

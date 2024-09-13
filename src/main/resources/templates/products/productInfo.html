@@ -167,6 +167,9 @@
             color: white;
             margin-top: 40px;
         }
+        .btn-custom {
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body>
@@ -207,11 +210,10 @@
             <input type="number" name="quantity" value="1" min="1"/>
             <button type="submit">Добавить в корзину</button>
         </form>
-        <a th:href="@{/reviews/{productId}(productId=${product.id})}">
-            Оставить отзыв</a>
-
-        <!-- Ссылка на страницу для просмотра отзывов -->
-        <a th:href="@{/reviews/product/{productId}/reviews(productId=${product.id})}">
+        <a th:href="@{/reviews/{productId}(productId=${product.id})}" class="btn btn-success btn-custom">
+            Оставить отзыв
+        </a>
+        <a th:href="@{/reviews/product/{productId}/reviews(productId=${product.id})}" class="btn btn-info">
             Посмотреть отзывы
         </a>
 
