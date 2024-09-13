@@ -22,7 +22,7 @@ import java.util.List;
 @Slf4j
 public class CartClientService {
 
-    @Value("${cart.service.url}") // Убедитесь, что этот URL настроен в вашем application.properties
+    @Value("${cart.service.url}")
     private String cartServiceUrl;
 
     private final RestTemplate restTemplate;
