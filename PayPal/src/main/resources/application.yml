@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: PayPal
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/FlowerShop
+    username: postgres
+    password: 19111993
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+server:
+  port: 9005
+
