@@ -18,6 +18,13 @@ import java.util.List;
 public class ReviewController {
 
     private final ReviewService reviewService;
+    //удаление
+    @PostMapping("/delete/{id}")
+    public ResponseEntity<Void> delete(@PathVariable  Long id){
+        reviewService.delete(id);
+        return ResponseEntity.noContent().build();
+
+    }
 
     // Создание нового отзыва
     @PostMapping

@@ -1,0 +1,84 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--  <meta charset="UTF-8">-->
+<!--  <title>Отзывы</title>-->
+<!--  <link rel="stylesheet" href="/styles.css">-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>Отзывы</h1>-->
+
+<!--&lt;!&ndash; Проверка наличия отзывов &ndash;&gt;-->
+<!--<div th:if="${reviews != null and !reviews.isEmpty()}">-->
+<!--  <ul>-->
+<!--    &lt;!&ndash; Перебор списка отзывов &ndash;&gt;-->
+<!--    <li th:each="review : ${reviews}">-->
+<!--      <p><strong>Оценка:</strong> <span th:text="${review.rating}"></span>/5</p>-->
+<!--      <p><strong>Отзыв:</strong> <span th:text="${review.review}"></span></p>-->
+<!--    </li>-->
+<!--  </ul>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; Сообщение, если отзывов нет &ndash;&gt;-->
+<!--<div th:if="${reviews == null or reviews.isEmpty()}">-->
+<!--  <p>Отзывов нет.</p>-->
+<!--</div>-->
+
+
+<!--</body>-->
+<!--</html>-->
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Отзывы</title>
+  <!-- Подключение стилей Bootstrap -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .container {
+      margin-top: 30px;
+    }
+    .review-item {
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+    .no-reviews {
+      margin-top: 30px;
+      font-size: 1.2em;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1 class="mb-4">Отзывы</h1>
+  <h2 class="mb-4">Оставить отзыв для продукта: <span th:text="${product.getName()}"></span></h2>
+
+  <!-- Проверка наличия отзывов -->
+  <div th:if="${reviews != null and !reviews.isEmpty()}">
+    <ul class="list-unstyled">
+      <!-- Перебор списка отзывов -->
+      <li th:each="review : ${reviews}" class="review-item">
+        <p><strong>Оценка:</strong> <span th:text="${review.rating}"></span>/5</p>
+        <p><strong>Отзыв:</strong> <span th:text="${review.review}"></span></p>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Сообщение, если отзывов нет -->
+  <div th:if="${reviews == null or reviews.isEmpty()}" class="no-reviews">
+    <p>Отзывов нет.</p>
+  </div>
+</div>
+
+<!-- Подключение JavaScript Bootstrap (опционально, для работы интерактивных компонентов) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

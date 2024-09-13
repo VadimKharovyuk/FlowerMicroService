@@ -22,6 +22,17 @@ public class ReviewService {
     private final ReviewRepository reviewRepository;
     private final RestTemplate restTemplate;
 
+
+    public void delete(Long id) {
+        if (reviewRepository.existsById(id)) {
+            reviewRepository.deleteById(id);
+            log.info("Отзыв с ID {} успешно удален", id);
+        } else {
+            log.warn("Отзыв с ID {} не найден", id);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Отзыв не найден");
+        }
+    }
+
     // Сохранение отзыва
     public ReviewDto saveReview(ReviewDto reviewDto) {
         log.info("Received request to save review: {}", reviewDto);
@@ -41,8 +52,12 @@ public class ReviewService {
     }
 
     private boolean checkIfProductExists(Long productId) {
-        String productServiceUrl = "http://localhost:9002/api/products/" + productId;
+        if (productId == null) {
+            log.error("Product ID is null. Cannot check product existence.");
+            return false;
+        }
 
+        String productServiceUrl = "http://localhost:9002/api/products/" + productId;
         try {
             restTemplate.getForObject(productServiceUrl, Void.class);
             return true;
@@ -59,6 +74,5 @@ public class ReviewService {
                 .map(ReviewMapper::toDto)
                 .collect(Collectors.toList());
     }
-
 
 }
