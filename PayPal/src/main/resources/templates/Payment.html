@@ -1,156 +1,99 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-<!--    <title>PayPal Payment</title>-->
-<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
-<!--</head>-->
-<!--<body>-->
-<!--<div class="container mt-5">-->
-<!--    <h2>Create Payment</h2>-->
-<!--    <form id="create-payment-form">-->
-<!--        <div class="form-group">-->
-<!--            <label for="total">Total</label>-->
-<!--            <input type="number" class="form-control" id="total" step="0.01" required>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <label for="currency">Currency</label>-->
-<!--            <select class="form-control" id="currency" required>-->
-<!--                <option value="USD">USD - US Dollar</option>-->
-<!--                <option value="EUR">EUR - Euro</option>-->
-<!--                <option value="GBP">GBP - British Pound</option>-->
-<!--            </select>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <label for="method">Method</label>-->
-<!--            <input type="text" class="form-control" id="method" value="paypal" required>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <label for="intent">Intent</label>-->
-<!--            <input type="text" class="form-control" id="intent" value="sale" required>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <label for="description">Description</label>-->
-<!--            <input type="text" class="form-control" id="description" required>-->
-<!--        </div>-->
-<!--        <button type="submit" class="btn btn-primary">Create Payment</button>-->
-<!--    </form>-->
-
-<!--    <h2 class="mt-5">Execute Payment</h2>-->
-<!--    <form id="execute-payment-form">-->
-<!--        <div class="form-group">-->
-<!--            <label for="paymentId">Payment ID</label>-->
-<!--            <input type="text" class="form-control" id="paymentId" required>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <label for="payerID">Payer ID</label>-->
-<!--            <input type="text" class="form-control" id="payerID" required>-->
-<!--        </div>-->
-<!--        <button type="submit" class="btn btn-success">Execute Payment</button>-->
-<!--    </form>-->
-<!--</div>-->
-
-<!--<script>-->
-<!--    document.getElementById('create-payment-form').addEventListener('submit', function(event) {-->
-<!--        event.preventDefault();-->
-
-<!--        const data = {-->
-<!--            total: document.getElementById('total').value,-->
-<!--            currency: document.getElementById('currency').value,-->
-<!--            method: document.getElementById('method').value,-->
-<!--            intent: document.getElementById('intent').value,-->
-<!--            description: document.getElementById('description').value,-->
-<!--            cancelUrl: 'http://localhost:9005/cancel',-->
-<!--            successUrl: 'http://localhost:9005/success'-->
-<!--        };-->
-
-<!--        fetch('/api/payments/create', {-->
-<!--            method: 'POST',-->
-<!--            headers: {-->
-<!--                'Content-Type': 'application/json'-->
-<!--            },-->
-<!--            body: JSON.stringify(data)-->
-<!--        })-->
-<!--            .then(response => response.json())-->
-<!--            .then(data => {-->
-<!--                window.location.href = data.links.find(link => link.rel === 'approval_url').href;-->
-<!--            })-->
-<!--            .catch(error => console.error('Error:', error));-->
-<!--    });-->
-
-<!--    document.getElementById('execute-payment-form').addEventListener('submit', function(event) {-->
-<!--        event.preventDefault();-->
-
-<!--        const paymentId = document.getElementById('paymentId').value;-->
-<!--        const payerID = document.getElementById('payerID').value;-->
-
-<!--        fetch(`/api/payments/execute?paymentId=${paymentId}&payerID=${payerID}`, {-->
-<!--            method: 'POST'-->
-<!--        })-->
-<!--            .then(response => response.json())-->
-<!--            .then(data => {-->
-<!--                alert('Payment executed successfully');-->
-<!--            })-->
-<!--            .catch(error => console.error('Error:', error));-->
-<!--    });-->
-<!--</script>-->
-<!--</body>-->
-<!--</html>-->
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Payment</title>
+    <title>PayPal Payment</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
 <div class="container mt-5">
     <h2>Create Payment</h2>
-    <form action="/api/payments/create" method="post">
+    <form id="create-payment-form">
         <div class="form-group">
             <label for="total">Total</label>
-            <input type="number" class="form-control" id="total" name="total" step="0.01" required>
+            <input type="number" class="form-control" id="total" step="0.01" required>
         </div>
         <div class="form-group">
             <label for="currency">Currency</label>
-            <select class="form-control" id="currency" name="currency" required>
-                <option value="USD">USD</option>
-                <option value="EUR">EUR</option>
-                <option value="GBP">GBP</option>
+            <select class="form-control" id="currency" required>
+                <option value="USD">USD - US Dollar</option>
+                <option value="EUR">EUR - Euro</option>
+                <option value="GBP">GBP - British Pound</option>
             </select>
         </div>
         <div class="form-group">
             <label for="method">Method</label>
-            <input type="text" class="form-control" id="method" name="method" value="paypal" required>
+            <input type="text" class="form-control" id="method" value="paypal" required>
         </div>
         <div class="form-group">
             <label for="intent">Intent</label>
-            <input type="text" class="form-control" id="intent" name="intent" value="sale" required>
+            <input type="text" class="form-control" id="intent" value="sale" required>
         </div>
         <div class="form-group">
             <label for="description">Description</label>
-            <input type="text" class="form-control" id="description" name="description" required>
-        </div>
-        <div class="form-group">
-            <input type="hidden" name="cancelUrl" value="http://localhost:9005/cancel">
-            <input type="hidden" name="successUrl" value="http://localhost:9005/success">
+            <input type="text" class="form-control" id="description" required>
         </div>
         <button type="submit" class="btn btn-primary">Create Payment</button>
     </form>
 
-    <!-- Вывод сообщения об ошибке, если есть -->
-    <div class="mt-3">
-        <span class="text-danger">
-            <strong>
-                <!-- Здесь можно вывести сообщение об ошибке -->
-                <th:block th:if="${errorMessage}">[[${errorMessage}]]</th:block>
-            </strong>
-        </span>
-    </div>
+    <h2 class="mt-5">Execute Payment</h2>
+    <form id="execute-payment-form">
+        <div class="form-group">
+            <label for="paymentId">Payment ID</label>
+            <input type="text" class="form-control" id="paymentId" required>
+        </div>
+        <div class="form-group">
+            <label for="payerID">Payer ID</label>
+            <input type="text" class="form-control" id="payerID" required>
+        </div>
+        <button type="submit" class="btn btn-success">Execute Payment</button>
+    </form>
 </div>
+
+<script>
+    document.getElementById('create-payment-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const data = {
+            total: document.getElementById('total').value,
+            currency: document.getElementById('currency').value,
+            method: document.getElementById('method').value,
+            intent: document.getElementById('intent').value,
+            description: document.getElementById('description').value,
+            cancelUrl: 'http://localhost:9005/cancel',
+            successUrl: 'http://localhost:9005/success'
+        };
+
+        fetch('/api/payments/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => response.json())
+            .then(data => {
+                window.location.href = data.links.find(link => link.rel === 'approval_url').href;
+            })
+            .catch(error => console.error('Error:', error));
+    });
+
+    document.getElementById('execute-payment-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const paymentId = document.getElementById('paymentId').value;
+        const payerID = document.getElementById('payerID').value;
+
+        fetch(`/api/payments/execute?paymentId=${paymentId}&payerID=${payerID}`, {
+            method: 'POST'
+        })
+            .then(response => response.json())
+            .then(data => {
+                alert('Payment executed successfully');
+            })
+            .catch(error => console.error('Error:', error));
+    });
+</script>
 </body>
 </html>
