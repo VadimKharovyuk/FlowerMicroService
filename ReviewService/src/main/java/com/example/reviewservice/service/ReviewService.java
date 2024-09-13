@@ -11,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +22,26 @@ public class ReviewService {
 
     private final ReviewRepository reviewRepository;
     private final RestTemplate restTemplate;
+
+
+    private static final List<String> FORBIDDEN_WORDS = Arrays.asList("хуй", "плохое слово2");
+
+    public void checkAndDeleteInappropriateReviews(List<ReviewDto> reviews) {
+        for (ReviewDto review : reviews) {
+            if (containsForbiddenWords(review.getReview())) {
+                delete(review.getId());
+            }
+        }
+    }
+
+    private boolean containsForbiddenWords(String reviewText) {
+        for (String word : FORBIDDEN_WORDS) {
+            if (reviewText.toLowerCase().contains(word.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
     public void delete(Long id) {
@@ -75,4 +96,10 @@ public class ReviewService {
                 .collect(Collectors.toList());
     }
 
+    public List<ReviewDto> getAllReviews() {
+        List<Review> reviewList = reviewRepository.findAll();
+        return reviewList.stream()
+                .map(ReviewMapper::toDto)
+                .collect(Collectors.toList());
+    }
 }
