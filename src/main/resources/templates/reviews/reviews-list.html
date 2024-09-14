@@ -94,6 +94,10 @@
       <div th:if="${product.imgPath != null}" class="mb-4">
         <img th:src="@{${product.imgPath}}" alt="Product Image" class="img-fluid aside-img"/>
       </div>
+      <div>
+        <p><strong>Описание:</strong><br>
+          <span th:text="${product.description}"></span></p>
+      </div>
     </aside>
 
     <!-- Основное содержимое -->

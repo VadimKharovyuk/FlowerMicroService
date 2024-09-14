@@ -26,6 +26,8 @@ public class ProductServiceClient {
     private final RestTemplate restTemplate;
 
 
+    // Метод для поиска товаров по стране
+
 
     // Метод для поиска товаров по стране
     public List<ProductDTO> findByCountryOfOrigin(String countryOfOrigin) {

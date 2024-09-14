@@ -7,6 +7,7 @@
     <!-- Подключение стилей Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
+
         .container {
             margin-top: 30px;
         }
@@ -22,6 +23,15 @@
             top: 0;
             max-width: 100%;
         }
+        /* Обычный шрифт */
+        .normal-font {
+            font-size: 16px; /* Размер шрифта по умолчанию */
+        }
+
+        /* Крупный шрифт */
+        .large-font {
+            font-size: 20px; /* Размер шрифта больше, чем по умолчанию */
+        }
     </style>
     <script>
         function validateReview() {
@@ -35,7 +45,9 @@
             }
             return true;
         }
+
     </script>
+
 </head>
 <body>
 <div class="container">
@@ -44,6 +56,10 @@
         <aside class="col-md-4 mb-4">
             <div th:if="${product.imgPath != null}" class="img-container">
                 <img th:src="@{${product.imgPath}}" alt="Product Image" class="img-fluid aside-img"/>
+                <div class="col-md-9">
+                    <p class="mb-1 normal-font">Description продукта: <br>
+                        <span th:text="${product.description}"></span>
+                </div>
             </div>
         </aside>
 

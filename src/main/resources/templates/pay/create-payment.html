@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Form</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 20px; }
+        .container { max-width: 500px; margin: auto; }
+        form { background: #f4f4f4; padding: 20px; border-radius: 5px; }
+        input[type="text"], input[type="number"] { width: 100%; padding: 8px; margin-bottom: 10px; }
+        input[type="submit"] { background: #333; color: #fff; border: none; padding: 10px 20px; cursor: pointer; }
+        input[type="submit"]:hover { background: #555; }
+        .error { color: red; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Payment Form</h1>
+    <form action="/payment/create" method="post">
+        <div>
+            <label for="total">Total Amount:</label>
+            <input type="number" id="total" name="total" step="0.01" required>
+        </div>
+        <div>
+            <label for="currency">Currency:</label>
+            <input type="text" id="currency" name="currency" value="USD" required>
+        </div>
+        <div>
+            <label for="description">Description:</label>
+            <input type="text" id="description" name="description" required>
+        </div>
+        <div>
+            <input type="submit" value="Pay with PayPal">
+        </div>
+    </form>
+    <div th:if="${error}" class="error">
+        <p th:text="${error}"></p>
+    </div>
+</div>
+</body>
+</html>

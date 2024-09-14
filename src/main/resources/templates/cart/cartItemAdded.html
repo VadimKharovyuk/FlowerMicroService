@@ -153,6 +153,39 @@
         .remove-button:hover {
             background-color: #c62828; /* Темнее при наведении */
         }
+        /* Общие стили для кнопки */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Основной стиль для btn-primary */
+        .btn-primary {
+            background-color: #007bff; /* Синий цвет */
+            color: white; /* Белый текст */
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3; /* Более темный синий при наведении */
+        }
+
+        /* Добавление легкой тени */
+        .btn-primary {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary:active {
+            background-color: #004085; /* Более темный синий при нажатии */
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            transform: translateY(2px); /* Легкий эффект нажатия */
+        }
     </style>
 </head>
 <body>
@@ -214,6 +247,12 @@
                     <button type="submit" class="pay-button">Оплатить через Lucky Bank</button>
                 </form>
             </div>
+            <div class="pay-container">
+                <form action="http://localhost:9005/" method="get">
+                    <button type="submit" class="btn btn-primary">Оплатить через PayPal</button>
+                </form>
+            </div>
+
         </div>
     </div>
 </div>
