@@ -22,10 +22,10 @@ public class DiscountController {
        return discountService.listDiscount();
     }
 
-    @PostMapping("/delete/{id}")
-    public ResponseEntity<DiscountDTO> delete(@PathVariable Long id) {
-        DiscountDTO deletedDiscount = discountService.deleteById(id);
-        return ResponseEntity.ok(deletedDiscount);
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
+        discountService.deleteById(id);
+        return ResponseEntity.noContent().build(); // Успешный ответ
     }
 
     @GetMapping("/{id}")

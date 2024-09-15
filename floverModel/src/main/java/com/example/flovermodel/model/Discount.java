@@ -31,4 +31,7 @@ public class Discount {
 
     @Column(name = "end_date", nullable = false)
     private LocalDateTime endDate;
+
+
+    private String description;
 }

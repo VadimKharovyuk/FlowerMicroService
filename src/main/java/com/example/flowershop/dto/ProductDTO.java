@@ -12,17 +12,13 @@ import java.math.BigDecimal;
 public class ProductDTO {
     private Long id;
 
-
+    private String imgPath;
     private String name;
     private String description;
     private Double weight;
     private String countryOfOrigin;
     private BigDecimal price;
     private Integer stockQuantity;
-
-    private String imgPath;
-
-
     private Long categoryId;
 
 

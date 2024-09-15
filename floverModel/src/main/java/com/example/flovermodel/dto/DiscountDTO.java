@@ -14,6 +14,7 @@ public class DiscountDTO {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private Long productId;  // ID продукта, связанного со скидкой
+    private String description;
 
 
 }

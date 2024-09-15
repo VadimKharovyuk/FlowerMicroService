@@ -25,17 +25,7 @@ public class DiscountClientService {
     private final RestTemplate restTemplate;
     public void deleteById(Long id) {
         String url = discountClientUrl + "/api/discounts/delete/" + id;
-        log.debug("Sending delete request to URL: {}", url);
-
-        // Отправка DELETE-запроса
-        restTemplate.exchange(
-                url,
-                HttpMethod.DELETE,
-                null,  // Нет тела для DELETE-запроса
-                Void.class
-        );
-
-        log.info("Discount with ID {} was successfully deleted", id);
+        restTemplate.exchange(url, HttpMethod.DELETE, null, Void.class);
     }
 
     public List<DiscountDTO> getAll() {

@@ -10,7 +10,6 @@ public class FlowerShopApplication {
         SpringApplication.run(FlowerShopApplication.class, args);
     }
 
- // add Description for dis
-    //fix delete
+    ///update category for disscount
 
 }

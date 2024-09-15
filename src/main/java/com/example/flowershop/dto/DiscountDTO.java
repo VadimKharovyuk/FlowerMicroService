@@ -28,4 +28,5 @@ public class DiscountDTO {
     private String productName; // Имя продукта
 
     private String description ;
+    private String imgPath;
 }

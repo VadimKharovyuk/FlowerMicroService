@@ -22,25 +22,28 @@
 <!--<table>-->
 <!--  <thead>-->
 <!--  <tr>-->
-
-<!--    <th>Percentage %</th>-->
+<!--    <th>Percentage</th>-->
 <!--    <th>Start Date</th>-->
 <!--    <th>End Date</th>-->
+<!--    <th>Description</th> &lt;!&ndash; Добавлено описание &ndash;&gt;-->
 <!--    <th>Product Name</th>-->
-<!--    <th>Actions</th> &lt;!&ndash; Добавлен заголовок для действий &ndash;&gt;-->
+<!--    <th>Product ID</th>-->
+<!--    <th>Actions</th>-->
 <!--  </tr>-->
 <!--  </thead>-->
 <!--  <tbody>-->
 <!--  &lt;!&ndash; Перебор списка скидок и отображение их данных &ndash;&gt;-->
 <!--  <tr th:each="discount : ${discounts}">-->
-
 <!--    <td th:text="${discount.percentage}">Percentage</td>-->
 <!--    <td th:text="${discount.formattedStartDate}">Start Date</td>-->
 <!--    <td th:text="${discount.formattedEndDate}">End Date</td>-->
+<!--    <td th:text="${discount.description}">Description</td> &lt;!&ndash; Отображение описания &ndash;&gt;-->
 <!--    <td><a th:href="@{/products/{id}(id=${discount.productId})}" th:text="${discount.productName}">Product Name</a></td>-->
+<!--    <td th:text="${discount.productId}">Product ID</td>-->
 <!--    <td>-->
-<!--      &lt;!&ndash; Форма для удаления скидки &ndash;&gt;-->
 <!--      <form th:action="@{/discount/delete/{id}(id=${discount.id})}" method="post" onsubmit="return confirm('Are you sure you want to delete this discount?');">-->
+<!--        &lt;!&ndash; Добавляем скрытое поле для указания DELETE метода &ndash;&gt;-->
+<!--        <input type="hidden" name="_method" value="DELETE"/>-->
 <!--        <button type="submit">Delete</button>-->
 <!--      </form>-->
 <!--    </td>-->
@@ -50,59 +53,124 @@
 <!--</body>-->
 <!--</html>-->
 
-
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Discounts</title>
   <style>
-    table {
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .card {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 20px;
+      width: 300px;
+      transition: all 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .card h2 {
+      margin-top: 0;
+      color: #007bff;
+    }
+    .card p {
+      margin: 10px 0;
+    }
+    .card a {
+      color: #007bff;
+      text-decoration: none;
+    }
+    .card a:hover {
+      text-decoration: underline;
+    }
+    .delete-form {
+      margin-top: 15px;
+    }
+    .delete-button {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .delete-button:hover {
+      background-color: #c82333;
+    }
+    .product-image {
       width: 100%;
-      border-collapse: collapse;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 15px;
     }
-    th, td {
-      border: 1px solid #ddd;
-      padding: 8px;
+    .nav {
+      display: flex;
+      justify-content: center;
+      background-color: #f8f9fa;
+      padding: 10px 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
-    th {
-      background-color: #f2f2f2;
+
+    .nav a {
+      color: #333;
+      text-decoration: none;
+      padding: 10px 15px;
+      margin: 0 5px;
+      border-radius: 5px;
+      transition: background-color 0.3s, color 0.3s;
     }
+
+    .nav a:hover {
+      background-color: #3c32ce;
+      color: white;
+    }
+
   </style>
 </head>
 <body>
+<nav class="nav">
+  <a href="/">Главная</a>
+  <a href="/products">Продукты</a>
+  <a href="/categories">Категории</a>
+  <a href="/flowershop/cart/all">Корзина</a>
+  <a href="/about">О нас</a>
+  <a href="/contact">Контакты</a>
+</nav>
 <h1>Discounts</h1>
 
-<table>
-  <thead>
-  <tr>
-    <th>ID</th>
-    <th>Percentage</th>
-    <th>Start Date</th>
-    <th>End Date</th>
-    <th>Description</th> <!-- Добавлено описание -->
-    <th>Product Name</th>
-    <th>Product ID</th>
-    <th>Actions</th>
-  </tr>
-  </thead>
-  <tbody>
+<div class="card-container">
   <!-- Перебор списка скидок и отображение их данных -->
-  <tr th:each="discount : ${discounts}">
-    <td th:text="${discount.id}">ID</td>
-    <td th:text="${discount.percentage}">Percentage</td>
-    <td th:text="${discount.formattedStartDate}">Start Date</td>
-    <td th:text="${discount.formattedEndDate}">End Date</td>
-    <td th:text="${discount.description}">Description</td> <!-- Отображение описания -->
-    <td><a th:href="@{/product/{id}(id=${discount.productId})}" th:text="${discount.productName}">Product Name</a></td>
-    <td th:text="${discount.productId}">Product ID</td>
-    <td>
-      <form th:action="@{/discount/delete/{id}(id=${discount.id})}" method="post" onsubmit="return confirm('Are you sure you want to delete this discount?');">
-        <button type="submit">Delete</button>
-      </form>
-    </td>
-  </tr>
-  </tbody>
-</table>
+  <div class="card" th:each="discount : ${discounts}">
+    <img class="product-image" th:src="@{${discount.imgPath}}" alt="Product Image">
+    <h2 th:text="${discount.percentage} + '% Off'">Percentage</h2>
+    <p><strong>Start Date:</strong> <span th:text="${discount.formattedStartDate}">Start Date</span></p>
+    <p><strong>End Date:</strong> <span th:text="${discount.formattedEndDate}">End Date</span></p>
+    <p><strong>Description:</strong> <span th:text="${discount.description}">Description</span></p>
+    <p><strong>Product:</strong> <a th:href="@{/products/{id}(id=${discount.productId})}" th:text="${discount.productName}">Product Name</a></p>
+    <form class="delete-form" th:action="@{/discount/delete/{id}(id=${discount.id})}" method="post" onsubmit="return confirm('Are you sure you want to delete this discount?');">
+      <input type="hidden" name="_method" value="DELETE"/>
+      <button class="delete-button" type="submit">Delete</button>
+    </form>
+  </div>
+</div>
 </body>
 </html>

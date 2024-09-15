@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -26,9 +27,10 @@ public class DiscountWebController {
     private final ProductServiceClient productServiceClient;
 
     @PostMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
-        discountClientService.deleteById(id);
-        return ResponseEntity.noContent().build(); // Отправка ответа без содержимого
+    public String deleteById(@PathVariable Long id) {
+        discountClientService.deleteById(id);  // Удаляем скидку по ID
+        log.info("Discount with ID {} successfully deleted", id);
+        return "redirect:/discount/all";  // Редирект на страницу со списком скидок
     }
 
     @GetMapping("/all")
@@ -45,6 +47,19 @@ public class DiscountWebController {
         for (DiscountDTO discount : discounts) {
             String productName = productIdToNameMap.get(discount.getProductId());
             discount.setProductName(productName);
+        }
+        // Создаем map для сопоставления productId -> productName и imgPath
+        Map<Long, String> productIdToImagePathMap = new HashMap<>();
+        for (ProductDTO product : productDTOList) {
+            productIdToImagePathMap.put(product.getId(), product.getImgPath());
+        }
+
+// Добавляем имя и изображение продукта в каждый объект DiscountDTO
+        for (DiscountDTO discount : discounts) {
+            String productName = productIdToNameMap.get(discount.getProductId());
+            String productImgPath = productIdToImagePathMap.get(discount.getProductId());
+            discount.setProductName(productName);
+            discount.setImgPath(productImgPath);
         }
         // Форматируем даты для каждого объекта
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");

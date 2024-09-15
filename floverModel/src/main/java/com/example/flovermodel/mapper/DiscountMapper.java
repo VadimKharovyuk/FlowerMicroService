@@ -15,6 +15,7 @@ public class DiscountMapper {
                 .percentage(discount.getPercentage())
                 .startDate(discount.getStartDate())
                 .endDate(discount.getEndDate())
+                .description(discount.getDescription())
                 .productId(discount.getProduct().getId())  // Получаем id продукта
                 .build();
     }
@@ -26,6 +27,7 @@ public class DiscountMapper {
         discount.setPercentage(discountDTO.getPercentage());
         discount.setStartDate(discountDTO.getStartDate());
         discount.setEndDate(discountDTO.getEndDate());
+        discount.setDescription(discountDTO.getDescription());
 
         // Создаем сущность Product с id, чтобы установить связь
         Product product = new Product();
