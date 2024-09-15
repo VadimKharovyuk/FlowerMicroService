@@ -10,15 +10,7 @@ public class FlowerShopApplication {
         SpringApplication.run(FlowerShopApplication.class, args);
     }
 
-
-
-    // перенести логику оплаты товара
-    // - доставка (флаг оплаченная )
-    // - оплата товара по флагу
-   //отзыввы для товара
-
-
-
-
+ // add Description for dis
+    //fix delete
 
 }

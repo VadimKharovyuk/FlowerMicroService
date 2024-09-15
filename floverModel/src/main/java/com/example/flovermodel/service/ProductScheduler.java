@@ -1,7 +1,6 @@
 package com.example.flovermodel.service;
 
 import com.example.flovermodel.dto.ProductDTO;
-import com.example.flovermodel.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -26,6 +25,8 @@ public class ProductScheduler {
 //        }
 //    }
 //}
+
+
 @Scheduled(cron = "0 0 * * * ?") // Запускается каждый час
 public void checkStockQuantities() {
     List<ProductDTO> allProducts = productService.getAllProducts();

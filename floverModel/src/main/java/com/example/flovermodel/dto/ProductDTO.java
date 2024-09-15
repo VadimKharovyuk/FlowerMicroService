@@ -23,4 +23,8 @@ public class ProductDTO {
     private String imgPath;
 
     private Long categoryId; // Идентификатор категории
+
+
+    private BigDecimal discountedPrice;
+    private BigDecimal OriginalPrice ;
 }

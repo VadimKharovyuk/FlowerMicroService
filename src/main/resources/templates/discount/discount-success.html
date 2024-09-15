@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discount Created</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Discount Created Successfully!</h1>
+
+    <!-- Информация о продукте -->
+    <h2>Product Details</h2>
+    <p>Name: <span th:text="${product.percentage}"></span></p>
+
+
+    <!-- Информация о скидке -->
+    <h2>Discount Details</h2>
+
+    <p>Product ID: <span th:text="${product.productId}"></span></p>
+    <p>Percentage: <span th:text="${product.percentage}"></span></p>
+    <p>Start Date: <span th:text="${product.startDate}"></span></p>
+    <p>End Date: <span th:text="${product.endDate}"></span></p>
+
+    <a href="/discount/create" class="btn btn-primary">Create Another Discount</a>
+</div>
+</body>
+</html>

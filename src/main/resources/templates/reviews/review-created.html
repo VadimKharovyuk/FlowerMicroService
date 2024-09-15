@@ -4,12 +4,73 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Review Created</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      color: #28a745;
+      margin-top: 50px;
+    }
+
+    p {
+      font-size: 1.25rem;
+      margin: 20px 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .thank-you {
+      font-size: 1.5rem;
+      color: #007bff;
+      margin: 20px 0;
+    }
+
+    .details {
+      margin: 10px 0;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 1rem;
+      color: #fff;
+      background-color: #007bff;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
 </head>
 <body>
-<h1>Review Created Successfully!</h1>
-<p>Review ID: <span th:text="${review.id}"></span></p>
-<p>Product ID: <span th:text="${review.productId}"></span></p>
-<p>Review: <span th:text="${review.review}"></span></p>
-<p>Rating: <span th:text="${review.rating}"></span></p>
+<div class="container">
+  <h1>Thank You for Your Review!</h1>
+  <p class="thank-you">We appreciate your feedback and are glad you took the time to share your thoughts.</p>
+
+  <div class="details">
+    <p>Review: <span th:text="${review.review}"></span></p>
+    <p>Rating: <span th:text="${review.rating}"></span></p>
+  </div>
+
+  <a href="/" class="btn">Back to Home</a>
+</div>
 </body>
 </html>

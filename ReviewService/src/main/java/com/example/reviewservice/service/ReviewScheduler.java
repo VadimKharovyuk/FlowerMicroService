@@ -13,7 +13,7 @@ public class ReviewScheduler {
     private final ReviewService reviewService;
 
 
-    //    @Scheduled(cron = "0 */4 * * * *") // Выполняется каждые 4 минуты
+//    @Scheduled(cron = "0 * * * * *") // Выполняется каждую минуту
 //    public void checkReviews() {
 //        List<ReviewDto> reviews = reviewService.getAllReviews();
 //        reviewService.checkAndDeleteInappropriateReviews(reviews);
