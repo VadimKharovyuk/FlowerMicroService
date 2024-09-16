@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Job Applications</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            color: #333;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center; /* Центрирование заголовка */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 auto; /* Центрирование таблицы */
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e0e0e0; /* Цвет фона при наведении */
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 5px 10px;
+            border: 1px solid #3498db;
+            border-radius: 5px;
+        }
+
+        a:hover {
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<h1>All Job Applications</h1>
+<table>
+    <thead>
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Phone Number</th>
+        <th>Email</th>
+        <th>Description</th>
+        <th>Job Position</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="jobApplication : ${jobApplications}">
+        <td th:text="${jobApplication.firstName}"></td>
+        <td th:text="${jobApplication.lastName}"></td>
+        <td th:text="${jobApplication.phoneNumber}"></td>
+        <td th:text="${jobApplication.email}"></td>
+        <td th:text="${jobApplication.description}"></td>
+        <td th:text="${jobApplication.jobPosition}"></td>
+        <td><a th:href="@{/job/{id}(id=${jobApplication.id})}">View</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Job Application Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            color: #333;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        span {
+            font-weight: bold;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block; /* Чтобы ссылка была как блок */
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #3498db;
+            border-radius: 5px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+<h1>Job Application Details</h1>
+<p>ID: <span th:text="${jobApplication.id}"></span></p>
+<p>First Name: <span th:text="${jobApplication.firstName}"></span></p>
+<p>Last Name: <span th:text="${jobApplication.lastName}"></span></p>
+<p>Phone Number: <span th:text="${jobApplication.phoneNumber}"></span></p>
+<p>Email: <span th:text="${jobApplication.email}"></span></p>
+<p>Description: <span th:text="${jobApplication.description}"></span></p>
+<p>Job Position: <span th:text="${jobApplication.jobPosition}"></span></p>
+<a href="/job/all">Back to all applications</a>
+</body>
+</html>

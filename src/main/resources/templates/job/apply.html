@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply for Job</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            display: flex;
+            max-width: 1200px;
+            width: 100%;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .form-container {
+            flex: 2;
+            padding: 20px;
+            border-right: 1px solid #ccc;
+        }
+
+        .aside-container {
+            flex: 1;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="tel"], input[type="email"], textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border-color 0.3s;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+        }
+
+        aside {
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            transition: background-color 0.3s;
+        }
+
+        aside h2 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+
+        aside p {
+            margin-bottom: 10px;
+        }
+
+        aside ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        aside ul li {
+            margin-bottom: 5px;
+        }
+
+        .theme-toggle {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+
+        .theme-toggle button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            background-color: #3498db;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        .theme-toggle button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Light theme */
+        .light-theme {
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .light-theme .container {
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .light-theme aside {
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+        }
+
+        /* Dark theme */
+        .dark-theme {
+            background-color: #333;
+            color: #f9f9f9;
+        }
+
+        .dark-theme .container {
+            background-color: #444;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .dark-theme aside {
+            background-color: #555;
+            border: 1px solid #666;
+        }
+    </style>
+</head>
+<body>
+<div class="theme-toggle">
+    <button id="themeToggle">Toggle Theme</button>
+</div>
+
+<div class="container">
+    <div class="form-container">
+        <h1>Apply for a Job</h1>
+        <form action="#" th:action="@{/job/apply}" th:object="${jobApplicationDTO}" method="post" id="jobForm">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" th:field="*{firstName}" required />
+
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" th:field="*{lastName}" required />
+
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="tel" id="phoneNumber" th:field="*{phoneNumber}" required />
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" th:field="*{email}" required />
+
+            <label for="description">Description:</label>
+            <textarea id="description" th:field="*{description}" rows="4"></textarea>
+
+            <label for="jobPosition">Job Position:</label>
+            <select id="jobPosition" th:field="*{jobPosition}">
+                <option value="DIRECTOR">Director</option>
+                <option value="SELLER">Seller</option>
+                <option value="CLEANER">Cleaner</option>
+                <option value="ADMINISTRATOR">Administrator</option>
+                <option value="FLORIST">Florist</option>
+                <option value="ACCOUNTANT">Accountant</option>
+                <option value="SECURITY">Security</option>
+            </select>
+
+            <button type="submit">Submit Application</button>
+        </form>
+    </div>
+    <div class="aside-container">
+        <aside>
+            <h2>Job Positions</h2>
+            <p>Here are some details about the different job positions available:</p>
+            <ul>
+                <li><strong>Director:</strong> Oversees the entire operation and makes high-level decisions.</li>
+                <li><strong>Seller:</strong> Responsible for selling products and interacting with customers.</li>
+                <li><strong>Cleaner:</strong> Maintains cleanliness and orderliness in the workplace.</li>
+                <li><strong>Administrator:</strong> Manages day-to-day administrative tasks and supports staff.</li>
+                <li><strong>Florist:</strong> Arranges and sells flowers and floral products.</li>
+                <li><strong>Accountant:</strong> Handles financial records and transactions.</li>
+                <li><strong>Security:</strong> Ensures the safety and security of the premises.</li>
+            </ul>
+        </aside>
+    </div>
+    <a href="/job/all">All Positions</a>
+</div>
+
+<script>
+    // Получаем элемент переключателя темы и устанавливаем текущую тему
+    const themeToggleButton = document.getElementById('themeToggle');
+    const currentTheme = localStorage.getItem('theme') || 'light-theme';
+    document.body.classList.add(currentTheme);
+
+    themeToggleButton.addEventListener('click', () => {
+        // Переключаем класс темы
+        if (document.body.classList.contains('light-theme')) {
+            document.body.classList.remove('light-theme');
+            document.body.classList.add('dark-theme');
+            localStorage.setItem('theme', 'dark-theme');
+        } else {
+            document.body.classList.remove('dark-theme');
+            document.body.classList.add('light-theme');
+            localStorage.setItem('theme', 'light-theme');
+        }
+    });
+</script>
+</body>
+</html>
