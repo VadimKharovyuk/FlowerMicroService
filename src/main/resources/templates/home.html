@@ -184,8 +184,44 @@
             padding: 20px;
             margin-top: auto;
         }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        #flowerFact {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
     </style>
+
 </head>
+
 <body>
 <header class="header">
     <div class="logo">
@@ -225,6 +261,11 @@
 <main class="main">
     <h1>Добро пожаловать в наш цветочный магазин!</h1>
     <p>Мы предлагаем широкий ассортимент цветов и растений для любого случая.</p>
+    <div class="container">
+        <h1>Интересный факт о цветах</h1>
+        <p id="flowerFact" th:text="${randomFact}"></p>
+        <button onclick="window.location.reload()">Получить новый факт</button>
+    </div>
 
     <section class="category-section">
         <h2>Категории</h2>
@@ -242,6 +283,7 @@
 
 <footer class="footer">
     <p>&copy; 2024 Цветочный Магазин. Все права защищены.</p>
+
 </footer>
 </body>
 </html>
