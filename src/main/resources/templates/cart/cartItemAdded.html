@@ -1,3 +1,315 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="ru">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Товары</title>-->
+<!--    <style>-->
+<!--        body {-->
+<!--            font-family: Arial, sans-serif;-->
+<!--            background-color: #f4f4f4;-->
+<!--            margin: 0;-->
+<!--            padding: 0;-->
+<!--            display: flex;-->
+<!--            justify-content: center;-->
+<!--            align-items: center;-->
+<!--            height: 100vh;-->
+<!--            flex-direction: column;-->
+<!--        }-->
+
+<!--        .main-content-wrapper {-->
+<!--            display: flex;-->
+<!--        }-->
+
+<!--        aside {-->
+<!--            width: 200px;-->
+<!--            background-color: #f0f0f0;-->
+<!--            padding: 20px;-->
+<!--            height: 100vh;-->
+<!--            position: fixed;-->
+<!--            top: 0;-->
+<!--            left: 0;-->
+<!--        }-->
+
+<!--        aside h2 {-->
+<!--            margin-top: 0;-->
+<!--        }-->
+
+<!--        aside ul {-->
+<!--            list-style-type: none;-->
+<!--            padding: 0;-->
+<!--        }-->
+
+<!--        aside li {-->
+<!--            margin-bottom: 10px;-->
+<!--        }-->
+
+<!--        .main-content {-->
+<!--            margin-left: 200px;-->
+<!--            padding: 20px;-->
+<!--            flex-grow: 1;-->
+<!--        }-->
+
+<!--        .nav {-->
+<!--            display: flex;-->
+<!--            justify-content: space-between;-->
+<!--            background-color: #333;-->
+<!--            padding: 10px;-->
+<!--            margin-bottom: 20px;-->
+<!--        }-->
+
+<!--        .nav a {-->
+<!--            color: white;-->
+<!--            text-decoration: none;-->
+<!--            padding: 10px 15px;-->
+<!--            border-radius: 5px;-->
+<!--            transition: background-color 0.3s;-->
+<!--        }-->
+
+<!--        .nav a:hover {-->
+<!--            background-color: #444;-->
+<!--        }-->
+
+<!--        .cart-container {-->
+<!--            max-width: 800px;-->
+<!--            margin: 0 auto;-->
+<!--        }-->
+
+<!--        .cart-item {-->
+<!--            display: flex;-->
+<!--            border-bottom: 1px solid #ccc;-->
+<!--            padding: 20px 0;-->
+<!--        }-->
+
+<!--        .cart-item img {-->
+<!--            width: 100px;-->
+<!--            height: 100px;-->
+<!--            object-fit: cover;-->
+<!--            margin-right: 20px;-->
+<!--        }-->
+
+<!--        .cart-item-info {-->
+<!--            flex-grow: 1;-->
+<!--        }-->
+
+<!--        .empty-cart-message {-->
+<!--            text-align: center;-->
+<!--            font-style: italic;-->
+<!--        }-->
+
+<!--        .checkout-button {-->
+<!--            display: block;-->
+<!--            width: 100%;-->
+<!--            padding: 10px;-->
+<!--            background-color: #4CAF50;-->
+<!--            color: white;-->
+<!--            border: none;-->
+<!--            cursor: pointer;-->
+<!--            font-size: 16px;-->
+<!--            margin-top: 20px;-->
+<!--        }-->
+
+<!--        .checkout-button:hover {-->
+<!--            background-color: #45a049;-->
+<!--        }-->
+
+<!--        /* Стили для контейнера div */-->
+<!--        div.pay-container {-->
+<!--            margin: 20px 0;-->
+<!--            text-align: center;-->
+<!--        }-->
+
+<!--        /* Стили для кнопки оплаты */-->
+<!--        button.pay-button {-->
+<!--            background-color: #4CAF50; /* Зелёный фон */-->
+<!--            color: white; /* Белый текст */-->
+<!--            border: none; /* Без границы */-->
+<!--            padding: 15px 30px; /* Внутренний отступ */-->
+<!--            text-align: center; /* Текст по центру */-->
+<!--            text-decoration: none; /* Убираем подчеркивание */-->
+<!--            display: inline-block;-->
+<!--            font-size: 16px; /* Размер текста */-->
+<!--            margin: 10px 0; /* Отступы */-->
+<!--            cursor: pointer; /* Указатель на кнопке */-->
+<!--            border-radius: 8px; /* Скругленные углы */-->
+<!--            transition: background-color 0.3s ease; /* Плавный переход фона */-->
+<!--        }-->
+
+<!--        /* Стили при наведении на кнопку */-->
+<!--        button.pay-button:hover {-->
+<!--            background-color: #45a049; /* Более тёмный зелёный при наведении */-->
+<!--        }-->
+
+<!--        .remove-button {-->
+<!--            background-color: #f44336; /* Красный цвет */-->
+<!--            color: white; /* Белый текст */-->
+<!--            border: none;-->
+<!--            padding: 10px 20px;-->
+<!--            text-align: center;-->
+<!--            text-decoration: none;-->
+<!--            display: inline-block;-->
+<!--            font-size: 16px;-->
+<!--            margin: 4px 2px;-->
+<!--            cursor: pointer;-->
+<!--            border-radius: 5px;-->
+<!--        }-->
+
+<!--        .remove-button:hover {-->
+<!--            background-color: #c62828; /* Темнее при наведении */-->
+<!--        }-->
+<!--        /* Общие стили для кнопки */-->
+<!--        .btn {-->
+<!--            display: inline-block;-->
+<!--            padding: 10px 20px;-->
+<!--            font-size: 16px;-->
+<!--            font-weight: bold;-->
+<!--            text-align: center;-->
+<!--            border-radius: 4px;-->
+<!--            border: none;-->
+<!--            cursor: pointer;-->
+<!--            transition: background-color 0.3s ease;-->
+<!--        }-->
+
+<!--        /* Основной стиль для btn-primary */-->
+<!--        .btn-primary {-->
+<!--            background-color: #007bff; /* Синий цвет */-->
+<!--            color: white; /* Белый текст */-->
+<!--        }-->
+
+<!--        .btn-primary:hover {-->
+<!--            background-color: #0056b3; /* Более темный синий при наведении */-->
+<!--        }-->
+
+<!--        /* Добавление легкой тени */-->
+<!--        .btn-primary {-->
+<!--            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);-->
+<!--        }-->
+
+<!--        .btn-primary:active {-->
+<!--            background-color: #004085; /* Более темный синий при нажатии */-->
+<!--            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);-->
+<!--            transform: translateY(2px); /* Легкий эффект нажатия */-->
+<!--        }-->
+<!--        .pay-container {-->
+<!--            background-color: #fff;-->
+<!--            padding: 20px;-->
+<!--            margin: 10px 0;-->
+<!--            border-radius: 8px;-->
+<!--            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);-->
+<!--            width: 300px;-->
+<!--            text-align: center;-->
+<!--        }-->
+
+<!--        .pay-button {-->
+<!--            width: 100%;-->
+<!--            padding: 10px;-->
+<!--            background-color: #4CAF50;-->
+<!--            color: white;-->
+<!--            border: none;-->
+<!--            border-radius: 4px;-->
+<!--            cursor: pointer;-->
+<!--            font-size: 16px;-->
+<!--        }-->
+
+<!--        .pay-button:hover {-->
+<!--            background-color: #45a049;-->
+<!--        }-->
+
+<!--        .btn-primary {-->
+<!--            width: 100%;-->
+<!--            padding: 10px;-->
+<!--            background-color: #007bff;-->
+<!--            color: white;-->
+<!--            border: none;-->
+<!--            border-radius: 4px;-->
+<!--            cursor: pointer;-->
+<!--            font-size: 16px;-->
+<!--        }-->
+
+<!--        .btn-primary:hover {-->
+<!--            background-color: #0056b3;-->
+<!--        }-->
+
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="main-content-wrapper">-->
+<!--    &lt;!&ndash; Секция категорий в виде aside &ndash;&gt;-->
+<!--    <aside>-->
+<!--        <h2>Категории</h2>-->
+<!--        <ul>-->
+<!--            <li th:each="category : ${categories}">-->
+<!--                <a th:href="@{/products/category/{categoryId}(categoryId=${category.id})}" th:text="${category.name}">Category Name</a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </aside>-->
+
+<!--    <div class="main-content">-->
+<!--        &lt;!&ndash; Навигационное меню &ndash;&gt;-->
+<!--        <nav class="nav">-->
+<!--            <a href="/">Главная</a>-->
+<!--            <a href="/products">Продукты</a>-->
+<!--            <a href="/products/new">Добавить Продукты</a>-->
+<!--            <a href="/products/stock">Stock Продукты</a>-->
+<!--            <a href="/flowershop/cart/all">Корзина</a>-->
+<!--            <a href="/deliveries/create">Оформить доставку</a>-->
+<!--            <a href="/deliveries">Мои заказы</a>-->
+<!--        </nav>-->
+
+<!--        <div class="cart-container">-->
+<!--            <h1>Your Cart</h1>-->
+
+<!--            <form th:action="@{/flowershop/cart/checkout}" method="post">-->
+<!--                <div th:if="${all != null}" th:each="item : ${all}">-->
+<!--                    <div class="cart-item">-->
+<!--                        &lt;!&ndash; Изображение товара &ndash;&gt;-->
+<!--                        <img th:src="@{${item.imgPath}}" alt="Product Image">-->
+
+<!--                        &lt;!&ndash; Информация о товаре &ndash;&gt;-->
+<!--                        <div class="cart-item-info">-->
+<!--                            <h3 th:text="${item.productName}">Product Name</h3>-->
+<!--                            <p th:text="${item.productDescription}">Product Description</p>-->
+<!--                            <p>Quantity: <span th:text="${item.quantity}">1</span></p>-->
+<!--                            <p>Total Price: <span th:text="${item.totalPrice}">100.00</span></p>-->
+<!--                            <form th:action="@{/flowershop/cart/removeFromCart/{cartItemId}(cartItemId=${item.id})}" method="post">-->
+<!--                                <button type="submit" class="remove-button">Удалить</button>-->
+<!--                            </form>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div th:if="${all == null}">-->
+<!--                    <p class="empty-cart-message">Your cart is empty.</p>-->
+<!--                </div>-->
+
+<!--            </form>-->
+
+<!--            <h2>Total Amount: <span th:text="${totalAmount}">0</span></h2>-->
+<!--            &lt;!&ndash; Кнопка для оплаты через банк &ndash;&gt;-->
+<!--            <div class="pay-container">-->
+<!--                <form action="/payments/payBank" method="get">-->
+<!--                    <button type="submit" class="pay-button">Оплатить через Lucky Bank</button>-->
+<!--                </form>-->
+<!--            </div>-->
+
+<!--            <div class="pay-container">-->
+<!--                <form action="http://localhost:9005/" method="get">-->
+<!--                    <button type="submit" class="btn btn-primary">Оплатить через PayPal</button>-->
+<!--                </form>-->
+<!--            </div>-->
+
+<!--            <div class="pay-container">-->
+<!--                <form action="/payment-form" method="get">-->
+<!--                    <button type="submit" class="btn btn-primary">Оплатить Liqpay</button>-->
+<!--                </form>-->
+<!--            </div>-->
+
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -7,9 +319,13 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
             display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             flex-direction: column;
         }
 
@@ -109,82 +425,49 @@
             background-color: #45a049;
         }
 
-        /* Стили для контейнера div */
-        div.pay-container {
-            margin: 20px 0;
+        /* Стили для контейнера с кнопками оплаты */
+        .pay-buttons-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px; /* Расстояние между кнопками */
+            margin-top: 20px;
+        }
+
+        /* Общие стили для кнопок */
+        .pay-container {
+            flex: 1;
             text-align: center;
         }
 
-        /* Стили для кнопки оплаты */
-        button.pay-button {
-            background-color: #4CAF50; /* Зелёный фон */
-            color: white; /* Белый текст */
-            border: none; /* Без границы */
-            padding: 15px 30px; /* Внутренний отступ */
-            text-align: center; /* Текст по центру */
-            text-decoration: none; /* Убираем подчеркивание */
-            display: inline-block;
-            font-size: 16px; /* Размер текста */
-            margin: 10px 0; /* Отступы */
-            cursor: pointer; /* Указатель на кнопке */
-            border-radius: 8px; /* Скругленные углы */
-            transition: background-color 0.3s ease; /* Плавный переход фона */
-        }
-
-        /* Стили при наведении на кнопку */
-        button.pay-button:hover {
-            background-color: #45a049; /* Более тёмный зелёный при наведении */
-        }
-
-        .remove-button {
-            background-color: #f44336; /* Красный цвет */
-            color: white; /* Белый текст */
-            border: none;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
+        button.pay-button, .btn-primary {
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
             font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        .remove-button:hover {
-            background-color: #c62828; /* Темнее при наведении */
-        }
-        /* Общие стили для кнопки */
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            font-size: 16px;
-            font-weight: bold;
-            text-align: center;
-            border-radius: 4px;
-            border: none;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
 
-        /* Основной стиль для btn-primary */
+        /* Стили для кнопки оплаты через Lucky Bank */
+        button.pay-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+
+        button.pay-button:hover {
+            background-color: #45a049;
+        }
+
+        /* Стили для кнопки PayPal и LiqPay */
         .btn-primary {
-            background-color: #007bff; /* Синий цвет */
-            color: white; /* Белый текст */
+            background-color: #007bff;
+            color: white;
+            border: none;
         }
 
         .btn-primary:hover {
-            background-color: #0056b3; /* Более темный синий при наведении */
-        }
-
-        /* Добавление легкой тени */
-        .btn-primary {
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn-primary:active {
-            background-color: #004085; /* Более темный синий при нажатии */
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-            transform: translateY(2px); /* Легкий эффект нажатия */
+            background-color: #0056b3;
         }
     </style>
 </head>
@@ -241,16 +524,25 @@
             </form>
 
             <h2>Total Amount: <span th:text="${totalAmount}">0</span></h2>
-            <!-- Кнопка для оплаты через банк -->
-            <div class="pay-container">
-                <form action="/payments/payBank" method="get">
-                    <button type="submit" class="pay-button">Оплатить через Lucky Bank</button>
-                </form>
-            </div>
-            <div class="pay-container">
-                <form action="http://localhost:9005/" method="get">
-                    <button type="submit" class="btn btn-primary">Оплатить через PayPal</button>
-                </form>
+            <!-- Кнопки для оплаты -->
+            <div class="pay-buttons-container">
+                <div class="pay-container">
+                    <form action="/payments/payBank" method="get">
+                        <button type="submit" class="pay-button">Оплатить через Lucky Bank</button>
+                    </form>
+                </div>
+
+                <div class="pay-container">
+                    <form action="http://localhost:9005/" method="get">
+                        <button type="submit" class="btn-primary">Оплатить через PayPal</button>
+                    </form>
+                </div>
+
+                <div class="pay-container">
+                    <form action="/payment-form" method="get">
+                        <button type="submit" class="btn-primary">Оплатить Liqpay</button>
+                    </form>
+                </div>
             </div>
 
         </div>

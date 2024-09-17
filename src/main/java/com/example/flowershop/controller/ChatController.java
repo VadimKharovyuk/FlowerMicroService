@@ -16,6 +16,7 @@ public class ChatController {
 
     private final ChatGPTService chatGPTService;
 
+
     @PostMapping("/chat")
     public ResponseEntity<String> chat(@RequestBody Map<String, String> payload) {
         String prompt = payload.get("prompt");
