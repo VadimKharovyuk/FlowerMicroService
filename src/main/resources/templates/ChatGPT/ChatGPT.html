@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat with ChatGPT</title>
+    <style>
+        /* Ваши стили */
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Chat with ChatGPT</h1>
+    <form id="chatForm">
+        <label for="prompt">Enter your question:</label>
+        <input type="text" id="prompt" name="prompt" required>
+        <button type="submit">Send</button>
+    </form>
+    <div id="response"></div>
+</div>
+
+<script>
+    document.getElementById('chatForm').addEventListener('submit', async function(event) {
+        event.preventDefault();
+        const prompt = document.getElementById('prompt').value;
+
+        const response = await fetch(`/chat?prompt=${encodeURIComponent(prompt)}`);
+        const result = await response.text();
+
+        document.getElementById('response').innerText = result;
+    });
+</script>
+</body>
+</html>

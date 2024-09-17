@@ -27,12 +27,12 @@ public class ProductScheduler {
 //}
 
 
-@Scheduled(cron = "0 0 * * * ?") // Запускается каждый час
-public void checkStockQuantities() {
-    List<ProductDTO> allProducts = productService.getAllProducts();
-    for (ProductDTO product : allProducts) {
-        if (product.getStockQuantity() != null && product.getStockQuantity() > 0) {
+    @Scheduled(cron = "0 0 * * * ?") // Запускается каждый час
+    public void checkStockQuantities() {
+        List<ProductDTO> allProducts = productService.getAllProducts();
+        for (ProductDTO product : allProducts) {
+            if (product.getStockQuantity() != null && product.getStockQuantity() > 0) {
+            }
         }
     }
-}
 }

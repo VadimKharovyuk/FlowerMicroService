@@ -24,9 +24,9 @@ public class ProductService {
     private final CategoryRepository categoryRepository;
 
     public List<ProductDTO> findByCountryOfOrigin(String CountryOfOrigin){
-       return  productRepository.findByCountryOfOrigin(CountryOfOrigin).stream()
-               .map(ProductMapper::toDTO)
-               .collect(Collectors.toList());
+        return  productRepository.findByCountryOfOrigin(CountryOfOrigin).stream()
+                .map(ProductMapper::toDTO)
+                .collect(Collectors.toList());
 
     }
 
