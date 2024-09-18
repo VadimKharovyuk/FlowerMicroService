@@ -14,7 +14,7 @@ import org.springframework.web.client.RestTemplate;
 @Slf4j
 public class ChatGPTService {
 
-    @Value("${openai.api.key}")
+    @Value("${openai.url}")
     private String apiKey;
 
     private final RestTemplate restTemplate;
