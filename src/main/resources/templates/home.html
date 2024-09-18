@@ -218,6 +218,55 @@
         button:hover {
             background-color: #2980b9;
         }
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .pay-buttons-container {
+            display: flex;
+            justify-content: center; /* Центрирование кнопок */
+            gap: 20px; /* Пробел между кнопками */
+            flex-wrap: wrap; /* Позволяет кнопкам переноситься на новую строку при необходимости */
+        }
+
+        .pay-container {
+            background-color: #484444;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 200px;
+            text-align: center;
+        }
+
+        .pay-button, .btn-primary {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .pay-button {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .pay-button:hover {
+            background-color: #45a049;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
     </style>
 
 </head>
@@ -289,11 +338,11 @@
         <div id="response"></div>
     </div>
 
-    <form method="POST" action="https://www.liqpay.ua/api/3/checkout" accept-charset="utf-8">
-        <input type="hidden" name="data" value="eyJwdWJsaWNfa2V5Ijoic2FuZGJveF9pNjQ3ODgxNTA0ODQiLCJhbW91bnQiOiIxIiwiYWN0aW9uIjoicGF5IiwiZGVzY3JpcHRpb24iOiJUZXN0IHBheW1lbnQiLCJjdXJyZW5jeSI6IlVTRCIsInZlcnNpb24iOiIzIiwib3JkZXJfaWQiOiJvcmRlcl9pZF8xIn0="/>
-        <input type="hidden" name="signature" value="3AIc4w1/yEJ7pbbEilF4NJrtFtw="/>
-        <input type="image" src="//static.liqpay.ua/buttons/payUk.png"/>
-    </form>
+<!--    <form method="POST" action="https://www.liqpay.ua/api/3/checkout" accept-charset="utf-8">-->
+<!--        <input type="hidden" name="data" value="eyJwdWJsaWNfa2V5Ijoic2FuZGJveF9pNjQ3ODgxNTA0ODQiLCJhbW91bnQiOiIxIiwiYWN0aW9uIjoicGF5IiwiZGVzY3JpcHRpb24iOiJUZXN0IHBheW1lbnQiLCJjdXJyZW5jeSI6IlVTRCIsInZlcnNpb24iOiIzIiwib3JkZXJfaWQiOiJvcmRlcl9pZF8xIn0="/>-->
+<!--        <input type="hidden" name="signature" value="3AIc4w1/yEJ7pbbEilF4NJrtFtw="/>-->
+<!--        <input type="image" src="//static.liqpay.ua/buttons/payUk.png"/>-->
+<!--    </form>-->
 
     <script>
         document.getElementById('chatForm').addEventListener('submit', async function(event) {
@@ -315,9 +364,28 @@
 
 </main>
 
-<footer class="footer">
-    <p>&copy; 2024 Цветочный Магазин. Все права защищены.</p>
+<footer>
+    <div class="pay-buttons-container">
+        <div class="pay-container">
+            <form action="/payments/payBank" method="get">
+                <button type="submit" class="pay-button">Оплатить через Lucky Bank</button>
+            </form>
+        </div>
 
+        <div class="pay-container">
+            <form action="http://localhost:9005/" method="get">
+                <button type="submit" class="btn-primary">Оплатить через PayPal</button>
+            </form>
+        </div>
+
+        <div class="pay-container">
+            <form action="/payment-form" method="get">
+                <button type="submit" class="btn-primary">Оплатить Liqpay</button>
+            </form>
+        </div>
+    </div>
+    <p>&copy; 2024 Цветочный Магазин. Все права защищены.</p>
 </footer>
+
 </body>
 </html>

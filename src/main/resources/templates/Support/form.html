@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Support Form</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+    <h1 class="mb-4">Support Form</h1>
+    <form action="/support/save" method="post">
+        <!-- Если объект уже существует, отобразить его ID как скрытое поле -->
+        <input type="hidden" name="id" th:value="${form.id}"/>
+
+        <div class="form-group">
+            <label for="topic">Topic:</label>
+            <input type="text" id="topic" name="topic" th:value="${form.topic}" placeholder="Enter topic" class="form-control" required/>
+        </div>
+
+        <div class="form-group">
+            <label for="messages">Messages:</label>
+            <textarea id="messages" name="messages" placeholder="Enter messages" class="form-control" required th:text="${form.messages}"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" th:value="${form.email}" placeholder="Enter email" class="form-control" required/>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <a href="/support/all" class="btn btn-secondary mt-3">Back to List</a>
+</div>
+
+<!-- Bootstrap JS and dependencies (optional) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

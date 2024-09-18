@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Support Details</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+    <h1 class="mb-4">Support Details</h1>
+
+
+    <p><strong>Topic:</strong> <span th:text="${support.topic}"></span></p>
+    <p><strong>Messages:</strong> <span th:text="${support.messages}"></span></p>
+    <p><strong>Email:</strong> <span th:text="${support.email}"></span></p>
+
+    <a href="/support/all" class="btn btn-secondary mb-3">Back to List</a>
+
+    <form action="/support/save" method="post">
+
+        <div class="form-group">
+            <label for="topic">Topic:</label>
+            <input type="text" id="topic" name="topic" th:value="${support.topic}" placeholder="Topic" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label for="messages">Messages:</label>
+            <textarea id="messages" name="messages" placeholder="Messages" class="form-control" rows="4" th:text="${support.messages}"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" th:value="${support.email}" placeholder="Email" class="form-control"/>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+</div>
+
+<!-- Bootstrap JS and dependencies (optional) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
