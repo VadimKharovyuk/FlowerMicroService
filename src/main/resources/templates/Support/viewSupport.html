@@ -17,24 +17,41 @@
 
     <a href="/support/all" class="btn btn-secondary mb-3">Back to List</a>
 
-    <form action="/support/save" method="post">
+<!--    <form action="/support/save" method="post">-->
 
+<!--        <div class="form-group">-->
+<!--            <label for="topic">Topic:</label>-->
+<!--            <input type="text" id="topic" name="topic" th:value="${support.topic}" placeholder="Topic" class="form-control"/>-->
+<!--        </div>-->
+
+<!--        <div class="form-group">-->
+<!--            <label for="messages">Messages:</label>-->
+<!--            <textarea id="messages" name="messages" placeholder="Messages" class="form-control" rows="4" th:text="${support.messages}"></textarea>-->
+<!--        </div>-->
+
+<!--        <div class="form-group">-->
+<!--            <label for="email">Email:</label>-->
+<!--            <input type="email" id="email" name="email" th:value="${support.email}" placeholder="Email" class="form-control"/>-->
+<!--        </div>-->
+
+<!--        <button type="submit" class="btn btn-primary">Save Changes</button>-->
+<!--    </form>-->
+
+
+    <form action="/email/send" method="post">
         <div class="form-group">
-            <label for="topic">Topic:</label>
-            <input type="text" id="topic" name="topic" th:value="${support.topic}" placeholder="Topic" class="form-control"/>
+            <label for="to">To:</label>
+            <input type="email" id="to" name="to" class="form-control" placeholder="Enter recipient email" required />
         </div>
-
         <div class="form-group">
-            <label for="messages">Messages:</label>
-            <textarea id="messages" name="messages" placeholder="Messages" class="form-control" rows="4" th:text="${support.messages}"></textarea>
+            <label for="subject">Subject:</label>
+            <input type="text" id="subject" name="subject" class="form-control" placeholder="Enter subject" required />
         </div>
-
         <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" th:value="${support.email}" placeholder="Email" class="form-control"/>
+            <label for="text">Message:</label>
+            <textarea id="text" name="text" class="form-control" placeholder="Enter your message" required></textarea>
         </div>
-
-        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <button type="submit" class="btn btn-primary">Send</button>
     </form>
 </div>
 

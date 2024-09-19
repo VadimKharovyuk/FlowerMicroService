@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Email Result</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <h1>Email Result</h1>
+  <p th:text="${message}"></p>
+  <a href="/support/all" class="btn btn-primary">Send Another Email</a>
+  <a href="/" class="btn btn-secondary">Back to Home</a>
+</div>
+</body>
+</html>

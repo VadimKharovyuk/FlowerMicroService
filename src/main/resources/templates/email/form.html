@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Email Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Email Form</h1>
+    <form action="/email/send" method="post">
+        <div class="form-group">
+            <label for="to">To:</label>
+            <input type="email" id="to" name="to" class="form-control" placeholder="Enter recipient email" required />
+        </div>
+        <div class="form-group">
+            <label for="subject">Subject:</label>
+            <input type="text" id="subject" name="subject" class="form-control" placeholder="Enter subject" required />
+        </div>
+        <div class="form-group">
+            <label for="text">Message:</label>
+            <textarea id="text" name="text" class="form-control" placeholder="Enter your message" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send</button>
+    </form>
+    <a href="/">Back to Home</a>
+</div>
+</body>
+</html>
