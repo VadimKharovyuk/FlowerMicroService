@@ -14,6 +14,7 @@ import java.util.List;
 @RequestMapping("/categories")
 public class CategoryController {
 
+
     private final CategoryServiceClient categoryServiceClient;
 
     @GetMapping("/new")
